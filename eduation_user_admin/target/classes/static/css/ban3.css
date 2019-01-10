@@ -1,0 +1,265 @@
+body{
+	font-size: 20px;
+}
+
+#ban3-left{
+	background-image: url(../img2/ban3-left.png);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	height:98%;
+}
+
+.left-title{
+  float: left;	
+  margin-top: 0.6rem;
+  margin-left: 1.4rem;
+  font-size:1.1rem;
+}
+.worker3{
+	width: 98%;
+	margin-left: 1%;
+	height:25%;
+	margin-top: 8%;
+	/*background-color: red;*/
+}
+.sex3{
+	width: 100%;
+	height: 10%;
+	margin-top: 3%;
+
+}
+.sex label{
+	font-size: 0.9rem;
+}
+.men3{
+	float: left;
+	margin-left: 25%;
+}
+
+.bar3{
+	width: 100%;
+	height: 13%;
+	margin-top: -1%;
+	/*background-color: snow;*/
+}
+.ban3_1{
+	float: left;
+	width: 20%;
+	height: 100%;
+	margin-left: -3%;
+	font-size: 0.8rem;
+	margin-top: 0.5%;
+}
+
+.th_1{
+	float: left;
+	font-size: 0.5rem;
+	margin-left: 5%;
+	color: #000000;
+}
+.th_2{
+	float: left;
+	font-size: 0.5rem;
+	margin-left: 90%;
+	margin-top: -7%;
+}
+
+.zhu_3{
+	width: 60%;
+	margin-left: 15%;
+	height:90%;
+	margin-top: 3%;
+	border: 0.05rem solid #6bc89b;
+}
+.th{
+	height:70%;
+	width:92%;
+	margin-left: 4%;
+	margin-top: 0.6%;
+	border: 0.05rem solid #6bc89b ;
+}
+.zhu_three{
+	height: 100%;
+	width: 100%;
+}
+.four{
+	width: 94%;
+	margin-left: 3%;
+	height: 60%;
+	margin-top: 4%;
+}
+.kind-t{
+	float:left;
+	width:45%;
+	height: 46%;
+	margin-left: 2%;
+	margin-top: 3%;
+	/*background-color: snow;*/
+}
+#t-1{
+	height:80%;
+	width:96%;
+	margin-top: 5%;
+	margin-left: 2%;
+}
+
+.s-class{
+	float:left;
+	width:45%;
+	height: 46%;
+	margin-left: 52%;
+	margin-top: -46%;
+}
+
+#t-2{
+	height:80%;
+	width:96%;
+	margin-top: 5%;
+	margin-left: 2%;
+}
+
+.c-class{
+	float:left;
+	width:45%;
+	height: 46%;
+	margin-left: 2%;
+	margin-top: 2%;
+}
+#t-3{
+	height:80%;
+	width:96%;
+	margin-top: 5%;
+	margin-left: 2%;
+}
+.b-class{
+	float:left;
+	width:45%;
+	height: 46%;
+	margin-left: 52%;
+	margin-top: -45%;
+}
+
+#t-4{
+	height:80%;
+	width:96%;
+	margin-top: 5%;
+	margin-left: 2%;
+}
+.stu-sex{
+	width: 90%;
+	height:5%;
+	margin-left: 5%;
+	margin-top: -2%;
+	/*background-color: snow;*/
+}
+.zhu4-l{
+	float:left;
+	font-size: 0.8rem;
+	margin-left: -2%;
+	margin-top: 1%;
+}
+.zhu_4{
+	width: 70%;
+	margin-left: 8%;
+	height:75%;
+	margin-top: 3%;
+	border: 0.05rem solid #6bc89b;
+}
+.stu{
+	height:80%;
+	width:94%;
+	margin-left: 3%;
+	margin-top: 0.6%;
+	border: 0.05rem solid #6bc89b ;
+}
+.zhu_four{
+	width: 100%;
+	height: 100%;
+}
+.zhu4-r{
+	float: right;
+	font-size: 0.8rem;
+	margin-top: -6%;
+	margin-right: -2%;
+}
+#ban3-center{
+	background-image: url(../img2/center-ban2.png);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	height:98%;
+	position: relative;
+}
+#showTime2{
+  float: left;
+  margin-left: 2%;
+}
+.JM3{
+	width:11%;
+	float:right;
+	margin-right: 4%;
+	margin-top: -2%;
+}
+.back3{
+    position: absolute;
+	width:5%;
+    right: 6.5%;
+	top:1%;
+}
+#S3{
+  margin-right: 2%;	
+}
+#F3{
+	margin-right: 2%;
+}
+
+.ban3-content{
+	width:92%;
+	margin-left: 4%;
+	height:89%;
+	margin-top: 8%;
+	font-size: 0.8rem;
+	line-height: 120%;
+   /* background-color: red;	*/
+}
+.ban3-content ul{
+	height: 100%;
+}
+.ban3-content button{
+	border: none;
+	outline: none;
+}
+.ban3-content ul li{
+	height:3.4%;
+	text-align: left;
+	letter-spacing:0.01rem;
+	padding-top: 0.05%;
+}
+.right_li{
+	margin-top: -4%;
+	margin-left: 50%;
+}
+.right0-li{
+	margin-left: 55%;
+	margin-top: -4%;
+}
+.right1_li{
+	margin-left: 30%;
+}
+.add_but{
+	width:auto; 
+	display:inline-block !important;
+	display:inline; 
+	text-align: left;
+}
+.add_but img{
+	float: right;
+	width: 10%;
+	margin-top: 0rem;
+	margin-right: -15%;
+}
+.li_red{
+	color: red !important;
+}
+.li_orange{
+	color: orange;
+}

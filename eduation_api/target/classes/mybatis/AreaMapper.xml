@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muji.zh.admin.mapper.AreaMapper">
+  <resultMap id="BaseResultMap" type="com.muji.zh.admin.model.Area">
+    <id column="a_id" jdbcType="INTEGER" property="aId" />
+    <result column="aname" jdbcType="VARCHAR" property="aname" />
+    <result column="urban_id" jdbcType="INTEGER" property="urbanId" />
+    <result column="flag1" jdbcType="VARCHAR" property="flag1" />
+    <result column="flag2" jdbcType="VARCHAR" property="flag2" />
+    <result column="flag3" jdbcType="VARCHAR" property="flag3" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    a_id, aname, urban_id, flag1, flag2, flag3
+  </sql>
+  <select id="selectByExample" parameterType="com.muji.zh.admin.model.AreaExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from area
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from area
+    where a_id = #{aId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from area
+    where a_id = #{aId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.muji.zh.admin.model.AreaExample">
+    delete from area
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.muji.zh.admin.model.Area">
+    insert into area (a_id, aname, urban_id, 
+      flag1, flag2, flag3
+      )
+    values (#{aId,jdbcType=INTEGER}, #{aname,jdbcType=VARCHAR}, #{urbanId,jdbcType=INTEGER}, 
+      #{flag1,jdbcType=VARCHAR}, #{flag2,jdbcType=VARCHAR}, #{flag3,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.muji.zh.admin.model.Area">
+    insert into area
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="aId != null">
+        a_id,
+      </if>
+      <if test="aname != null">
+        aname,
+      </if>
+      <if test="urbanId != null">
+        urban_id,
+      </if>
+      <if test="flag1 != null">
+        flag1,
+      </if>
+      <if test="flag2 != null">
+        flag2,
+      </if>
+      <if test="flag3 != null">
+        flag3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="aId != null">
+        #{aId,jdbcType=INTEGER},
+      </if>
+      <if test="aname != null">
+        #{aname,jdbcType=VARCHAR},
+      </if>
+      <if test="urbanId != null">
+        #{urbanId,jdbcType=INTEGER},
+      </if>
+      <if test="flag1 != null">
+        #{flag1,jdbcType=VARCHAR},
+      </if>
+      <if test="flag2 != null">
+        #{flag2,jdbcType=VARCHAR},
+      </if>
+      <if test="flag3 != null">
+        #{flag3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.muji.zh.admin.model.AreaExample" resultType="java.lang.Long">
+    select count(*) from area
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+
+
+
+  <select id="dinstinctName" resultMap="BaseResultMap">
+    SELECT DISTINCT a_id, aname from area where urban_id=#{id}
+  </select>
+
+
+  <update id="updateByExampleSelective" parameterType="map">
+    update area
+    <set>
+      <if test="record.aId != null">
+        a_id = #{record.aId,jdbcType=INTEGER},
+      </if>
+      <if test="record.aname != null">
+        aname = #{record.aname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.urbanId != null">
+        urban_id = #{record.urbanId,jdbcType=INTEGER},
+      </if>
+      <if test="record.flag1 != null">
+        flag1 = #{record.flag1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag2 != null">
+        flag2 = #{record.flag2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag3 != null">
+        flag3 = #{record.flag3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update area
+    set a_id = #{record.aId,jdbcType=INTEGER},
+      aname = #{record.aname,jdbcType=VARCHAR},
+      urban_id = #{record.urbanId,jdbcType=INTEGER},
+      flag1 = #{record.flag1,jdbcType=VARCHAR},
+      flag2 = #{record.flag2,jdbcType=VARCHAR},
+      flag3 = #{record.flag3,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.muji.zh.admin.model.Area">
+    update area
+    <set>
+      <if test="aname != null">
+        aname = #{aname,jdbcType=VARCHAR},
+      </if>
+      <if test="urbanId != null">
+        urban_id = #{urbanId,jdbcType=INTEGER},
+      </if>
+      <if test="flag1 != null">
+        flag1 = #{flag1,jdbcType=VARCHAR},
+      </if>
+      <if test="flag2 != null">
+        flag2 = #{flag2,jdbcType=VARCHAR},
+      </if>
+      <if test="flag3 != null">
+        flag3 = #{flag3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where a_id = #{aId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.muji.zh.admin.model.Area">
+    update area
+    set aname = #{aname,jdbcType=VARCHAR},
+      urban_id = #{urbanId,jdbcType=INTEGER},
+      flag1 = #{flag1,jdbcType=VARCHAR},
+      flag2 = #{flag2,jdbcType=VARCHAR},
+      flag3 = #{flag3,jdbcType=VARCHAR}
+    where a_id = #{aId,jdbcType=INTEGER}
+  </update>
+</mapper>

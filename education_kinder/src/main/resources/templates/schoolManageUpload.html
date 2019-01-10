@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>学校管理 - 上传资料</title>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="stylesheet" th:href="@{~/static/css/school_manage.css}"/>
+    <link rel="stylesheet" th:href="@{~/static/lib/layui/css/layui.css}"/>
+    <link rel="stylesheet" th:href="@{~/static/css/global.css}"/>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script th:src="@{~/static/lib/layui/layui.js}" charset="utf-8"></script>
+    <link rel="stylesheet" th:href="@{~/static/sweetalert/sweetalert.css}"/>
+    <script type="text/javascript" th:src="@{~/static/sweetalert/sweetalert.min.js}"></script>
+    <script type="text/javascript" th:src="@{~/static/sweetalert/xlalert.js}"></script>
+</head>
+<body>
+<div class="upload">
+<form action="/kinder/insterKinder" name="kinderform" id="kinderform" method="post" enctype="multipart/form-data">
+    <table border="0" cellspacing="0" cellpadding="0">
+        <!--th:value="${kindergarten?.kId}"-->
+        <input type="hidden" th:value="${kindergarten?.kId}" name="kId"/>
+        <tr>
+            <th class="th_title">名称</th>
+            <th class="th_con"><input id="title" type="text" th:value="${kindergarten?.kname}" name="kname" placeholder="xxxxxxxx"/></th>
+        </tr>
+        <tr>
+            <th class="th_title">地址</th>
+            <th class="th_con">
+                <input type="text"  value="郑州市" style="width:42px"/>
+                <select id="area" style="width: 80px;height: 25px;" name="areaId">
+                    <option value="-1">请选择区域</option>
+                    <option  th:each="list:${areas}" th:value="${list.aId}" th:text="${list.aname}" th:selected="${kindergarten?.areaId == list.aId}"></option>
+                </select>
+                <input id="address" type="text" th:value="${kindergarten?.address}" name="address" style="width: 200px;" placeholder="xxx路(街，巷)xxx号"/>
+            </th>
+        </tr>
+        <tr>
+            <th class="th_title">许可证编号</th>
+            <th class="th_file" id="allow">
+                <input type="text" maxlength="15" id="licenseNumber" th:value="${kindergarten?.licenseNumber}" name="licenseNumber" placeholder="00000000"/>
+                <input type="file" accept="image/*" id="no_file" name="file" onchange="Javascript:validate_img(this);"/>
+                <button th:if="${kindergarten?.licenseNumber==null}"   id="no_file1" class="u">上传证件</button>
+                <button th:if="${kindergarten?.licenseNumber!=null}"  id="n_file1" class="u">重新上传证件</button>
+            </th>
+        </tr>
+        <tr>
+            <th class="th_title">经营性质</th>
+            <th class="th_file" id="sell">
+                <input type="text" id="businessNature" th:value="${kindergarten?.businessNature}" name="businessNature" placeholder="xxxxxxxx"/>
+                <input type="file" accept="image/*" id="business_file" name="file1" onchange="Javascript:validate_img(this);"/>
+                <button th:if="${kindergarten?.licenseNumber==null}"  id="business_file1" class="u">上传证件</button>
+                <button th:if="${kindergarten?.licenseNumber!=null}"  id="busines_file1" class="u">重新上传证件</button>
+            </th>
+        </tr>
+        <tr>
+            <th class="th_title">主管部门</th>
+            <th class="th_con"><input id="eduname" maxlength="15" type="text" th:value="${education?.ename}" name="eduname" placeholder="金水区教育局"/></th>
+        </tr>
+        <tr>
+            <th class="th_title">开办时间</th>
+            <th class="th_con"><input id="createDate" type="text"  th:value="${createDate}" name="date" placeholder="固定格式：2018年12月04日"/></th>
+        </tr>
+        <tr>
+            <th class="th_title">负责人姓名</th>
+            <th>
+                <input type="text" id="legalName" maxlength="4" th:value="${session.kinderLegal.klname}" placeholder="xxx" name="legalName" style="width:140px;"/>
+                <span class="m"  style="padding-right:18px">联系电话</span>
+                <input type="text" maxlength="11" id="phone" th:value="${kindergarten?.phone}" name="mphone" style="width:116px;"/>
+            </th>
+        </tr>
+        <tr>
+            <th class="th_title">设计班个数</th>
+            <th>
+                <input type="text" maxlength="5" id="planClass"  onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" th:value="${kindergarten?.planClass}" placeholder="00个" name="planClass" style="width:140px;"/>
+            </th>
+        </tr>
+        <tr>
+            <th class="th_title">设计招收个数</th>
+            <th>
+                <input type="text" maxlength="5" id="planPeople"  onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" th:value="${kindergarten?.planPeople}" placeholder="00个" name="planPeople" style="width:140px;"/>
+            </th>
+        </tr>
+        <tr>
+            <th class="th_title">在职教师人数</th>
+            <th class="th_con"><input maxlength="5" onkeyup="clearNum(this)" onafterpaste="clearNum(this)" id="planTeacher"  type="text" th:value="${kindergarten?.planTeacher}" name="planTeacher" placeholder="000个"/></th>
+        </tr>
+        <tr>
+            <th class="th_title">保育员人数</th>
+            <th class="th_con"><input maxlength="5" onkeyup="clearNum(this)" onafterpaste="clearNum(this)" id="governess"  type="text" th:value="${kindergarten?.governess}" name="governess" placeholder="000个"/></th>
+        </tr>
+        <tr>
+            <th class="th_title">其他员工人数</th>
+            <th class="th_con"><input maxlength="5" onkeyup="clearNum(this)" onafterpaste="clearNum(this)" id="otherPeople"  type="text" th:value="${kindergarten?.otherPeople}" name="otherPeople" placeholder="000个"/></th>
+        </tr>
+        <tr>
+            <th class="th_title">离退休人数</th>
+            <th class="th_con"><input maxlength="5" onkeyup="clearNum(this)" onafterpaste="clearNum(this)" id="leavePeople"  type="text" th:value="${kindergarten?.leavePeople}" name="leavePeople" placeholder="000个"/></th>
+        </tr>
+    </table>
+    <!--占位-->
+    <div class="zw"></div>
+    <!---->
+    <table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <th class="th_title l">固定资产总值(万元)</th>
+            <th class="th_con"><input id="grossProduction" maxlength="6" onkeyup="clearNoNum(this)" type="text" th:value="${kindergarten?.grossProduction}" name="grossProduction" placeholder="0"/></th>
+        </tr>
+        <tr>
+            <th class="th_title l">园舍面积(M²)</th>
+            <th class="th_con"><input id="areaCovered"  maxlength="8" onkeyup="clearNoNum(this)" type="text" th:value="${kindergarten?.areaCovered}" name="areaCovered" placeholder="00000"/></th>
+        </tr>
+        <tr>
+            <th class="th_title l">年度总收入(万元)</th>
+            <th class="th_con"><input id="annual"  maxlength="6" onkeyup="clearNoNum(this)" type="text" th:value="${kindergarten?.annual}" name="annual" placeholder="00000"/></th>
+        </tr>
+        <tr>
+            <th class="th_title l">社会捐款(万元)</th>
+            <th class="th_con"><input id="socialDonation"  maxlength="6" onkeyup="clearNoNum(this)" type="text" th:value="${kindergarten?.socialDonation}" name="socialDonation" placeholder="00000"/></th>
+        </tr>
+        <tr>
+            <th class="th_title l">保教费收入(万元)</th>
+            <th class="th_con"><input id="premiums"  maxlength="6" onkeyup="clearNoNum(this)" type="text" th:value="${kindergarten?.premiums}" name="premiums" placeholder="00000"/></th>
+        </tr>
+        <tr>
+            <th class="th_title l">申报收费标准(元/月)</th>
+            <th>
+                <span class="m" style="padding-right:98px;margin-left: 1px;">日托</span>
+                <input id="dayCare" type="text" th:value="${kindergarten?.dayCare}" maxlength="6" onkeyup="clearNoNum(this)" name="dayCare" style="width:208px;"/>
+            </th>
+        </tr>
+        <tr>
+            <th class="th_title l" style="border-bottom:none;background-color: #ffffff;"></th>
+            <th>
+                <span class="m" style="padding-right:61px;margin-left: 1px;">全托(夜宿)</span>
+                <input id="fullCare" maxlength="6" onkeyup="clearNoNum(this)" type="text" th:value="${kindergarten?.fullCare}" name="fullCare" style="width:208px;"/>
+            </th>
+        </tr>
+        <tr>
+            <th class="th_title l" style="border-top:none;background-color: #ffffff;"></th>
+            <th>
+                <span class="m" style="padding-right:33px;margin-left: 1px;">幼儿班(小托班)</span>
+                <input id="littleTob" type="text" maxlength="6" onkeyup="clearNoNum(this)" th:value="${kindergarten?.littleTob}" name="littleTob" style="width:208px;"/>
+            </th>
+        </tr>
+        <tr>
+            <th class="th_title l">教育主管部门经办人</th>
+            <th>
+                <input class="roomname" type="text" th:value="${kindergarten?.eduDepartment1}" name="eduDepartment1" style="width:180px;height:22px;" placeholder="科室名"/>
+                <input type="text" class="peoplename" maxlength="4" th:value="${kindergarten?.chargename1}" name="chargename1" style="width:160px;margin-left: -5px;height:22px;" placeholder="经办人人名"/>
+            </th>
+        </tr>
+        <tr>
+            <th class="th_title l" style="border-top:none;background-color: #ffffff;"></th>
+            <th>
+                <input class="roomname" type="text" th:value="${kindergarten?.eduDepartment2}" name="eduDepartment2" style="width:180px;height:22px;" placeholder="科室名"/>
+                <input type="text" class="peoplename" maxlength="4" th:value="${kindergarten?.chargename2}" name="chargename2" style="width:160px;margin-left: -5px;height:22px;" placeholder="负责人人名"/>
+            </th>
+        </tr>
+        <tr>
+            <th class="th_title l">价格主管部门经办人</th>
+            <th>
+                <input class="roomname" type="text" th:value="${kindergarten?.priceDepartment1}" name="priceDepartment1" style="width:180px;height:22px;" placeholder="科室名"/>
+                <input type="text" class="peoplename" maxlength="4" th:value="${kindergarten?.officalname1}" name="officalname1" style="width:160px;margin-left: -5px;height:22px;" placeholder="经办人人名"/>
+            </th>
+        </tr>
+        <tr>
+            <th class="th_title l" style="border-top:none;background-color: #ffffff;"></th>
+            <th>
+                <input class="roomname" type="text" th:value="${kindergarten?.priceDepartment2}" name="priceDepartment2" style="width:180px;height:22px;" placeholder="科室名"/>
+                <input type="text" class="peoplename" maxlength="4" th:value="${kindergarten?.officalname2}" name="officalname2" style="width:160px;margin-left: -5px;height:22px;" placeholder="负责人人名"/>
+            </th>
+        </tr>
+        <!--<tr>-->
+            <!--<th class="th_title l">目前评级等级</th>-->
+            <!--<th class="th_con"><input type="text" name="rank" placeholder="00000"/></th>-->
+        <!--</tr>-->
+        <tr>
+            <th class="th_title">消防资格证编号</th>
+            <th class="th_file" id="fire">
+                <input type="text" id="fireworkno" th:value="${kindergarten?.fireworkno}" name="fireworkno" placeholder="00000000"/>
+                <input type="file" accept="image/*" style="opacity:0;position:absolute;" id="fire_file" name="file2" onchange="Javascript:validate_img(this);"/>
+                <button th:if="${kindergarten?.fireworkno==null}" id="no_file2" class="u">上传证件</button>
+                <button th:if="${kindergarten?.fireworkno!=null}"  id="n_file2" class="u">重新上传证件</button>
+            </th>
+        </tr>
+    </table>
+</form>
+</div>
+<div class="submit" style="margin-left:40%;">
+    <button id="formsubmit" class="button" >上传数据</button>
+</div>
+</body>
+<script>
+    $('.button').click(function(){
+        var event= event || window.event;
+        var title=$('#title').val();
+        var address=$('#address').val();
+        var area=$('#area').val();
+        var phone=$('#phone').val();
+        var businessNature=$('#businessNature').val();
+        var licenseNumber=$('#licenseNumber').val();
+        var eduname=$('#eduname').val();
+        var createDate=$('#createDate').val();
+        var grossProduction=$('#grossProduction').val();
+        var legalName=$('#legalName').val();
+        var planClass=$('#planClass').val();
+        var planPeople=$('#planPeople').val();
+        var planTeacher=$('#planTeacher').val();
+        var governess=$('#governess').val();
+        var otherPeople=$('#otherPeople').val();
+        var leavePeople=$('#leavePeople').val();
+        var areaCovered=$('#areaCovered').val();
+        var annual=$('#annual').val();
+        var socialDonation=$('#socialDonation').val();
+        var premiums=$('#premiums').val();
+        var dayCare=$('#dayCare').val();
+        var fullCare=$('#fullCare').val();
+        var littleTob=$('#littleTob').val();
+        var fireworkno=$('#fireworkno').val();
+        var reg = /(1[3-9]\d{9}$)/;
+        var reg1 = /^[0-9a-zA-Z]+$/;
+        var reg2=/^[\u4e00-\u9fa5]*$/;
+        if($.trim(title)==null||$.trim(title).length==0){
+            zlalert.alertError('姓名不能为空！');
+            return false;
+        }else if(!reg2.test(title)){
+            zlalert.alertError('姓名不能有有空格且必须为中文！');
+            return false;
+        }else if($.trim(address)==null||$.trim(address).length==0){
+            zlalert.alertError('地址不能为空！');
+            return false;
+        }else if($.trim(area)==-1){
+            zlalert.alertError('请选择区域！');
+            return false;
+        }else if(phone.trim().length==0||phone.trim()==null){
+            zlalert.alertError('手机号不能为空！');
+            return false;
+        }
+        else if($.trim(phone).length!=11){
+            zlalert.alertError('请输入11位手机号！');
+            return false;
+        }
+        else if(!reg.test(phone)){
+            zlalert.alertError('手机号格式错误！');
+            return false;
+        }
+        else if(licenseNumber.trim().length==0||licenseNumber.trim()==null){
+            zlalert.alertError('请填写许可证编号！');
+            return false;
+        }else if($.trim(licenseNumber).length!=15){
+            zlalert.alertError('许可证编号必须是15位！');
+            return false;
+        }else if(!reg1.test(licenseNumber)){
+            zlalert.alertError('许可证编号格式错误！');
+            return false;
+        }else if(businessNature.trim().length==0 || businessNature.trim()==null){
+            zlalert.alertError('请填写经营性质！');
+            return false;
+        }else if(!(businessNature.trim()=="公办" || businessNature.trim()=="民办")){
+            zlalert.alertError('经营性质只能填写公办或民办！');
+            return false;
+        }else if(eduname.trim().length==0||eduname.trim()==null){
+            zlalert.alertError('请填写主管部门！');
+            return false;
+        }else if(createDate.trim().length==0||createDate.trim()==null){
+            zlalert.alertError('请填写创建时间！');
+            return false;
+        }else if(grossProduction.trim().length==0||grossProduction.trim()==null){
+            zlalert.alertError('请填写固定资产！');
+            return false;
+        }else if(legalName.trim().length==0||legalName.trim()==null){
+            zlalert.alertError('请填写负责人姓名！');
+            return false;
+        }else if(planClass.trim().length==0||planClass.trim()==null){
+            zlalert.alertError('请填写设计班个数！');
+            return false;
+        }else if(planPeople.trim().length==0||planPeople.trim()==null){
+            zlalert.alertError('设计招收个数！');
+            return false;
+        }else if(planTeacher.trim().length==0||planTeacher.trim()==null){
+            zlalert.alertError('请填写在职教师人数！');
+            return false;
+        }else if(governess.trim().length==0||governess.trim()==null){
+            zlalert.alertError('请填写保育员人数！');
+            return false;
+        }else if(otherPeople.trim().length==0||otherPeople.trim()==null){
+            zlalert.alertError('请填写其他员工人数！');
+            return false;
+        }else if(leavePeople.trim().length==0||leavePeople.trim()==null){
+            zlalert.alertError('请填写离退休人数！');
+            return false;
+        }else if(areaCovered.trim().length==0||areaCovered.trim()==null){
+            zlalert.alertError('请填写园舍面积！');
+            return false;
+        }else if(annual.trim().length==0||annual.trim()==null){
+            zlalert.alertError('请填写年度总收入！');
+            return false;
+        }else if(socialDonation.trim().length==0||socialDonation.trim()==null){
+            zlalert.alertError('请填写社会捐款！');
+            return false;
+        }else if(premiums.trim().length==0||premiums.trim()==null){
+            zlalert.alertError('请填写保教费金额！');
+            return false;
+        }else if(dayCare.trim().length==0||dayCare.trim()==null){
+            zlalert.alertError('请填写日托收费标准！');
+            return false;
+        }else if(fullCare.trim().length==0||fullCare.trim()==null){
+            zlalert.alertError('请填写全托收费标准！');
+            return false;
+        }else if(littleTob.trim().length==0||littleTob.trim()==null){
+            zlalert.alertError('请填写幼儿班收费标准！');
+            return false;
+        }else if(fireworkno.trim().length==0||fireworkno.trim()==null){
+            zlalert.alertError('请填写消防资格证编号！');
+            return false;
+        }else {
+            $('.roomname').each(function(){
+                if($(this).val().trim().length==0||$(this).val().trim()==null){
+                    zlalert.alertError('请填写科室名！');
+                    return false;
+                }else {
+                    $('.peoplename').each(function(){
+                        if($(this).val().trim().length==0||$(this).val().trim()==null){
+                            zlalert.alertError('请填写科室负责人名称！');
+                            return false;
+                        }else if(!reg2.test($(this).val())){
+                            zlalert.alertError('科室负责人名称不能有空格且必须为中文！');
+                            return false;
+                        }else {
+                            zlalert.alertConfirm({'msg':'你确定上传数据吗？'});
+                            $('.confirm').click(function () {
+                                formsunmit();
+                            });
+                            return false;
+                        }
+                    });
+                    return false;
+                }
+            });
+        }
+    })
+    $('#no_file').change(function () {
+        var file = this.files[0];
+        $('#allow button').text(file.name);
+    });
+$('#business_file').change(function () {
+    var file = this.files[0];
+    $('#sell button').text(file.name);
+});
+$('#fire_file').change(function () {
+    var file = this.files[0];
+    $('#fire button').text(file.name);
+});
+    $("#phone").keyup(function(){
+        $(this).val($(this).val().replace( /[^0-9]/g,''));
+    }).bind("paste",function(){
+        $(this).val($(this).val().replace( /[^0-9]/g,''));
+    })
+    /* <![CDATA[ */
+    function clearNoNum(obj){
+        obj.value = obj.value.replace(/[^\d.]/g,"");  //清除“数字”和“.”以外的字符
+        obj.value = obj.value.replace(/\.{2,}/g,"."); //只保留第一个. 清除多余的
+        obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");
+        //  obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/,'$1$2.$3');//只能输入两个小数
+        if(obj.value.indexOf(".")< 0 && obj.value !=""){//以上已经过滤，此处控制的是如果没有小数点，首位不能为类似于 01、02的金额
+            obj.value= parseFloat(obj.value);
+        }
+    }
+    function clearNum(obj){
+        obj.value = obj.value.replace(/[^\d]/g,"");  //清除“数字”和“.”以外的字符
+        // obj.value = obj.value.replace(/\.{2,}/g,"."); //只保留第一个. 清除多余的
+        obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");
+        //  obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/,'$1$2.$3');//只能输入两个小数
+        if(obj.value.indexOf(".")< 0 && obj.value !=""){//以上已经过滤，此处控制的是如果没有小数点，首位不能为类似于 01、02的金额
+            obj.value= parseFloat(obj.value);
+        }
+    }
+    /* ]]> */
+function validate_img(ele){
+    // 返回 KB，保留小数点后两位
+    //alert((ele.files[0].size/(1024*1024)).toFixed(2));
+    var file = ele.value;
+    if(!/.(gif|jpg|jpeg|png|GIF|JPG|bmp)$/.test(file)){
+        $('#allow button').text('上传证件');
+        //$('#kinderform').trigger("reset");
+        $(ele).val('');
+        zlalert.alertError("图片类型必须是.gif,jpeg,jpg,png,bmp中的一种");
+        return false;
+    }else{
+        //alert((ele.files[0].size).toFixed(2));
+        //返回Byte(B),保留小数点后两位
+        if(((ele.files[0].size).toFixed(2))>=(10*1024*1024)){
+            $('#allow button').text('上传证件');
+         //   $('#kinderform').trigger("reset");
+            $(ele).val('');
+            zlalert.alertError("请上传小于10M的图片");
+            return false;
+        }
+    }
+}
+    function formsunmit(){
+        var form=new FormData($('#kinderform')[0]);
+        $.ajax({
+            url: '/kinder/insterKinder',
+            type: 'POST',
+            data: form,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                //成功的回调
+                if(data==1){
+                    alert("日期格式错误请按此格式填写：2018年12月04日");
+                    return false;
+                }
+                if(data==2){
+                    alert("请上传附件！");
+                    return false;
+                }
+                if(data==3){
+                    alert("当前主管部门不存在");
+                    return false;
+                }
+                if(data==0){
+                    alert("上传数据成功");
+                    window.location.reload();
+                    return false;
+                }
+                return false;
+            },
+            error: function (returndata) {
+                zlalert.alertError("数据传输失败");
+            }
+        });
+    }
+</script>
+</html>

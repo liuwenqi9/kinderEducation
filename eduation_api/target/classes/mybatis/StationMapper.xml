@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muji.zh.admin.mapper.StationMapper">
+  <resultMap id="BaseResultMap" type="com.muji.zh.admin.model.Station">
+    <id column="s_id" jdbcType="INTEGER" property="sId" />
+    <result column="sname" jdbcType="VARCHAR" property="sname" />
+    <result column="professional_title" jdbcType="VARCHAR" property="professionalTitle" />
+    <result column="flag1" jdbcType="VARCHAR" property="flag1" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.muji.zh.admin.model.Station">
+    <result column="flag2" jdbcType="VARBINARY" property="flag2" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    s_id, sname, professional_title, flag1
+  </sql>
+  <sql id="Blob_Column_List">
+    flag2
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.muji.zh.admin.model.StationExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from station
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.muji.zh.admin.model.StationExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from station
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from station
+    where s_id = #{sId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from station
+    where s_id = #{sId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.muji.zh.admin.model.StationExample">
+    delete from station
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.muji.zh.admin.model.Station">
+    insert into station (s_id, sname, professional_title, 
+      flag1, flag2)
+    values (#{sId,jdbcType=INTEGER}, #{sname,jdbcType=VARCHAR}, #{professionalTitle,jdbcType=VARCHAR}, 
+      #{flag1,jdbcType=VARCHAR}, #{flag2,jdbcType=VARBINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="com.muji.zh.admin.model.Station">
+    insert into station
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sId != null">
+        s_id,
+      </if>
+      <if test="sname != null">
+        sname,
+      </if>
+      <if test="professionalTitle != null">
+        professional_title,
+      </if>
+      <if test="flag1 != null">
+        flag1,
+      </if>
+      <if test="flag2 != null">
+        flag2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sId != null">
+        #{sId,jdbcType=INTEGER},
+      </if>
+      <if test="sname != null">
+        #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="professionalTitle != null">
+        #{professionalTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="flag1 != null">
+        #{flag1,jdbcType=VARCHAR},
+      </if>
+      <if test="flag2 != null">
+        #{flag2,jdbcType=VARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.muji.zh.admin.model.StationExample" resultType="java.lang.Long">
+    select count(*) from station
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update station
+    <set>
+      <if test="record.sId != null">
+        s_id = #{record.sId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sname != null">
+        sname = #{record.sname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.professionalTitle != null">
+        professional_title = #{record.professionalTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag1 != null">
+        flag1 = #{record.flag1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag2 != null">
+        flag2 = #{record.flag2,jdbcType=VARBINARY},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update station
+    set s_id = #{record.sId,jdbcType=INTEGER},
+      sname = #{record.sname,jdbcType=VARCHAR},
+      professional_title = #{record.professionalTitle,jdbcType=VARCHAR},
+      flag1 = #{record.flag1,jdbcType=VARCHAR},
+      flag2 = #{record.flag2,jdbcType=VARBINARY}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update station
+    set s_id = #{record.sId,jdbcType=INTEGER},
+      sname = #{record.sname,jdbcType=VARCHAR},
+      professional_title = #{record.professionalTitle,jdbcType=VARCHAR},
+      flag1 = #{record.flag1,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.muji.zh.admin.model.Station">
+    update station
+    <set>
+      <if test="sname != null">
+        sname = #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="professionalTitle != null">
+        professional_title = #{professionalTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="flag1 != null">
+        flag1 = #{flag1,jdbcType=VARCHAR},
+      </if>
+      <if test="flag2 != null">
+        flag2 = #{flag2,jdbcType=VARBINARY},
+      </if>
+    </set>
+    where s_id = #{sId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.muji.zh.admin.model.Station">
+    update station
+    set sname = #{sname,jdbcType=VARCHAR},
+      professional_title = #{professionalTitle,jdbcType=VARCHAR},
+      flag1 = #{flag1,jdbcType=VARCHAR},
+      flag2 = #{flag2,jdbcType=VARBINARY}
+    where s_id = #{sId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.muji.zh.admin.model.Station">
+    update station
+    set sname = #{sname,jdbcType=VARCHAR},
+      professional_title = #{professionalTitle,jdbcType=VARCHAR},
+      flag1 = #{flag1,jdbcType=VARCHAR}
+    where s_id = #{sId,jdbcType=INTEGER}
+  </update>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <select id="findAll" resultMap="BaseResultMap">
+    SELECT s_id,sname FROM station
+  </select>
+  <select id="getSid" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select s_id from station where sname = #{pname}
+  </select>
+
+
+</mapper>

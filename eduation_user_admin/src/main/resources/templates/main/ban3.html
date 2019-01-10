@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>ban3页面</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/ban3.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/ban2.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/index.css">
+    <script src="/static/js/echarts.min.js"></script>
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/jquery.rotate.min.js"></script>
+    <style>
+        #window{
+            display: none;
+            position: absolute;
+            top: 18%;
+            left: 35%;
+            width: 40%;
+            height: 10%;
+            background-image: url(/static/img/addressreal.png);
+            background-size: 100% 100%;
+            z-index:1002;
+            opacity: 0.8;
+            font-size: 1rem;
+        }
+
+        #window1{
+            display: none;
+            position: absolute;
+            top: 18%;
+            left: 35%;
+            width: 48%;
+            height: 10%;
+            background-image: url(/static/img/addressreal.png);
+            background-size: 100% 100%;
+            z-index:1002;
+            opacity: 0.8;
+            font-size: 1rem;
+        }
+
+        #window2{
+            display: none;
+            position: absolute;
+            top: 18%;
+            left: 35%;
+            width: 48%;
+            height: 10%;
+            background-image: url(/static/img/addressreal.png);
+            background-size: 100% 100%;
+            z-index:1002;
+            opacity: 0.8;
+            font-size: 1rem;
+        }
+
+        #window3{
+            display: none;
+            position: absolute;
+            top: 18%;
+            left: 35%;
+            width: 48%;
+            height: 10%;
+            background-image: url(/static/img/addressreal.png);
+            background-size: 100% 100%;
+            z-index:1002;
+            opacity: 0.8;
+            font-size: 1rem;
+        }
+
+        #window4{
+            display: none;
+            position: absolute;
+            top: 18%;
+            left: 35%;
+            width: 48%;
+            height: 10%;
+            background-image: url(/static/img/addressreal.png);
+            background-size: 100% 100%;
+            z-index:1002;
+            opacity: 0.8;
+            font-size: 1rem;
+        }
+
+        #window5{
+            display: none;
+            position: absolute;
+            top: 18%;
+            left: 35%;
+            width: 48%;
+            height: 10%;
+            background-image: url(/static/img/addressreal.png);
+            background-size: 100% 100%;
+            z-index:1002;
+            opacity: 0.8;
+            font-size: 1rem;
+        }
+
+        #window6{
+            display: none;
+            position: absolute;
+            top: 18%;
+            left: 35%;
+            width: 48%;
+            height: 10%;
+            background-image: url(/static/img/addressreal.png);
+            background-size: 100% 100%;
+            z-index:1002;
+            opacity: 0.8;
+            font-size: 1rem;
+        }
+
+        #window7{
+            display: none;
+            position: absolute;
+            top: 18%;
+            left: 35%;
+            width: 48%;
+            height: 10%;
+            background-image: url(/static/img/addressreal.png);
+            background-size: 100% 100%;
+            z-index:1002;
+            opacity: 0.8;
+            font-size: 1rem;
+        }
+        .window_content{
+            float: left;
+            margin-top: 10%;
+            text-align:center;
+            margin-left: 15%;
+        }
+
+
+    </style>
+</head>
+<body oncontextmenu="return false;" onselectstart="return false">
+<!-- 上 -->
+<div class="header">
+    <div class="topimg">
+		   		<span class="h-title" id="ban3-h-title">
+		   		  <sapn th:text="${kindergarten.kname}"> </sapn>基础信息统计
+		   		</span>
+        <span class="mes">
+		   			<p>欢迎您! <label th:text="${session.eduUser.nname}">XXX教育局&nbsp;</label>管理中心&nbsp;<a href="/logout">退出</a></p>
+		   		</span>
+    </div>
+</div>
+
+<!-- 整体-->
+<div class="main">
+
+    <!-- 左边-->
+    <div class="left light" id="ban3-left">
+        <span class="left-title">幼儿园信息</span>
+        <div class="worker3">
+            <div class="sex3">
+                <label class="men3">男</label>
+                <label classs="women3">女</label>
+            </div>
+            <div class="bar3">
+                <label class="ban3_1">园长</label>
+                <span class="bar2-right"><label th:text="${practitionerTypeMan['count0']}"></label>:<label th:text="${practitionerTypeWoMan['count0']}"></label></span>
+                <div class="zhu_3">    <!--外框 -->
+                    <div class="th"> <!--内框 -->
+                        <!--<label class="th_1" th:text="${practitionerTypeMan['count0']}"></label>-->
+                        <div class="zhu_three" id="ICRADE1"></div>     <!-- 柱状图-->
+                        <!--<label class="th_2" th:text="${practitionerTypeWoMan['count0']}"></label>-->
+                    </div>
+                </div>
+                <!--<label class="ban3_2" th:text="${practitionerTypeMan['count0']}"></label>:<label-->
+                    <!--th:text="${practitionerTypeWoMan['count0']}"></label>-->
+            </div>
+            <div class="bar3">
+                <label class="ban3_1">幼师</label>
+                <span class="bar2-right"><label th:text="${practitionerTypeMan['count1']}"></label>:<label th:text="${practitionerTypeWoMan['count1']}"></label></span>
+                <div class="zhu_3">    <!--外框 -->
+                    <div class="th"> <!--内框 -->
+                        <!--<label class="th_1" th:text="${practitionerTypeMan['count1']}">100</label>-->
+                        <div class="zhu_three" id="ICRADE2"></div>     <!-- 柱状图-->
+                        <!--<label class="th_2" th:text="${practitionerTypeWoMan['count1']}">100</label>-->
+                    </div>
+                </div>
+
+            </div>
+            <div class="bar3">
+                <label class="ban3_1">保育员</label>
+                <span class="bar2-right"><label th:text="${practitionerTypeMan['count2']}"></label>:<label th:text="${practitionerTypeWoMan['count2']}"></label></span>
+                <div class="zhu_3">    <!--外框 -->
+                    <div class="th"> <!--内框 -->
+                        <!--<label class="th_1" th:text="${practitionerTypeMan['count2']}">100</label>-->
+                        <div class="zhu_three" id="ICRADE3"></div>     <!-- 柱状图-->
+                        <!--<label class="th_2" th:text="${practitionerTypeWoMan['count2']}">100</label>-->
+                    </div>
+                </div>
+
+            </div>
+            <div class="bar3">
+                <label class="ban3_1">保健医</label>
+                <span class="bar2-right"><label th:text="${practitionerTypeMan['count3']}"></label>:<label th:text="${practitionerTypeWoMan['count3']}"></label></span>
+                <div class="zhu_3">    <!--外框 -->
+                    <div class="th"> <!--内框 -->
+                        <!--<label class="th_1" th:text="${practitionerTypeMan['count3']}">100</label>-->
+                        <div class="zhu_three" id="ICRADE4"></div>     <!-- 柱状图-->
+                        <!--<label class="th_2" th:text="${practitionerTypeWoMan['count3']}">100</label>-->
+                    </div>
+                </div>
+
+            </div>
+            <div class="bar3">
+                <label class="ban3_1">后勤人员</label>
+                <span class="bar2-right"><label th:text="${practitionerTypeMan['count4']}"></label>:<label th:text="${practitionerTypeWoMan['count4']}"></label></span>
+                <div class="zhu_3">    <!--外框 -->
+                    <div class="th"> <!--内框 -->
+                        <!--<label class="th_1" th:text="${practitionerTypeMan['count4']}">100</label>-->
+                        <div class="zhu_three" id="ICRADE5"></div>     <!-- 柱状图-->
+                        <!--<label class="th_2" th:text="${practitionerTypeWoMan['count4']}">100</label>-->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!--4个柱状图 -->
+        <div class="four">
+            <div class="kind-t">
+                <div id="t-1"></div>
+            </div>
+            <div class="s-class">
+                <div id="t-2"></div>
+            </div>
+            <div class="c-class">
+                <div id="t-3"></div>
+            </div>
+            <div class="b-class">
+                <div id="t-4"></div>
+            </div>
+        </div>
+        <div class="stu-sex">
+            <label class="zhu4-l">学生</label>
+            <div class="zhu_4"> <!--外框 -->
+                <div class="stu"> <!-- 内框-->
+                    <!--<label class="th_1">100</label>-->
+                    <div class="zhu_four" id="studentsex"></div>   <!--柱状 -->
+                    <!--<label class="th_2">100</label>-->
+                </div>
+            </div>
+
+
+
+            <span  class="zhu4-r" ><label th:text="${studentCountMan}"></label>:<label th:text="${studentCountWoMan}"></label></span>
+
+        </div>
+    </div>
+
+    <!-- 中间   -->
+    <div class="center light" id="ban3-center">
+        <div class="time" id="showTime2"></div>
+        <div class="Anniu">
+          <img class="JM3" src="/static/img2/JM.png" > <a href="#" onClick="javascript :history.back(-1);" ><img  class="back3" src="/static/img2/back.png"></a>
+            <!--<a href="/toFind"><img class="S" id="S3" src="/static/img/sousuo.png"></a>-->
+           <!--<a href="/toAddNotice"> <img class="F" id="F3" src="/static/img/fabu.png"></a>-->
+        </div>
+        <!--内容信息展示 -->
+        <div class="ban3-content">
+            <ul>
+                <li>名称:<label th:text="${kindergarten.kname}">XXXXXXX</label></li>
+                <li class="li_red">地址:
+                    <div class="li_red add_but "><label th:text="${kindergarten.address}">郑州市金水区XXX路(街，巷)XXX号</label>
+                        <button></button>
+                    </div>
+                </li>
+                <li class="li_red">
+                    <div class="add_but">许可证编号:<label th:text="${kindergarten.licenseNumber}">XXXXXX</label></div>
+                </li>
+                <li class="right0-li"><a href="#"  id="YES">点击查看详情</a></li>
+
+                <div id="windows">
+                    <img th:src="${kindergarten.flag4}" />
+                </div>
+                <li>经营性质:<label th:text="${typename}">XXXX</label></li>
+                <li class="right0-li" th:text="${kindergarten.kname}"><a href="#">点击查看详情</a></li>
+                <li>主管部门:<label th:text="${educationName}">XXXXXXX</label></li>
+                <li>开办时间:<label th:text="${date}">0000年00月00日</label></li>
+                <li class="li_red">
+                    <div class="add_but">负责人姓名：<label th:text="${legalName}">XXXXXX</label></div>
+                </li>
+                <li class="right_li li_red">
+                    <div class="add_but">联系电话：<label th:text="${kindergarten.phone}">0000000000</label></div>
+                </li>
+
+
+                <li>设计办班个数：<label th:text="${kindergarten.planClass}">00个</label>   </li>
+                <li class="right_li li_red">
+                    <div class="add_but">实际办班个数：<label th:text="${really2}">00个</label></div>
+                </li>
+                <li>设计招收个数：<label th:text="${kindergarten.planPeople}">000个</label></li>
+                <li class="right_li li_red">
+                    <div class="add_but" id="bai">实际招收个数：
+                        <label th:text="${really}" id="abi">000个</label>
+                    <th th:each="kind ,itemStat: ${warningMap['warning2']}" th:if="${itemStat.count}<=4">
+                            <span th:if="${kind.field}==plan_teacher">
+
+                                <style>
+
+                                    #bai {
+                                        color:  #c865e9;
+                                    }
+
+                                    #abi {
+                                        color: #c865e9;
+                                    }
+
+
+                                </style>
+                             <a href="#" onclick="fun6()"><img  src="/static/img2/blue.png"/></a></label>
+                                <div id="window6">
+                        <span class="window_content"  >设计招收个数与计划不符</span>
+
+
+                    </div>
+                            </span>
+                    </th>
+
+        </div>
+
+
+        </li>
+
+        <li>
+            <div class="add_but" id="ss">在职教师人数：
+                <label th:text="${kindergarten.planTeacher}" id="wor">000人</label>
+                <th th:each="kind ,itemStat: ${warningMap['warning2']}" th:if="${itemStat.count}<=4">
+                            <span th:if="${kind.field}==plan_teacher">
+
+                                <style>
+
+                                    #ss {
+                                        color: orange;
+                                    }
+
+                                    #wor {
+                                        color: orange;
+                                    }
+
+
+                                </style>
+                                <a href="#" onclick="fun5()"><img  src="/static/img2/gantan_orange.png"/></a></label>
+                                <div id="window5">
+                        <span class="window_content" th:text="${kind.content}" >工资标准偏低</span>
+
+
+                    </div>
+                            </span>
+                </th>
+
+
+            </div>
+        </li>
+        <li>
+            <div class="add_but" id="or">保育员人数：
+                <label th:text="${kindergarten.governess}" id="od1">000人</label>
+                <th th:each="kind ,itemStat: ${warningMap['warning2']}" th:if="${itemStat.count}<=4">
+                            <span th:if="${kind.field}==governess">
+
+                                <style>
+
+                                    #or{
+                                        color: orange;
+                                    }
+
+                                    #od1{
+                                        color: orange;
+                                    }
+
+
+                                </style>
+                                <a href="#" onclick="fun4()"><img  src="/static/img2/gantan_orange.png"/></a></label>
+                                <div id="window4">
+                        <span class="window_content" th:text="${kind.content}" >工资标准偏低</span>
+
+
+                    </div>
+                            </span>
+                </th>
+
+            </div>
+
+        </li>
+        <li>
+            <div class="add_but" id="orange1">其他员工人数：<label id="ora1" th:text="${kindergarten.otherPeople}">000人</label>
+                <span th:each="kind ,itemStat: ${warningMap['warning2']}" th:if="${itemStat.count}<=4">
+                            <span th:if="${kind.field}==other_people">
+
+                                <style>
+
+                                    #orange1 {
+                                        color: orange;
+                                    }
+
+                                    #ora1 {
+                                        color: orange;
+                                    }
+                                    img{
+
+                                    }
+
+                                </style>
+                              <a href="#" onclick="fun3()"><img  src="/static/img2/gantan_orange.png"/></a></label>
+                                <div id="window3">
+                        <span class="window_content" th:text="${kind.content}" >工资标准偏低</span>
+
+
+                    </div>
+                            </span>
+                </span>
+
+
+            </div>
+        </li>
+        <li>
+            <div class="add_but">离退休人数：<label th:text="${kindergarten.leavePeople}">000人</label></div>
+        </li>
+        <li>
+            <div class="add_but" id="orange">工资标准：
+                <label id="ora" th:text="${kindergarten.wages}">0000元</label>
+                <th th:each="kind ,itemStat: ${warningMap['warning2']}" th:if="${itemStat.count}<=4">
+
+
+                   <label
+                        th:if="${kind.field}==plan_teacher">
+
+                    <style>
+                        #orange {
+                            color: orange;
+                        }
+
+                        #ora {
+                            color: orange;
+                        }
+                    </style>
+                    <a href="#" onclick="fun2()"><img  src="/static/img2/gantan_orange.png"/></a></label>
+                    <div id="window">
+                        <span class="window_content" >工资标准偏低</span>
+                    </div>
+
+                </th>
+
+            </div>
+        </li>
+        <li>固定资产总值(万元)：<label th:text="${kindergarten.grossProduction}">0000</label></li>
+        <li>园舍面积(M)：<label th:text="${kindergarten.areaCovered}">000</label></li>
+        <li>
+            <div class="add_but">年度总收入(万元)：<label th:text="${kindergarten.annual}">0000</label></div>
+        </li>
+        <li>社会捐款(万元)：<label th:text="${kindergarten.socialDonation}">0000</label></li>
+        <li>
+            <div class="add_but">保教费收入(万元)：<label th:text="${kindergarten.premiums}">0000</label></div>
+        </li>
+        <li>
+            <div class="add_but">申报收费标准(元/月)：日托：<label th:text="${kindergarten.dayCare}">000</label></div>
+        </li>
+        <li class="right1_li">
+            <div class="add_but">全托(夜宿)：<label th:text="${kindergarten.fullCare}">000</label></div>
+        </li>
+        <li class="right1_li">
+            <div class="add_but">幼儿园(小托班)：<label th:text="${kindergarten.littleTob}">000</label>
+                <img  src="/static/img2/blue.png"/></div>
+        </li>
+        <li>教育主管部门经办人：处(科)室经办人名(附时间)<span th:text="${kindergarten.chargename1}"></span></li>
+        <li  class="right1_li">处(科)室经办人名(附时间)<span th:text="${kindergarten.chargename2}"></span></li>
+        <li class="right1_li">处(科)室经办人名(附时间)<span  th:text="${kindergarten.eduDepartment1}"></span></li>
+        <li >价格主管部门经办人：处(科)室经办人名(附时间)<span th:text="${kindergarten.officalname1}"></span></li>
+        <li class="right1_li" >处(科)室经办人名(附时间)<span th:text="${kindergarten.officalname2}"></span></li>
+        <li class="right1_li">处(科)室经办人名(附时间)<span  th:text="${kindergarten.priceDepartment1}"></span></li>
+        <li>目前评级等级：<label th:text="${kindergarten.rank}">XXXX</label></li>
+        <li>系统评级等级：<label>XXXX</label></li>
+        </ul>
+    </div>
+</div>
+<!--  右边 -->
+<div class="right">
+    <!-- 右上 -->
+    <div class="right-t light">
+        <!--警报框 -->
+        <span class="biaoti">警报信息</span>
+
+        <div class="jingbao" id="t1">
+            <p><label class="title">一级警报</label><label class="sum" th:text="${cso1}">19条</label></p>
+            <div class="b">
+                <button bchange="1" class="b1" id="m1"><img src="/static/img/redwrong.png" width="60%"/></button>
+            </div>
+            <!--<p><label class="a1">内容概述</label><label class="a2">时间</label></p>-->
+            <!--<p ><label class="a1">内容概述</label><label class="a2">时间</label></p>-->
+
+            <th th:each="complaintList ,itemStat: ${warningMap['warning1']}" th:if="${itemStat.count}<=1">
+                <p><a th:href="@{'/findByKid?kid='+${complaintList.kId}}"><label class="a1"
+                                                                                 th:text="${complaintList.content}"></label></a>
+                    <label class="a2" th:text="${complaintList.id}"></label>
+                </p>
+            </th>
+
+
+        </div>
+        <!--信息展示 -->
+        <div class="show" id="show1">
+
+
+            <th th:each="complaintList ,itemStat: ${warningMap['warning1']}">
+                <p><a th:href="@{'/findByKid?kid='+${complaintList.kId}}"><label class="show-l"
+                                                                                 th:text="${complaintList.content}"></label></a>
+                    <label class="show-r" th:text="${complaintList.id}"></label>
+                </p>
+            </th>
+
+
+        </div>
+
+
+        <div class="jingbao" id="t2">
+            <p><label class="title">二级警报</label> <label class="sum" style="color: orange;"
+                                                        th:text="${cso2}">19条</label></p>
+            <div class="b">
+                <button bchange="1" class="b1" id="m2"><img src="/static/img/orange.png" width="60%"/></button>
+            </div>
+            <th th:each="complaintList ,itemStat: ${warningMap['warning2']}" th:if="${itemStat.count}<=1">
+                <p><a th:href="@{'/findByKid?kid='+${complaintList.kId}}"><label class="a1"
+                                                                                 th:text="${complaintList.content}"></label></a>
+                    <label class="a2" th:text="${complaintList.id}"></label>
+                </p>
+            </th>
+
+
+        </div>
+        <!--信息展示 -->
+        <div class="show" id="show2">
+
+            <th th:each="complaintList : ${warningMap['warning2']}">
+                <p><a th:href="@{'/findByKid?kid='+${complaintList.kId}}"><label class="show-l"
+                                                                                 th:text="${complaintList.content}"></label></a>
+                    <label class="show-r" th:text="${complaintList.id}"></label>
+                </p>
+            </th>
+
+
+        </div>
+
+        <div class="jingbao" id="t3">
+            <p><label class="title">三级警报</label><label class="sum" style="color: #5c72f9;"
+                                                       th:text="${cso3}">19条</label></p>
+            <div class="b">
+                <button bchange="1" class="b1" id="m3"><img src="/static/img/purple.png" width=60%></button>
+            </div>
+
+
+            <th th:each="complaintList ,itemStat: ${warningMap['warning3']}" th:if="${itemStat.count}<=1">
+                <p><a th:href="@{'/findByKid?kid='+${complaintList.kId}}"><label class="a1"
+                                                                                 th:text="${complaintList.content}"></label></a>
+                    <label class="a2" th:text="${complaintList.id}"></label>
+                </p>
+            </th>
+
+
+        </div>
+
+
+        <div class="show" id="show3">
+
+
+            <th th:each="complaintList : ${warningMap['warning3']}">
+                <p><a th:href="@{'/findByKid?kid='+${complaintList.kId}}"><label class="show-l"
+                                                                                 th:text="${complaintList.content}"></label></a>
+                    <label class="show-r" th:text="${complaintList.id}"></label>
+                </p>
+            </th>
+
+
+        </div>
+
+
+        <div class="jingbao" id="t4">
+            <p><label class="title">四级警报</label><label class="sum" style="color: #5ccf98;"
+                                                       th:text="${cso4}">19条</label></p>
+            <div class="b">
+                <button bchange="1" class="b1" id="m4"><img src="/static/img/gren.png" width=60%></button>
+            </div>
+
+            <th th:each="complaintList ,itemStat: ${warningMap['warning4']}" th:if="${itemStat.count}<=1">
+                <p><a th:href="@{'/findByKid?kid='+${complaintList.kId}}"><label class="a1"
+                                                                                 th:text="${complaintList.content}"></label></a>
+                    <label class="a2" th:text="${complaintList.id}"></label>
+                </p>
+            </th>
+
+
+        </div>
+
+        <!--信息展示 -->
+        <div class="show" id="show4">
+
+            <th th:each="complaintList : ${warningMap['warning4']}">
+                <p><a th:href="@{'/findByKid?kid='+${complaintList.kId}}"><label class="show-l"
+                                                                                 th:text="${complaintList.content}"></label></a>
+                    <label class="show-r" th:text="${complaintList.id}"></label>
+                </p>
+            </th>
+
+
+        </div>
+
+
+    </div>
+    <!--右下 -->
+    <div class="right-f light">
+
+        <!-- 投诉框 -->
+        <span class="Ts">投诉</span>
+
+        <div class="ts" id="ts1">
+            <p><label class="title">从业者投诉</label> <label class="sum" th:text="${tsp}">19条</label><label>条</label>
+            </p>
+            <div class="bf">
+                <button bchange="1" class="b1" id="m5"><img src="/static/img/redwrong.png" width="60%"/></button>
+            </div>
+
+
+            <th th:each="complaintList ,itemStat: ${ComMap['complaints']}" th:if="${itemStat.count}<=2">
+                <p><a th:href="@{'/lookCom?id='+${complaintList.id}}"><label class="a1-f"
+                                                                             th:text="${complaintList.title}"></label></a>
+                    <label class="a2-f" th:text="${complaintList.flag1}"></label>
+
+
+                </p>
+            </th>
+        </div>
+        <!--投诉信息展示 -->
+        <div class="show" id="show5">
+
+            <th th:each="complaintList ,itemStat: ${ComMap['complaints']}">
+                <p><a th:href="@{'/lookCom?id='+${complaintList.id}}"><label class="show-l"
+                                                                             th:text="${complaintList.title}"></label></a>
+                    <label class="show-r" th:text="${complaintList.flag1}"></label>
+
+
+                </p>
+            </th>
+
+
+        </div>
+        <div class="ts" id="ts2">
+
+            <p><label class="title">家长投诉</label> <label class="sum" th:text="${ts}">19条</label><label>条</label></p>
+            <div class="bf">
+                <button bchange="1" class="b1" id="m6"><img src="/static/img/redwrong.png" width="60%"/></button>
+            </div>
+
+
+            <th th:each="complaintList ,itemStat: ${ComMap['complaintParent']}" th:if="${itemStat.count}<=2">
+                <p><a th:href="@{'/lookCom?id='+${complaintList.id}}"><label class="a1-f"
+                                                                             th:text="${complaintList.title}"></label></a>
+                    <label class="a2-f" th:text="${complaintList.flag1}"></label>
+                </p>
+            </th>
+        </div>
+        <!--投诉信息展示 -->
+        <div class="show" id="show6">
+
+            <th th:each="complaintList ,itemStat: ${ComMap['complaintParent']}">
+                <p>
+                    <a th:href="@{'/lookCom?id='+${complaintList.id}}"><label th:text="${complaintList.title}"
+                                                                              class="show-l">
+                    </label></a>
+                    <label th:text="${complaintList.flag1}" class="show-r"></label>
+                </p>
+            </th>
+        </div>
+    </div>
+</div>
+</div>
+
+</body>
+<!-- 显示时间 -->
+<script type="text/javascript">
+    setInterval("fun(showTime2)", 1);
+
+    function fun(timeID) {
+        var date = new Date(); //创建对象
+        var y = date.getFullYear(); //获取年份
+        var m = date.getMonth() + 1; //获取月份  返回0-11
+        var d = date.getDate(); // 获取日
+        var w = date.getDay(); //获取星期几  返回0-6   (0=星期天)
+        var ww = '周' + '日一二三四五六'.charAt(new Date().getDay()); //星期几
+        var h = date.getHours(); //时
+        var minute = date.getMinutes() //分
+        var s = date.getSeconds(); //秒
+
+        if (m < 10) {
+            m = "0" + m;
+        }
+
+        if (d < 10) {
+            d = "0" + d;
+        }
+
+        if (h < 10) {
+            h = "0" + h;
+        }
+
+        if (minute < 10) {
+            minute = "0" + minute;
+        }
+
+        if (s < 10) {
+            s = "0" + s;
+        }
+
+        document.getElementById(timeID.id).innerHTML = y + "年" + m + "月" + d + "日" + "   " +
+            h + ":" + minute + ":" + s + "  " + ww;
+
+    }
+</script>
+
+<!--点开警报 -->
+<script type="text/javascript">
+         function fun2(){
+             $('#window').toggle();
+         };
+         function fun1(){
+             $('#window1').toggle();
+         };
+         function fun3(){
+             $('#window3').toggle();
+         };
+         function fun4(){
+             $('#window4').toggle();
+         };
+         function fun5(){
+             $('#window5').toggle();
+         };
+
+         function fun6(){
+             $('#window6').toggle();
+         };
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#YES").click(function(){
+            $("#windows").toggle();
+        });
+    });
+    $(document).ready(function(){
+        $(".reback").click(function(){
+            $("#light").toggle();
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function(){
+
+
+        var n = [[${studentCountMan}]]
+        var s = [[${studentCountWoMan}]]
+
+        var green_width = n / (n + s) * 100
+        $("#studentsex").css({"background-color":"#6bc89b","width":green_width+'%'});
+
+    });
+</script>
+
+
+
+<!--柱状图 -->
+<script>
+    $(document).ready(function () {
+        var n = [[${practitionerTypeMan['count0']}]]
+        var s = [[${practitionerTypeWoMan['count0']}]]
+        if(n==s)
+        {
+            green_width0=50;
+        }
+        else {
+            var green_width0 = n / (n + s) * 100
+
+        }
+
+
+        var n1 = [[${practitionerTypeMan['count1']}]]
+        var s1= [[${practitionerTypeWoMan['count1']}]]
+
+        if(n1==s1)
+        {
+            green_width1=50;
+        }
+        else {
+            var green_width1 = n1 / (n1 + s1) * 100
+
+        }
+
+
+
+
+        var n2 = [[${practitionerTypeMan['count2']}]]
+        var s2 = [[${practitionerTypeWoMan['count2']}]]
+
+        if(n2==s2)
+        {
+            green_width2=50;
+        }
+        else {
+            var green_width2 = n2/ (n2 + s2) * 100
+
+        }
+
+
+        var n3 = [[${practitionerTypeMan['count3']}]]
+        var s3 = [[${practitionerTypeWoMan['count3']}]]
+
+
+        if(n3==s3)
+        {
+            green_width3=50;
+        }
+        else {
+            var green_width3 = n3 / (n3 + s3) * 100
+
+        }
+
+        //
+        var n4 = [[${practitionerTypeMan['count4']}]]
+        var s4 = [[${practitionerTypeWoMan['count4']}]]
+
+
+        if(n4==s4)
+        {
+            green_width4=50;
+        }
+        else {
+            var green_width4= n4 / (n4 + s4) * 100
+
+        }
+
+
+
+        // $( "#ICRADE1").css({"background-color": "#6bc89b", "width": green_width0 + '%'});
+        // $( "#ICRADE2").css({"background-color": "#6bc89b", "width": green_width1 + '%'});
+        //
+        // $( "#ICRADE3").css({"background-color": "#6bc89b", "width": green_width2 + '%'});
+        // $( "#ICRADE4").css({"background-color": "#6bc89b", "width": green_width3 + '%'});
+        //$(".zhu_three").css({"background-color":"#6bc89b","width":green_width1+'%'});
+        $( "#ICRADE1").css({"background-color": "#6bc89b", "width": green_width0 + '%'});
+        $( "#ICRADE2").css({"background-color": "#6bc89b", "width": green_width1 + '%'});
+
+        $( "#ICRADE3").css({"background-color": "#6bc89b", "width": green_width2 + '%'});
+        $( "#ICRADE4").css({"background-color": "#6bc89b", "width": green_width3 + '%'});
+        $( "#ICRADE5").css({"background-color": "#6bc89b", "width": green_width4 + '%'});
+    });
+</script>
+
+
+
+
+<!--饼状图 -->
+<script>
+    var mychart1 = echarts.init(document.getElementById("t-1"));
+    var mychart2 = echarts.init(document.getElementById("t-2"));
+    var mychart3 = echarts.init(document.getElementById("t-3"));
+    var mychart4 = echarts.init(document.getElementById("t-4"));
+
+
+
+    var sd=[[${clasStuTotalMan['clasTypeTotal0']}]]
+
+    var sc=[[${clasStuTotalWoMan['clasTypeTotal0']}]]
+
+    var sd1=[[${clasStuTotalMan['clasTypeTotal1']}]]
+
+    var sc1=[[${clasStuTotalWoMan['clasTypeTotal1']}]]
+
+    var sd2=[[${clasStuTotalMan['clasTypeTotal2']}]]
+
+    var sc2=[[${clasStuTotalWoMan['clasTypeTotal2']}]]
+
+    var option = {
+        //  backgroundColor: '#014131',//背景颜色
+        tooltip: {
+            show: true,
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+
+        toolbox: {
+            show: false,
+            feature: {
+                mark: {show: true},
+                dataView: {show: true, readOnly: false},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        calculable: false,
+
+        series: [
+            {
+                name: '幼师',
+                type: 'pie',
+                radius: '85%',
+                data: [
+                    {value: [[${contSafe}]], name: '合格'},
+                    {value: [[${contSafes}]], name: '不合格'},
+                ],
+                itemStyle: {//系列级个性化
+                    normal: {
+                        color: function (params) {
+                            var colorList = [
+                                'rgba(59 ,161, 128,0.8)', '#0f4b3f'
+                            ];
+                            return colorList[params.dataIndex]
+                        },
+                        labelLine: {//饼图不显示线条
+                            length: 2,
+                            show: false
+                        },
+                        label: {//饼图不显示文字
+                            show: true,
+                            position: 'inner',//饼图图上显示百分比
+                            formatter: function (params) {
+                                return (params.percent - 0).toFixed(0) + '%'
+                            },
+                            textStyle: {
+                                fontSize: 14
+                            }
+                        },
+                    }
+                }
+            }
+        ]
+    };
+    var option2 = {
+        //  backgroundColor: '#014131',//背景颜色
+        tooltip: {
+            show: true,
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+
+        toolbox: {
+            show: false,
+            feature: {
+                mark: {show: true},
+                dataView: {show: true, readOnly: false},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        calculable: false,
+
+        series: [
+            {
+                name: '小班',
+                type: 'pie',
+                radius: '85%',
+
+
+                data: [
+                    {value:[[${counts['count0']}]], name: '教师'},
+                    {value: sc+sd, name: '学生'},
+                ],
+                itemStyle: {//系列级个性化
+                    normal: {
+                        color: function (params) {
+                            var colorList = [
+                                'rgba(59 ,161, 128,0.8)', '#0f4b3f'
+                            ];
+                            return colorList[params.dataIndex]
+                        },
+                        labelLine: {//饼图不显示线条
+                            length: 2,
+                            show: false
+                        },
+                        label: {//饼图不显示文字
+                            show: true,
+                            position: 'inner',//饼图图上显示百分比
+                            formatter: function (params) {
+                                return (params.percent - 0).toFixed(0) + '%'
+                            },
+                            textStyle: {
+                                fontSize: 14
+                            }
+                        },
+                    }
+                }
+            }
+        ]
+    };
+    var option3 = {
+        //  backgroundColor: '#014131',//背景颜色
+        tooltip: {
+            show: true,
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+
+        toolbox: {
+            show: false,
+            feature: {
+                mark: {show: true},
+                dataView: {show: true, readOnly: false},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        calculable: false,
+
+        series: [
+            {
+                name: '中班',
+                type: 'pie',
+                radius: '85%',
+                data: [
+                    {value: [[${counts['count0']}]], name: '教师'},
+                    {value: sc1+sd1, name: '学生'},
+                ],
+                itemStyle: {//系列级个性化
+                    normal: {
+                        color: function (params) {
+                            var colorList = [
+                                'rgba(59 ,161, 128,0.8)', '#0f4b3f'
+                            ];
+                            return colorList[params.dataIndex]
+                        },
+                        labelLine: {//饼图不显示线条
+                            length: 2,
+                            show: false
+                        },
+                        label: {//饼图不显示文字
+                            show: true,
+                            position: 'inner',//饼图图上显示百分比
+                            formatter: function (params) {
+                                return (params.percent - 0).toFixed(0) + '%'
+                            },
+                            textStyle: {
+                                fontSize: 14
+                            }
+                        },
+                    }
+                }
+            }
+        ]
+    };
+    var option4 = {
+        //  backgroundColor: '#014131',//背景颜色
+        tooltip: {
+            show: true,
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+
+        toolbox: {
+            show: false,
+            feature: {
+                mark: {show: true},
+                dataView: {show: true, readOnly: false},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        calculable: false,
+
+        series: [
+            {
+                name: '大班',
+                type: 'pie',
+                radius: '85%',
+                data: [
+                    {value: [[${counts['count0']}]], name: '教师'},
+                    {value: sc2+sd2, name: '学生'},
+                ],
+                itemStyle: {//系列级个性化
+                    normal: {
+                        color: function (params) {
+                            var colorList = [
+                                'rgba(59 ,161, 128,0.8)', '#0f4b3f'
+                            ];
+                            return colorList[params.dataIndex]
+                        },
+                        labelLine: {//饼图不显示线条
+                            length: 2,
+                            show: false
+                        },
+                        label: {//饼图不显示文字
+                            show: true,
+                            position: 'inner',//饼图图上显示百分比
+                            formatter: function (params) {
+                                return (params.percent - 0).toFixed(0) + '%'
+                            },
+                            textStyle: {
+                                fontSize: 14
+                            }
+                        },
+                    }
+                }
+            }
+        ]
+    };
+    mychart1.setOption(option);
+    mychart2.setOption(option2);
+    mychart3.setOption(option3);
+    mychart4.setOption(option4);
+</script>
+
+
+<!--警报 -->
+<script type="text/javascript">
+    $(document).ready(function(){
+        //警报点击
+        $("#m1").click(function(){
+            var n = $("#m1").attr("bchange");
+            //下拉框是关闭的的
+            if(n==1){
+                var n2=$("#m2").attr("bchange");
+                var n3=$("#m3").attr("bchange");
+                var n4=$("#m4").attr("bchange");
+                if(n2==0){
+                    //该下拉框开启
+                    $(".b").toggleClass("bnew");
+                    $(".jingbao").toggleClass("jingbao1");
+                    $(".a1").toggle();
+                    $(".a2").toggle();
+                    $("#show2").toggle();
+                    $("#m2").attr("bchange","1");
+                    $("#t2").css({"background-image":"url('/static/img/touming.png')"});
+                }
+                if(n3==0){
+                    //该下拉框开启
+                    $(".b").toggleClass("bnew");
+                    $(".jingbao").toggleClass("jingbao1");
+                    $(".a1").toggle();
+                    $(".a2").toggle();
+                    $("#show3").toggle();
+                    $("#m3").attr("bchange","1");
+                    $("#t3").css({"background-image":"url('/static/img/touming.png')"});
+                }
+                if(n4==0){
+                    //该下拉框开启
+                    $(".b").toggleClass("bnew");
+                    $(".jingbao").toggleClass("jingbao1");
+                    $(".a1").toggle();
+                    $(".a2").toggle();
+                    $("#show4").toggle();
+                    $("#m4").attr("bchange","1");
+                    $("#t4").css({"background-image":"url('/static/img/touming.png')"});
+                }
+                $(".b").toggleClass("bnew");
+                $(".jingbao").toggleClass("jingbao1");
+                $(".a1").toggle();
+                $(".a2").toggle();
+                $("#show1").toggle();
+                $("#m1").attr("bchange","0");
+                $("#t1").css({"background-image":"url('/static/img/shine.png')"});
+            }
+            if(n==0){
+                $(".b").toggleClass("bnew");
+                $(".jingbao").toggleClass("jingbao1");
+                $(".a1").toggle();
+                $(".a2").toggle();
+                $("#show1").toggle();
+                $("#m1").attr("bchange","1");
+                $("#t1").css({"background-image":"url('/static/img/touming.png')"});
+            }
+
+        });
+        $("#m2").click(function(){
+            var n = $("#m2").attr("bchange");
+            //下拉框是关闭的的
+            if(n==1){
+                var n1=$("#m1").attr("bchange");
+                var n3=$("#m3").attr("bchange");
+                var n4=$("#m4").attr("bchange");
+                if(n1==0){
+                    //该下拉框开启
+                    $(".b").toggleClass("bnew");
+                    $(".jingbao").toggleClass("jingbao1");
+                    $(".a1").toggle();
+                    $(".a2").toggle();
+                    $("#show1").toggle();
+                    $("#m1").attr("bchange","1");
+                    $("#t1").css({"background-image":"url('/static/img/touming.png')"});
+                }
+                if(n3==0){
+                    //该下拉框开启
+                    $(".b").toggleClass("bnew");
+                    $(".jingbao").toggleClass("jingbao1");
+                    $(".a1").toggle();
+                    $(".a2").toggle();
+                    $("#show3").toggle();
+                    $("#m3").attr("bchange","1");
+                    $("#t3").css({"background-image":"url('/static/img/touming.png')"});
+                }
+                if(n4==0){
+                    //该下拉框开启
+                    $(".b").toggleClass("bnew");
+                    $(".jingbao").toggleClass("jingbao1");
+                    $(".a1").toggle();
+                    $(".a2").toggle();
+                    $("#show4").toggle();
+                    $("#m4").attr("bchange","1");
+                    $("#t4").css({"background-image":"url('/static/img/touming.png')"});
+                }
+                $(".b").toggleClass("bnew");
+                $(".jingbao").toggleClass("jingbao1");
+                $(".a1").toggle();
+                $(".a2").toggle();
+                $("#show2").toggle();
+                $("#m2").attr("bchange","0");
+                $("#t2").css({"background-image":"url('/static/img/shine.png')"});
+            }
+            if(n==0){
+                $(".b").toggleClass("bnew");
+                $(".jingbao").toggleClass("jingbao1");
+                $(".a1").toggle();
+                $(".a2").toggle();
+                $("#show2").toggle();
+                $("#m2").attr("bchange","1");
+                $("#t2").css({"background-image":"url('/static/img/touming.png')"});
+            }
+        });
+        $("#m3").click(function(){
+            var n = $("#m3").attr("bchange");
+            //下拉框是关闭的的
+            if(n==1){
+                var n2=$("#m2").attr("bchange");
+                var n1=$("#m1").attr("bchange");
+                var n4=$("#m4").attr("bchange");
+                if(n2==0){
+                    //该下拉框开启
+                    $(".b").toggleClass("bnew");
+                    $(".jingbao").toggleClass("jingbao1");
+                    $(".a1").toggle();
+                    $(".a2").toggle();
+                    $("#show2").toggle();
+                    $("#m2").attr("bchange","1");
+                    $("#t2").css({"background-image":"url('/static/img/touming.png')"});
+                }
+                if(n1==0){
+                    //该下拉框开启
+                    $(".b").toggleClass("bnew");
+                    $(".jingbao").toggleClass("jingbao1");
+                    $(".a1").toggle();
+                    $(".a2").toggle();
+                    $("#show1").toggle();
+                    $("#m1").attr("bchange","1");
+                    $("#t1").css({"background-image":"url('/static/img/touming.png')"});
+                }
+                if(n4==0){
+                    //该下拉框开启
+                    $(".b").toggleClass("bnew");
+                    $(".jingbao").toggleClass("jingbao1");
+                    $(".a1").toggle();
+                    $(".a2").toggle();
+                    $("#show4").toggle();
+                    $("#m4").attr("bchange","1");
+                    $("#t4").css({"background-image":"url('/static/img/touming.png')"});
+                }
+                $(".b").toggleClass("bnew");
+                $(".jingbao").toggleClass("jingbao1");
+                $(".a1").toggle();
+                $(".a2").toggle();
+                $("#show3").toggle();
+                $("#m3").attr("bchange","0");
+                $("#t3").css({"background-image":"url('/static/img/shine.png')"});
+            }
+            if(n==0){
+                $(".b").toggleClass("bnew");
+                $(".jingbao").toggleClass("jingbao1");
+                $(".a1").toggle();
+                $(".a2").toggle();
+                $("#show3").toggle();
+                $("#m3").attr("bchange","1");
+                $("#t3").css({"background-image":"url('/static/img/touming.png')"});
+            }
+
+        });
+        $("#m4").click(function(){
+            var n = $("#m4").attr("bchange");
+            //下拉框是关闭的的
+            if(n==1){
+                var n2=$("#m2").attr("bchange");
+                var n3=$("#m3").attr("bchange");
+                var n1=$("#m1").attr("bchange");
+                if(n2==0){
+                    //该下拉框开启
+                    $(".b").toggleClass("bnew");
+                    $(".jingbao").toggleClass("jingbao1");
+                    $(".a1").toggle();
+                    $(".a2").toggle();
+                    $("#show2").toggle();
+                    $("#m2").attr("bchange","1");
+                    $("#t2").css({"background-image":"url('/static/img/touming.png')"});
+                }
+                if(n3==0){
+                    //该下拉框开启
+                    $(".b").toggleClass("bnew");
+                    $(".jingbao").toggleClass("jingbao1");
+                    $(".a1").toggle();
+                    $(".a2").toggle();
+                    $("#show3").toggle();
+                    $("#m3").attr("bchange","1");
+                    $("#t3").css({"background-image":"url('/static/img/touming.png')"});
+                }
+                if(n1==0){
+                    //该下拉框开启
+                    $(".b").toggleClass("bnew");
+                    $(".jingbao").toggleClass("jingbao1");
+                    $(".a1").toggle();
+                    $(".a2").toggle();
+                    $("#show1").toggle();
+                    $("#m1").attr("bchange","1");
+                    $("#t1").css({"background-image":"url('/static/img/touming.png')"});
+                }
+                $(".b").toggleClass("bnew");
+                $(".jingbao").toggleClass("jingbao1");
+                $(".a1").toggle();
+                $(".a2").toggle();
+                $("#show4").toggle();
+                $("#m4").attr("bchange","0");
+                $("#t4").css({"background-image":"url('/static/img/shine.png')"});
+            }
+            if(n==0){
+                $(".b").toggleClass("bnew");
+                $(".jingbao").toggleClass("jingbao1");
+                $(".a1").toggle();
+                $(".a2").toggle();
+                $("#show4").toggle();
+                $("#m4").attr("bchange","1");
+                $("#t4").css({"background-image":"url('/static/img/touming.png')"});
+            }
+
+        });
+        $("#m5").click(function(){
+            //警报点击
+            var n = $("#m5").attr("bchange");
+            //下拉框是关闭的的
+            if(n==1){
+                var n2=$("#m6").attr("bchange");
+                if(n2==0){
+                    //该下拉框开启
+                    $(".bf").toggleClass("bnew1");
+                    $(".ts").toggleClass("ts1");
+                    $(".a1-f").toggle();
+                    $(".a2-f").toggle();
+                    $("#show6").toggle();
+                    $("#m6").attr("bchange","1");
+                    $("#ts2").css({"background-image":"url('/static/img/touming.png')"});
+                }
+                $(".bf").toggleClass("bnew1");
+                $(".ts").toggleClass("ts1");
+                $(".a1-f").toggle();
+                $(".a2-f").toggle();
+                $("#show5").toggle();
+                $("#m5").attr("bchange","0");
+                $("#ts1").css({"background-image":"url('/static/img/shine.png')"});
+            }
+            if(n==0){
+                $(".bf").toggleClass("bnew1");
+                $(".ts").toggleClass("ts1");
+                $(".a1-f").toggle();
+                $(".a2-f").toggle();
+                $("#show5").toggle();
+                $("#m5").attr("bchange","1");
+                $("#ts1").css({"background-image":"url('/static/img/touming.png')"});
+            }
+        });
+        $("#m6").click(function(){
+            //警报点击
+            var n = $("#m6").attr("bchange");
+            //下拉框是关闭的的
+            if(n==1){
+                var n2=$("#m5").attr("bchange");
+                if(n2==0){
+                    //该下拉框开启
+                    $(".bf").toggleClass("bnew1");
+                    $(".ts").toggleClass("ts1");
+                    $(".a1-f").toggle();
+                    $(".a2-f").toggle();
+                    $("#show5").toggle();
+                    $("#m5").attr("bchange","1");
+                    $("#ts1").css({"background-image":"url('/static/img/touming.png')"});
+                }
+                $(".bf").toggleClass("bnew1");
+                $(".ts").toggleClass("ts1");
+                $(".a1-f").toggle();
+                $(".a2-f").toggle();
+                $("#show6").toggle();
+                $("#m6").attr("bchange","0");
+                $("#ts2").css({"background-image":"url('/static/img/shine.png')"});
+            }
+            if(n==0){
+                $(".bf").toggleClass("bnew1");
+                $(".ts").toggleClass("ts1");
+                $(".a1-f").toggle();
+                $(".a2-f").toggle();
+                $("#show6").toggle();
+                $("#m6").attr("bchange","1");
+                $("#ts2").css({"background-image":"url('/static/img/touming.png')"});
+            }
+        });
+    });
+</script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var rotation2 = function (){
+            $(".JM3").rotate({
+                angle:0,
+                animateTo:360,
+                callback: rotation2,
+                easing: function (x,t,b,c,d){        // t: current time, b: begInnIng value, c: change In value, d: duratio
+                    d = d*2;
+                    return c*(t/d)+b;
+                }
+            });
+        }
+        rotation2();
+    });
+    $(document).ready(function(){
+        $(".back3").mouseleave(function () {
+            var rotation2 = function (){
+                $(".JM3").rotate({
+                    angle:0,
+                    animateTo:360,
+                    callback: rotation2,
+                    easing: function (x,t,b,c,d){        // t: current time, b: begInnIng value, c: change In value, d: duratio
+                        d = d*2;
+                        return c*(t/d)+b;
+                    }
+                });
+            }
+            rotation2();
+        });
+    });
+    $(document).ready(function(){
+        $(".back3").mouseover(function () {
+            var rotation1 = function (){
+                $(".JM3").rotate({
+                    angle:0,
+                    animateTo:360,
+                    callback: rotation1,
+                    easing: function (x,t,b,c,d){        // t: current time, b: begInnIng value, c: change In value, d: durati
+                        return c*(t/d)+b;
+                    }
+                });
+            }
+            rotation1();
+        });
+    });
+</script>
+
+</html>

@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muji.zh.admin.mapper.ParSlarListMapper">
+  <resultMap id="BaseResultMap" type="com.muji.zh.admin.model.ParSlarList">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="pname" jdbcType="VARCHAR" property="pname" />
+    <result column="s_id" jdbcType="INTEGER" property="sId" />
+    <result column="p_id" jdbcType="INTEGER" property="pId" />
+    <result column="sign" jdbcType="INTEGER" property="sign" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="end_date" jdbcType="TIMESTAMP" property="endDate" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="real_wages" jdbcType="REAL" property="realWages" />
+    <result column="falg1" jdbcType="VARCHAR" property="falg1" />
+    <result column="falg2" jdbcType="VARCHAR" property="falg2" />
+    <result column="falg3" jdbcType="VARCHAR" property="falg3" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, pname, s_id, p_id, sign, state, create_date, end_date, content, real_wages, falg1, 
+    falg2, falg3
+  </sql>
+  <select id="selectByExample" parameterType="com.muji.zh.admin.model.ParSlarListExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from par_slar_list
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from par_slar_list
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from par_slar_list
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.muji.zh.admin.model.ParSlarListExample">
+    delete from par_slar_list
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.muji.zh.admin.model.ParSlarList">
+    insert into par_slar_list (id, pname, s_id, 
+      p_id, sign, state, create_date, 
+      end_date, content, real_wages, 
+      falg1, falg2, falg3
+      )
+    values (#{id,jdbcType=INTEGER}, #{pname,jdbcType=VARCHAR}, #{sId,jdbcType=INTEGER}, 
+      #{pId,jdbcType=INTEGER}, #{sign,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{endDate,jdbcType=TIMESTAMP}, #{content,jdbcType=VARCHAR}, #{realWages,jdbcType=REAL}, 
+      #{falg1,jdbcType=VARCHAR}, #{falg2,jdbcType=VARCHAR}, #{falg3,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.muji.zh.admin.model.ParSlarList">
+    insert into par_slar_list
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="pname != null">
+        pname,
+      </if>
+      <if test="sId != null">
+        s_id,
+      </if>
+      <if test="pId != null">
+        p_id,
+      </if>
+      <if test="sign != null">
+        sign,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="endDate != null">
+        end_date,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="realWages != null">
+        real_wages,
+      </if>
+      <if test="falg1 != null">
+        falg1,
+      </if>
+      <if test="falg2 != null">
+        falg2,
+      </if>
+      <if test="falg3 != null">
+        falg3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="pname != null">
+        #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="sId != null">
+        #{sId,jdbcType=INTEGER},
+      </if>
+      <if test="pId != null">
+        #{pId,jdbcType=INTEGER},
+      </if>
+      <if test="sign != null">
+        #{sign,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null">
+        #{endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="realWages != null">
+        #{realWages,jdbcType=REAL},
+      </if>
+      <if test="falg1 != null">
+        #{falg1,jdbcType=VARCHAR},
+      </if>
+      <if test="falg2 != null">
+        #{falg2,jdbcType=VARCHAR},
+      </if>
+      <if test="falg3 != null">
+        #{falg3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.muji.zh.admin.model.ParSlarListExample" resultType="java.lang.Long">
+    select count(*) from par_slar_list
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update par_slar_list
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.pname != null">
+        pname = #{record.pname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sId != null">
+        s_id = #{record.sId,jdbcType=INTEGER},
+      </if>
+      <if test="record.pId != null">
+        p_id = #{record.pId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sign != null">
+        sign = #{record.sign,jdbcType=INTEGER},
+      </if>
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=INTEGER},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endDate != null">
+        end_date = #{record.endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realWages != null">
+        real_wages = #{record.realWages,jdbcType=REAL},
+      </if>
+      <if test="record.falg1 != null">
+        falg1 = #{record.falg1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.falg2 != null">
+        falg2 = #{record.falg2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.falg3 != null">
+        falg3 = #{record.falg3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update par_slar_list
+    set id = #{record.id,jdbcType=INTEGER},
+      pname = #{record.pname,jdbcType=VARCHAR},
+      s_id = #{record.sId,jdbcType=INTEGER},
+      p_id = #{record.pId,jdbcType=INTEGER},
+      sign = #{record.sign,jdbcType=INTEGER},
+      state = #{record.state,jdbcType=INTEGER},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      end_date = #{record.endDate,jdbcType=TIMESTAMP},
+      content = #{record.content,jdbcType=VARCHAR},
+      real_wages = #{record.realWages,jdbcType=REAL},
+      falg1 = #{record.falg1,jdbcType=VARCHAR},
+      falg2 = #{record.falg2,jdbcType=VARCHAR},
+      falg3 = #{record.falg3,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.muji.zh.admin.model.ParSlarList">
+    update par_slar_list
+    <set>
+      <if test="pname != null">
+        pname = #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="sId != null">
+        s_id = #{sId,jdbcType=INTEGER},
+      </if>
+      <if test="pId != null">
+        p_id = #{pId,jdbcType=INTEGER},
+      </if>
+      <if test="sign != null">
+        sign = #{sign,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null">
+        end_date = #{endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="realWages != null">
+        real_wages = #{realWages,jdbcType=REAL},
+      </if>
+      <if test="falg1 != null">
+        falg1 = #{falg1,jdbcType=VARCHAR},
+      </if>
+      <if test="falg2 != null">
+        falg2 = #{falg2,jdbcType=VARCHAR},
+      </if>
+      <if test="falg3 != null">
+        falg3 = #{falg3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.muji.zh.admin.model.ParSlarList">
+    update par_slar_list
+    set pname = #{pname,jdbcType=VARCHAR},
+      s_id = #{sId,jdbcType=INTEGER},
+      p_id = #{pId,jdbcType=INTEGER},
+      sign = #{sign,jdbcType=INTEGER},
+      state = #{state,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      end_date = #{endDate,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=VARCHAR},
+      real_wages = #{realWages,jdbcType=REAL},
+      falg1 = #{falg1,jdbcType=VARCHAR},
+      falg2 = #{falg2,jdbcType=VARCHAR},
+      falg3 = #{falg3,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!--查询已经发过的工资-->
+  <select id="selectParSlarListByPrimaryAndSignId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from par_slar_list
+    where p_id = #{pId} and sign = #{sign} and state = #{state}
+  </select>
+
+  <!--查询 未发工资-->
+  <select id="selectParSlarListByPidAndSign" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from par_slar_list
+    where p_id = #{pId} and sign = #{sign}
+  </select>
+
+  <!-- 确认工资 -->
+  <update id="ConfirmSlarList">
+      update par_slar_list
+      set sign = #{sign},state = #{state}
+      where p_id = #{pId}
+  </update>
+
+  <!-- 查询工资状态 -->
+  <select id="selectStateBypIdAndSignAndId" resultType="java.lang.Integer">
+    select state from par_slar_list where p_id = #{pId} and sign = #{sign}
+  </select>
+
+  <!--通过Pid 查询 Sid-->
+  <select id="selectSidBypPidAndId" resultType="java.lang.Integer">
+    select s_id from par_slar_list where p_id = #{pId}
+  </select>
+
+  <!--通过pId 和 sign  查询  总的实际发放的工资-->
+  <select id="selectTotalWagesBypIdAndSign" resultType="java.lang.Integer">
+     select sum(real_wages) from par_slar_list where p_id = #{pId} and sign=#{sign}
+  </select>
+</mapper>

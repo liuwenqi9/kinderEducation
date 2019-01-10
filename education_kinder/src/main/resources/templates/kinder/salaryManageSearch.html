@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>工资管理 - 工资清单查询</title>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="stylesheet" href="css/global.css"/>
+    <link rel="stylesheet" href="css/pay_manage.css"/>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="js/xadmin.js"></script>
+</head>
+<body>
+<p class="pay_title">教职工资查询</p>
+<div class="search" style="text-align: center">
+    <form action="">
+        <input type="text" placeholder="请输入姓名" name="tea_name"/>
+        <input type="text" placeholder="请输入编号" name="tea_no"/>
+        <button type="submit" style="height:30px;width:60px;">查询</button>
+    </form>
+</div>
+<div class="stu_free_table">
+    <table>
+        <tr class="stu">
+            <th class="b stu_no">学号</th>
+            <th class="b">老师姓名</th>
+            <th class="b">年龄</th>
+            <th class="b">性别</th>
+            <th class="b">所在学校</th>
+            <th class="b">基本工资(月)</th>
+            <th class="b">午餐补助(月)</th>
+            <th class="b">通讯补助(月)</th>
+        </tr>
+        <tr th:each="salaryList : ${salaryListList}">
+            <th th:text="${salaryList.pId}"></th>
+            <th th:text="${salaryList.sname}"></th>
+            <th th:text="${salaryList.age}"></th>
+            <th th:text="${salaryList.sex}"></th>
+            <th th:text="${salaryList.kinderName}"></th>
+            <th>2400</th>
+            <th>600</th>
+            <th>80</th>
+        </tr>
+
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,10 @@
+com\muji\zh\admin\controller\AdminController.class
+config\redis\BasePrefix.class
+config\redis\RedisService.class
+config\SwaggerConfig.class
+config\WebLogAspect.class
+config\redis\RedisPoolFactory.class
+config\redis\KeyPrefix.class
+config\redis\DashboardKey.class
+com\muji\zh\admin\controller\Application.class
+config\redis\RedisConfig.class

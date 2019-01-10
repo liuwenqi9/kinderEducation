@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muji.zh.admin.mapper.ParentMapper">
+  <resultMap id="BaseResultMap" type="com.muji.zh.admin.model.Parent">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="ic_id" jdbcType="VARCHAR" property="icId" />
+    <result column="pname" jdbcType="VARCHAR" property="pname" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="falg1" jdbcType="VARCHAR" property="falg1" />
+    <result column="flag2" jdbcType="VARCHAR" property="flag2" />
+    <result column="flag3" jdbcType="VARCHAR" property="flag3" />
+    <result column="flag4" jdbcType="VARCHAR" property="flag4" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, password, ic_id, pname, address, sex, phone, email, image, falg1, flag2, flag3, 
+    flag4
+  </sql>
+  <select id="selectByExample" parameterType="com.muji.zh.admin.model.ParentExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from parent
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from parent
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from parent
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.muji.zh.admin.model.ParentExample">
+    delete from parent
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.muji.zh.admin.model.Parent">
+    insert into parent (id, password, ic_id, 
+      pname, address, sex, 
+      phone, email, image, 
+      falg1, flag2, flag3, 
+      flag4)
+    values (#{id,jdbcType=INTEGER}, #{password,jdbcType=VARCHAR}, #{icId,jdbcType=VARCHAR}, 
+      #{pname,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, 
+      #{falg1,jdbcType=VARCHAR}, #{flag2,jdbcType=VARCHAR}, #{flag3,jdbcType=VARCHAR}, 
+      #{flag4,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.muji.zh.admin.model.Parent">
+    insert into parent
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="icId != null">
+        ic_id,
+      </if>
+      <if test="pname != null">
+        pname,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="image != null">
+        image,
+      </if>
+      <if test="falg1 != null">
+        falg1,
+      </if>
+      <if test="flag2 != null">
+        flag2,
+      </if>
+      <if test="flag3 != null">
+        flag3,
+      </if>
+      <if test="flag4 != null">
+        flag4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="icId != null">
+        #{icId,jdbcType=VARCHAR},
+      </if>
+      <if test="pname != null">
+        #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="falg1 != null">
+        #{falg1,jdbcType=VARCHAR},
+      </if>
+      <if test="flag2 != null">
+        #{flag2,jdbcType=VARCHAR},
+      </if>
+      <if test="flag3 != null">
+        #{flag3,jdbcType=VARCHAR},
+      </if>
+      <if test="flag4 != null">
+        #{flag4,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.muji.zh.admin.model.ParentExample" resultType="java.lang.Long">
+    select count(*) from parent
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update parent
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.icId != null">
+        ic_id = #{record.icId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pname != null">
+        pname = #{record.pname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image != null">
+        image = #{record.image,jdbcType=VARCHAR},
+      </if>
+      <if test="record.falg1 != null">
+        falg1 = #{record.falg1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag2 != null">
+        flag2 = #{record.flag2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag3 != null">
+        flag3 = #{record.flag3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag4 != null">
+        flag4 = #{record.flag4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update parent
+    set id = #{record.id,jdbcType=INTEGER},
+      password = #{record.password,jdbcType=VARCHAR},
+      ic_id = #{record.icId,jdbcType=VARCHAR},
+      pname = #{record.pname,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      image = #{record.image,jdbcType=VARCHAR},
+      falg1 = #{record.falg1,jdbcType=VARCHAR},
+      flag2 = #{record.flag2,jdbcType=VARCHAR},
+      flag3 = #{record.flag3,jdbcType=VARCHAR},
+      flag4 = #{record.flag4,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.muji.zh.admin.model.Parent">
+    update parent
+    <set>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="icId != null">
+        ic_id = #{icId,jdbcType=VARCHAR},
+      </if>
+      <if test="pname != null">
+        pname = #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="falg1 != null">
+        falg1 = #{falg1,jdbcType=VARCHAR},
+      </if>
+      <if test="flag2 != null">
+        flag2 = #{flag2,jdbcType=VARCHAR},
+      </if>
+      <if test="flag3 != null">
+        flag3 = #{flag3,jdbcType=VARCHAR},
+      </if>
+      <if test="flag4 != null">
+        flag4 = #{flag4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.muji.zh.admin.model.Parent">
+    update parent
+    set password = #{password,jdbcType=VARCHAR},
+      ic_id = #{icId,jdbcType=VARCHAR},
+      pname = #{pname,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      falg1 = #{falg1,jdbcType=VARCHAR},
+      flag2 = #{flag2,jdbcType=VARCHAR},
+      flag3 = #{flag3,jdbcType=VARCHAR},
+      flag4 = #{flag4,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

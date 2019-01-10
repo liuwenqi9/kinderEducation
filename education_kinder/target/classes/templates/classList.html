@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>班级列表</title>
+    <meta name="renderer" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" th:href="@{~/static/css/font.css}"/>
+    <link rel="stylesheet" th:href="@{~/static/css/xadmin.css}"/>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{~/static/lib/layui/layui.js}" charset="utf-8"></script>
+    <script type="text/javascript" th:src="@{~/static/js/xadmin.js}"></script>
+    <!--[if lt IE 9]>
+      <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+      <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  
+  <body class="layui-anim layui-anim-up">
+    <div class="x-body">
+      <div class="layui-row">
+        <form class="layui-form layui-col-md8 x-so" action="/kinder/checkClass" method="post">
+          <input type="text" name="cname" placeholder="请输入班级名"  autocomplete="off" class="layui-input"/>
+          <input type="hidden" th:value="${check}" id="check" class="check"/>
+          <input type="hidden" th:value="${cname}" id="cname" class="cname"/>
+          <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+        </form>
+				<div style="float: right;">
+				   <a class="layui-btn layui-btn-small"  href="javascript:window.location.replace('/kinder/classList?currentPage=1');" title="刷新">
+				     <i class="layui-icon">ဂ</i>
+                   </a>
+				 </div>
+      </div>
+      <xblock>
+        <button class="layui-btn" onclick="x_admin_add('添加班级信息','/kinder/classAdd',600,400)"><i class="layui-icon"></i>添加</button>
+        <span class="x-right" style="line-height:40px">共有数据：<i th:text="${count}"></i>条</span>
+      </xblock>
+      <table class="layui-table">
+        <thead>
+          <tr>
+            <!--<th>-->
+              <!--<div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>-->
+            <!--</th>-->
+            <th>ID</th>
+            <th>班级名称</th>
+            <th>班级类型</th>
+            <!--<th>年级</th>-->
+            <th>班主任</th>
+            <th>操作</th></tr>
+        </thead>
+        <tbody>
+          <tr th:each="classVo:${classVoList.list}">
+            <!--<td>-->
+              <!--<div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>-->
+            <!--</td>-->
+            <td th:text="${classVo.cId}"></td>
+            <td th:text="${classVo.cname}"></td>
+            <td th:text="${classVo.aname}"></td>
+            <!--<td th:text="${classVo.grade}"></td>-->
+            <td th:text="${classVo.pname}"></td>
+            <td>
+              <a title="编辑"  onclick="x_admin_show('编辑','/kinder/classEdit/',600,400,this)" href="javascript:;">
+                <i class="layui-icon">&#xe642;</i>
+                <input id="cId" th:value="${classVo.cId}" type="hidden"/>
+              </a>
+              <!--<a title="删除" onclick="member_del(this)" href="javascript:;">-->
+                <!--<i class="layui-icon">&#xe640;</i>-->
+              <!--</a>-->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div id="laypage"></div>
+      <!-- <div class="page">
+        <div>
+          <a class="prev" href="">&lt;&lt;</a>
+          <a class="num" href="">1</a>
+          <span class="current">2</span>
+          <a class="num" href="">3</a>
+          <a class="num" href="">489</a>
+          <a class="next" href="">&gt;&gt;</a>
+        </div>
+      </div>
+ -->
+    </div>
+    <script th:inline="javascript">
+        $(function(){
+            fenye();
+        })
+        function fenye(){
+            layui.use(['laypage', 'layer','table'], function() {
+                var laypage = layui.laypage
+                    , layer = layui.layer,table=layui.table;
+//              table.render({
+//                  elem: '#test'
+//                  ,id: 'testReload'
+//              })
+                laypage.render({
+                    elem: 'laypage',
+                    count: [[${classVoList.total}]],
+                    curr: [[${classVoList.pageNum}]],
+                    limit : [[${classVoList.pageSize}]],
+                    layout: ['prev', 'page', 'next'],
+                    jump:function(obj,first){
+                        if(first){ return ; }
+                        //分页切换的回掉
+//                      $.ajax({
+//                          type:'get',
+//                          dataType:'json',
+//                          url:'/kinder/practitionList?currentPage='+obj.curr,
+//                          success:function(data){
+//                              showData(data);
+//                          }
+//                      })
+                        var url;
+                        var check=$('#check').val();
+                        var cname=$('#cname').val();
+                      /* <![CDATA[ */
+                        if(check==0){
+                            url='/kinder/classList?currentPage='+obj.curr;
+                        }else if(check==1){
+                            url='/kinder/checkClasses?cname='+cname+'&currentPage='+obj.curr;
+                        }
+                      /* ]]> */
+                        window.location.href = url;
+                    }
+                });
+            });
+        }
+      /*用户-删除*/
+      function member_del(obj){
+          layer.confirm('确认要删除吗？',function(index){
+              //发异步删除数据
+              var id=$('#cId').val();
+              $.ajax({
+                  url: "/kinder/deleteClass",
+                  type: "POST",
+                  data: {id:id},
+                  success: function (msg) {
+                      if (msg == 200) {
+                          //删除这一行
+//                          obj.del();
+//                          //关闭弹框
+//                          layer.close(index);
+//                          layer.msg("删除成功", {icon: 6});
+                          $(obj).parents("tr").remove();
+                          layer.msg('已删除!',{icon:1,time:1000});
+                      } else {
+                          layer.msg("删除失败", {icon: 5});
+                      }
+                  }
+              });
+
+          });
+      }
+      
+      function delAll (argument) {
+
+        var data = tableCheck.getData();
+  
+        layer.confirm('确认要删除吗？'+data,function(index){
+            //捉到所有被选中的，发异步进行删除
+            layer.msg('删除成功', {icon: 1});
+            $(".layui-form-checked").not('.header').parents('tr').remove();
+        });
+      }
+    </script>
+   
+  </body>
+
+</html>

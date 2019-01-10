@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="UTF-8">
+		<title>ban5页面</title>
+		<link rel="stylesheet" type="text/css" href="/static/css/ban2.css">
+		<link rel="stylesheet" type="text/css" href="/static/css/index.css">
+		<link rel="stylesheet" type="text/css" href="/static/css/ban5.css">
+		<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+		<script src="/static/js/jquery.rotate.min.js"></script>
+		<style>
+
+			#window5{
+				display: none;
+				position: absolute;
+				top: 18%;
+				left: 35%;
+				width: 48%;
+				height: 10%;
+				background-image: url(/static/img/addressreal.png);
+				background-size: 100% 100%;
+				z-index:1002;
+				opacity: 0.8;
+				font-size: 1rem;
+			}
+
+			.window_content{
+				float: left;
+				margin-top: 10%;
+				text-align:center;
+				margin-left: 15%;
+			}
+		</style>
+	</head>
+	<body oncontextmenu="return false;" onselectstart="return false">
+		<!-- 上 -->
+		<div class="header">
+			<div class="topimg">
+		   		<span class="h-title" >
+					<label th:text="${session.education.ename}"></label><label>幼儿园管理平台</label>
+		   		</span>
+				<span class="mes">
+		   			<p>欢迎您! <label th:text="${session.eduUser.nname}">XXX教育局&nbsp;</label>管理中心&nbsp;<a href="/logout">退出</a></p>
+		   		</span>
+			</div>
+		</div>
+	     <!-- 整体-->
+	   <div  class="main">
+	   	   
+	   	   <!-- 左边-->
+	   	 <div class="left">
+	   	 	<!-- 左上 -->
+	   	 	<div class="left-t light" id="ban5-left-t">
+	   	 		<span class="ban5-lt">工作履历</span>
+	   	 		<div class="left-t-content">
+
+
+					<table th:each="partexper ,itemStat: ${parExperienceList}" th:if="${itemStat.count}<=3">
+
+						<tr>
+
+							<td width="35%"> <label th:text="${partexper.flag1}"></label></td>
+							<td width="11%"> <img src="/static/img2/mapp.png"></td>
+
+							<td width="60%"rowspan="2"><span  th:text="${partexper.content}"> 学习经历描述</span></td>
+
+						</tr>
+
+					</table>
+
+	   	 		</div>
+	   	 	</div>
+	   	 	<!-- 左下-->
+	   	   <div class="left-f light" id="ban5-left-f">
+	   	   	  	<span class="ban5-ft">被投诉记录</span> 
+	   	   	  	<div class="left-f-content">
+	   	   	  		<div class="content">
+
+
+
+						<th th:each="complaint ,itemStat: ${complaintsIng}" th:if="${itemStat.count}<=3">
+
+
+
+
+
+
+							<span th:text="${complaint.title}">园长XXX</span>
+							<span th:text="${complaint.flag1}">2018/08/03</span>
+
+							<span >
+
+								<!--<from id="reallys">-->
+								<!---->
+								<!--</from>-->
+
+								<input name="id" id="cid1" type="hidden" th:value="${complaint.id}"/>
+								<a href="#" onclick="reply1()" >
+									<img src="/static/img2/按钮左.png" ><div id="img_font" class="smallsize-font small-font" th:switch="${complaint.sign}">
+
+									<span th:case="2">属实</span>
+
+									<span th:case="1">属实</span>
+									<span th:case="0">未知</span>
+									<span th:case="3">不属实</span>
+
+
+
+
+
+								</div>
+								<!--</span>-->
+
+								  <!--<span th:if="${kind.field}==governess">-->
+
+                                <!--<style>-->
+
+                                    <!--#or{-->
+										<!--color: orange;-->
+									<!--}-->
+
+									<!--#od1{-->
+										<!--color: orange;-->
+									<!--}-->
+								</a>
+
+									<a th:href="@{'/lookCom?id='+${complaint.id}}">
+										<img id="img_right" src="/static/img2/按钮右.png"><div id="img_font1" class="smallsize-font small-font"><span id="csx">已处理</span></div>
+									</a>
+
+								<span th:if="${complaint.sign}==1">
+											<style>
+
+
+												#csx{
+													color: white;
+												}
+											</style>
+
+										</span>
+
+	   	   	  			    </span>
+							<br>
+							<br>
+							<br>
+						</th>
+
+
+	   	   	  		</div>
+	   	   	  		
+	   	   	  	</div>
+	   	   </div>	
+	    </div>	   	   
+	   	  	
+	   	 <!-- 中间   -->
+	   	 <div class="center light" id="ban2-center">
+	   	   <!--时间 -->
+	   	   
+	   	   <div class="time" id="showTime2"></div>
+	   	   <!-- 中间按钮 -->
+	   	   <div class="Anniu">
+			   <img class="JM2" src="/static/img2/JM.png">   <a href="#" onClick="javascript :history.back(-1);" >	<img  class="back" src="/static/img2/back.png"></a>
+	   	   </div>	
+	   	   <div class="ban5-content">
+	   	   	<span class="work" th:text="${station.sname}">园长</span>
+
+	   	   <!--定义模板 -->
+
+	   	   	<ul>
+	   	   		<li>姓名:<label th:text="${practitPioner.pname}">{{name}}</label></li>
+	   	   		<li>性别:<label th:text="${practitPioner.sex}">{{sex}}</label></li>
+	   	   		<!--<li>生日:<label th:text="${practitPioner.pname}">{{birth}}</label></li>-->
+	   	   		<li class="r3"><img  th:src="${practitPioner.image}"></li>
+	   	   		<li>年龄:<label th:text="${practitPioner.pname}">{{age}}</label></li>
+	   	   		<li>籍贯:<label th:text="${practitPioner.nativePlace}">{{adress}}</label></li>
+	   	   	    <li>联系电话:<label th:text="${practitPioner.phone}">{{ mynumber }}</label></li>
+	   	   	    <li>地址:<label th:text="${practitPioner.arrderss}">{{ myadress }}</label></li>
+	   	   	    <li>身份证:<label th:text="${practitPioner.idCard}">{{ IDcard }}</label></li>
+	   	   	  <!--  <li class="r0"><a href="#">点击查看详情</a></li>-->
+	   	   	    <li>毕业院校:<label th:text="${practitPioner.graduation}">{{ school }}</label></li>
+	   	   	 <!--   <li class="r0"><a href="#">点击查看详情</a></li>-->
+				<li><span th:text="${station.sname}"></span>资格证:<label th:text="${practitPioner.certificate}">{{ Zige }}</label></li>
+	   	   	   <!-- <li class="r0" ><a href="#">点击查看详情</a></li>-->
+	   	   	    <li>签发部门:<label th:text="${practitPioner.isussingDeartment}">{{ qifa }}</label></li>
+	   	   	    <li>现工作幼儿园:<label th:text="${kindergarten.kname}">{{ work }}</label></li>
+	   	   	    <li>负责人姓名:<label th:text="${kinderLegal.klname}">{{ fuzename }}</label></li>
+	   	   	    <li class="r1">联系电话:<label  th:text="${kinderLegal.phone}">{{ fuzenumber }}</label></li>
+	   	   	    <li>申报工资:<label th:text="${practitPioner.wages}">{{ shenbaoS }}元(申报)</label></li>
+	   	   	    <li class="r1" id="ss">实发:<label th:text="${reallywages}" id="wor"></label>
+
+					<th th:each="kind ,itemStat: ${partList}" >
+                            <span th:if="${kind.field}==wages">
+
+                                <style>
+
+                                    #ss {
+										color: red;
+									}
+
+									#wor {
+										color: red;
+									}
+
+
+                                </style>
+                                <a href="#" onclick="fun5()"><img  src="/static/img2/gantanred.png"/></a></label>
+								<div id="window5">
+                        <span class="window_content" th:text="${kind.content}" >工资标准偏低</span>
+
+
+                    </div>
+                            </span>
+					</th>
+
+
+
+				</li>
+	   	   	    <li>社保:<label th:text="${practitPioner.socialSecurity}">{{ shebao }}</label></li>
+	   	   	    <li>职称:<label th:text="${practitPioner.positionalTitles}">{{ zhiwei}}</label></li>
+	   	   	    <li>岗位:<label th:text="${station.sname}">{{ gangwei }}</label></li>
+	   	   	    <li>健康证明:<label th:text="${practitPioner.physicalHealth}">生理健康:{{ shengli }}</label></li>
+	   	   	 <!--   <li class="r0"><a href="#">点击查看详情</a></li>-->
+	   	   	    <li class="r2"><label>心理健康:</label><label th:text="${practitPioner.mentalHealth}">></label></li>
+	   	   <!--	    <li class="r0"><a href="#">点击查看详情</a></li>-->
+	   	   	    <li>目前评级等级:<label  th:text="${practitPioner.sign}">{{ muqiandengji }}</label></li>
+	   	   	    <li>系统评级等级:<label  ></label></li>
+	   	   	</ul>
+
+	   	   </div>
+	   	 </div>
+	   	  <!--  右边 -->
+	   	 <div class="right">
+	   	 	<!-- 右上 -->
+	   	 	<div class="right-t light">
+	   	 		<span class="ban5-lt">获奖记录</span>
+	   	 		<div class="right-t-content">
+		   	 		<table th:each="partWinRecord ,itemStat: ${partWinRecordList}" th:if="${itemStat.count}<=3">
+
+		   	 			<tr>
+
+
+
+
+							<td width="35%"> <label th:text="${partWinRecord.date}"></label></td>
+							<td width="11%"> <img src="/static/img2/mapp.png"></td>
+
+							<td width="60%"rowspan="2"><span  th:text="${partWinRecord.content}"> 学习经历描述</span></td>
+
+		   	 		   </tr>
+	   	 		    </table>
+
+
+	   	 		</div>
+	   	 	</div>
+	   	 	<!--右下 -->
+	   	 	<div class="right-f light" id="ban5-right-f">
+	   	 	  <span class="ban5-ft">投诉记录</span>
+	   	 	  <div class="left-f-content">
+	   	   	  		<div class="content">
+						<th th:each="complaint ,itemStat: ${complaintsIng}" th:if="${itemStat.count}<=3">
+
+
+
+
+
+
+							<span th:text="${complaint.title}">园长XXX</span>
+							<span th:text="${complaint.flag1}">2018/08/03</span>
+
+							<span >
+
+
+
+								<input name="id" id="cid" type="hidden" th:value="${complaint.id}"/>
+								<a href="#" onclick="reply()">
+									<img src="/static/img2/按钮左.png" ><div id="img_font" class="smallsize-font small-font" th:switch="${complaint.sign}">
+
+									<span th:case="2">属实</span>
+
+									<span th:case="1">属实</span>
+									<span th:case="0">未知</span>
+									<span th:case="3">不属实</span>
+
+
+
+
+
+								</div>
+								</a>
+
+									<a th:href="@{'/lookCom?id='+${complaint.id}}">
+										<img id="img_right" src="/static/img2/按钮右.png"><div id="img_font1" class="smallsize-font small-font"><span id="bs">已处理</span></div>
+									</a>
+
+
+									<span th:if="${complaint.sign}==1">
+											<style>
+
+
+												#bs{
+													color: white;
+												}
+											</style>
+
+										</span>
+	   	   	  			    </span>
+							<br>
+							<br>
+							<br>
+						</th>
+	   	   	  		</div>
+	   	   	  		
+	   	   	  	</div>
+	   	 	</div>
+	   	 </div>	   	  
+	   </div>
+	   
+	</body>
+	<!-- 显示时间 -->
+
+
+
+	<!--<script>-->
+
+        <!--$("#img_font2").click(function () {-->
+
+
+
+            <!--$.ajax({-->
+                <!--//几个参数需要注意一下-->
+                <!--type: "GET",//方法类型-->
+                <!--url: "/updateCom" ,//url-->
+                <!--data: $('#reallys').serialize(),-->
+                <!--success: function (result) {-->
+                    <!--console.log(result);//打印服务端返回的数据(调试用)-->
+                    <!--if (result == "success") {-->
+                        <!--alert("设为属实成功");-->
+                    <!--}-->
+                    <!--;-->
+                <!--},-->
+                <!--error : function() {-->
+                    <!--alert("异常！");-->
+                <!--}-->
+            <!--});-->
+        <!--});-->
+	<!--</script>-->
+<script>
+
+
+    var cid1=$("#cid1").val();
+    function reply1(){
+        $.ajax({
+            //几个参数需要注意一下
+            type: "GET",//方法类型
+
+            url: "/updateCom" ,//url
+            data:{
+
+                id:cid1,
+
+            },
+            success: function (result) {
+                console.log(result);//打印服务端返回的数据(调试用)
+
+                if (result == "success") {
+                    alert("设置状态成功");
+                }
+                ;
+
+            },
+            error : function() {
+                alert("异常！");
+            }
+        });
+
+    }
+</script>
+
+
+	<script>
+
+
+        var cid=$("#cid").val();
+        function reply(){
+            $.ajax({
+                //几个参数需要注意一下
+                type: "GET",//方法类型
+
+                url: "/updateCom" ,//url
+                data:{
+
+                    id:cid,
+
+                },
+                success: function (result) {
+                    console.log(result);//打印服务端返回的数据(调试用)
+
+                    if (result == "success") {
+                        alert("设置状态成功");
+                    }
+                    ;
+
+
+                },
+                error : function() {
+                    alert("异常！");
+                }
+            });
+
+        }
+	</script>
+   <script type="text/javascript">
+			setInterval("fun(showTime2)", 1);
+			function fun(timeID) {
+				var date = new Date(); //创建对象  
+				var y = date.getFullYear(); //获取年份  
+				var m = date.getMonth() + 1; //获取月份  返回0-11  
+				var d = date.getDate(); // 获取日  
+				var w = date.getDay(); //获取星期几  返回0-6   (0=星期天) 
+				var ww = '周' + '日一二三四五六'.charAt(new Date().getDay()); //星期几
+				var h = date.getHours(); //时
+				var minute = date.getMinutes() //分
+				var s = date.getSeconds(); //秒
+
+				if(m < 10) {
+					m = "0" + m;
+				}
+
+				if(d < 10) {
+					d = "0" + d;
+				}
+
+				if(h < 10) {
+					h = "0" + h;
+				}
+
+				if(minute < 10) {
+					minute = "0" + minute;
+				}
+
+				if(s < 10) {
+					s = "0" + s;
+				}
+
+				document.getElementById(timeID.id).innerHTML =  y + "年" + m + "月" + d + "日" + "   " +
+					h + ":" + minute + ":" + s + "  " + ww;
+
+			}
+		</script>
+   
+   	
+   <!--定义数据 -->
+
+
+
+	<script type="text/javascript">
+        function fun2(){
+            $('#window').toggle();
+        };
+        function fun1(){
+            $('#window1').toggle();
+        };
+        function fun3(){
+            $('#window3').toggle();
+        };
+        function fun4(){
+            $('#window4').toggle();
+        };
+        function fun5(){
+            $('#window5').toggle();
+        };
+
+        function fun6(){
+            $('#window6').toggle();
+        };
+	</script>
+
+	<script type="text/javascript">
+        $(document).ready(function () {
+            var rotation2 = function (){
+                $(".JM2").rotate({
+                    angle:0,
+                    animateTo:360,
+                    callback: rotation2,
+                    easing: function (x,t,b,c,d){        // t: current time, b: begInnIng value, c: change In value, d: duratio
+                        d = d*2;
+                        return c*(t/d)+b;
+                    }
+                });
+            }
+            rotation2();
+        });
+        $(document).ready(function(){
+            $(".back").mouseleave(function () {
+                var rotation2 = function (){
+                    $(".JM2").rotate({
+                        angle:0,
+                        animateTo:360,
+                        callback: rotation2,
+                        easing: function (x,t,b,c,d){        // t: current time, b: begInnIng value, c: change In value, d: duratio
+                            d = d*2;
+                            return c*(t/d)+b;
+                        }
+                    });
+                }
+                rotation2();
+            });
+        });
+        $(document).ready(function(){
+            $(".back").mouseover(function () {
+                var rotation1 = function (){
+                    $(".JM2").rotate({
+                        angle:0,
+                        animateTo:360,
+                        callback: rotation1,
+                        easing: function (x,t,b,c,d){        // t: current time, b: begInnIng value, c: change In value, d: durati
+                            return c*(t/d)+b;
+                        }
+                    });
+                }
+                rotation1();
+            });
+        });
+	</script>
+	<script>
+        $(document).ready(function(){
+            $(".small-font").click(function(){
+
+                if($(this).css("color") == "rgb(183, 192, 189)"){
+                    $(this).css("color", "white")
+                }else{
+                    $(this).css("color", "rgb(183, 192, 189)")
+                };
+            });
+        });
+	</script>
+</html>

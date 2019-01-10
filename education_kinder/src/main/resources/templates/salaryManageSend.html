@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>工资管理 - 工资清单发布</title>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="stylesheet" th:href="@{~/static/lib/layui/css/layui.css}"/>
+    <link rel="stylesheet" th:href="@{~/static/css/pay_manage.css}"/>
+    <link rel="stylesheet" th:href="@{~/static/css/global.css}"/>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script th:src="@{~/static/lib/layui/layui.js}" charset="utf-8"></script>
+    <script type="text/javascript" th:src="@{~/static/js/xadmin.js}"></script>
+    <link rel="stylesheet" th:href="@{~/static/sweetalert/sweetalert.css}"/>
+    <script type="text/javascript" th:src="@{~/static/sweetalert/sweetalert.min.js}"></script>
+    <script type="text/javascript" th:src="@{~/static/sweetalert/xlalert.js}"></script>
+</head>
+<body>
+<p class="pay_title">工资清单发布</p>
+    <div class="right_btn">
+        <button id="download" class="btn">下载模板</button>
+        <form id="fileUpload" method="post" action="#" enctype="multipart/form-data">
+            <input type="hidden" id="fId" name="fId" th:value="${kinderFile?.fId}"/>
+            <input type="hidden" id="fileUrl" name="url" th:value="${kinderFile?.url}"/>
+            <input id="moban" accept=".xls,.xlsx" type="file" name="file" onchange="validate_xls(this)"/>
+            <button id="moban1" class="btn">导入文件</button>
+        </form>
+    </div>
+    <!--excel 图片-->
+    <div class="img">
+        <img th:src="@{~/static/images/excel.jpg}"/>
+    </div>
+    <div id="show" style="text-align: center;font-size:20px;margin-top:30px;"></div>
+<div class="send_list">
+    <button id="send" class="btn" onclick="modeImport()">发布清单</button>
+</div>
+<script>
+    $('#moban').change(function () {
+        var file = this.files[0];
+        $('#show').text(file.name);
+    })
+
+    $('#download').click(function () {
+        var uploadUrl=$('#fileUrl').val();
+        window.open(""+uploadUrl, "_blank");
+    })
+    function modeImport(){
+        var fileInput = $('#moban').get(0).files[0];
+        if(!fileInput){
+            zlalert.alertError('请选择文件');
+            return false;
+        }else{
+            var formData = new FormData($("#fileUpload")[0]);
+            $.ajax({
+                type: 'POST',
+                url:'/kinder/modeUpload',
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    $('#show').text('');
+                    $('#fileUpload').trigger('reset');
+                    $('#fId').val(data.fId);
+                    $('#fileUrl').val(data.url);
+                    alert(data.msg);
+                },
+                error: function () {
+                    //请求异常的回调
+                    alert('请求错误');
+                }
+            });
+        }
+    }
+</script>
+</body>
+</html>

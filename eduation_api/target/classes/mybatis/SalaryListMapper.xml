@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muji.zh.admin.mapper.SalaryListMapper">
+  <resultMap id="BaseResultMap" type="com.muji.zh.admin.model.SalaryList">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="p_id" jdbcType="INTEGER" property="pId" />
+    <result column="sname" jdbcType="VARCHAR" property="sname" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="kinder_name" jdbcType="VARCHAR" property="kinderName" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="salary" jdbcType="VARCHAR" property="salary" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="real_wages" jdbcType="VARCHAR" property="realWages" />
+    <result column="flag1" jdbcType="VARCHAR" property="flag1" />
+    <result column="flag2" jdbcType="VARCHAR" property="flag2" />
+    <result column="falg3" jdbcType="VARCHAR" property="falg3" />
+    <result column="flag4" jdbcType="VARCHAR" property="flag4" />
+  </resultMap>
+  <sql id="View_Column_List">
+    id, p_id, sname, age, sex, kinder_name, salary, content, create_date,real_wages
+  </sql>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, p_id, sname, age, sex, kinder_name, content, salary, create_date, real_wages, 
+    flag1, flag2, falg3, flag4
+  </sql>
+  <select id="selectByExample" parameterType="com.muji.zh.admin.model.SalaryListExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from salary_list
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from salary_list
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="findBYPid" resultMap="BaseResultMap">
+    select id from salary_list where p_id=#{pid}
+    ORDER BY
+id DESC
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from salary_list
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.muji.zh.admin.model.SalaryListExample">
+    delete from salary_list
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.muji.zh.admin.model.SalaryList">
+    insert into salary_list (id, p_id, sname, 
+      age, sex, kinder_name, 
+      content, salary, create_date, 
+      real_wages, flag1, flag2, 
+      falg3, flag4)
+    values (#{id,jdbcType=INTEGER}, #{pId,jdbcType=INTEGER}, #{sname,jdbcType=VARCHAR}, 
+      #{age,jdbcType=INTEGER}, #{sex,jdbcType=VARCHAR}, #{kinderName,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR}, #{salary,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{realWages,jdbcType=VARCHAR}, #{flag1,jdbcType=VARCHAR}, #{flag2,jdbcType=VARCHAR}, 
+      #{falg3,jdbcType=VARCHAR}, #{flag4,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyProperty="id" useGeneratedKeys="true" parameterType="com.muji.zh.admin.model.SalaryList">
+    insert into salary_list
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="pId != null">
+        p_id,
+      </if>
+      <if test="sname != null">
+        sname,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="kinderName != null">
+        kinder_name,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="salary != null">
+        salary,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="realWages != null">
+        real_wages,
+      </if>
+      <if test="flag1 != null">
+        flag1,
+      </if>
+      <if test="flag2 != null">
+        flag2,
+      </if>
+      <if test="falg3 != null">
+        falg3,
+      </if>
+      <if test="flag4 != null">
+        flag4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="pId != null">
+        #{pId,jdbcType=INTEGER},
+      </if>
+      <if test="sname != null">
+        #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="kinderName != null">
+        #{kinderName,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="salary != null">
+        #{salary,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="realWages != null">
+        #{realWages,jdbcType=VARCHAR},
+      </if>
+      <if test="flag1 != null">
+        #{flag1,jdbcType=VARCHAR},
+      </if>
+      <if test="flag2 != null">
+        #{flag2,jdbcType=VARCHAR},
+      </if>
+      <if test="falg3 != null">
+        #{falg3,jdbcType=VARCHAR},
+      </if>
+      <if test="flag4 != null">
+        #{flag4,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.muji.zh.admin.model.SalaryListExample" resultType="java.lang.Long">
+    select count(*) from salary_list
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update salary_list
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.pId != null">
+        p_id = #{record.pId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sname != null">
+        sname = #{record.sname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.age != null">
+        age = #{record.age,jdbcType=INTEGER},
+      </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.kinderName != null">
+        kinder_name = #{record.kinderName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salary != null">
+        salary = #{record.salary,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.realWages != null">
+        real_wages = #{record.realWages,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag1 != null">
+        flag1 = #{record.flag1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag2 != null">
+        flag2 = #{record.flag2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.falg3 != null">
+        falg3 = #{record.falg3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag4 != null">
+        flag4 = #{record.flag4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update salary_list
+    set id = #{record.id,jdbcType=INTEGER},
+      p_id = #{record.pId,jdbcType=INTEGER},
+      sname = #{record.sname,jdbcType=VARCHAR},
+      age = #{record.age,jdbcType=INTEGER},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      kinder_name = #{record.kinderName,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=VARCHAR},
+      salary = #{record.salary,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      real_wages = #{record.realWages,jdbcType=VARCHAR},
+      flag1 = #{record.flag1,jdbcType=VARCHAR},
+      flag2 = #{record.flag2,jdbcType=VARCHAR},
+      falg3 = #{record.falg3,jdbcType=VARCHAR},
+      flag4 = #{record.flag4,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.muji.zh.admin.model.SalaryList">
+    update salary_list
+    <set>
+      <if test="pId != null">
+        p_id = #{pId,jdbcType=INTEGER},
+      </if>
+      <if test="sname != null">
+        sname = #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="kinderName != null">
+        kinder_name = #{kinderName,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="salary != null">
+        salary = #{salary,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="realWages != null">
+        real_wages = #{realWages,jdbcType=VARCHAR},
+      </if>
+      <if test="flag1 != null">
+        flag1 = #{flag1,jdbcType=VARCHAR},
+      </if>
+      <if test="flag2 != null">
+        flag2 = #{flag2,jdbcType=VARCHAR},
+      </if>
+      <if test="falg3 != null">
+        falg3 = #{falg3,jdbcType=VARCHAR},
+      </if>
+      <if test="flag4 != null">
+        flag4 = #{flag4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+  <update id="updateByPrimaryKey" parameterType="com.muji.zh.admin.model.SalaryList">
+    update salary_list
+    set p_id = #{pId,jdbcType=INTEGER},
+      sname = #{sname,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      sex = #{sex,jdbcType=VARCHAR},
+      kinder_name = #{kinderName,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      salary = #{salary,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      real_wages = #{realWages,jdbcType=VARCHAR},
+      flag1 = #{flag1,jdbcType=VARCHAR},
+      flag2 = #{flag2,jdbcType=VARCHAR},
+      falg3 = #{falg3,jdbcType=VARCHAR},
+      flag4 = #{flag4,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+
+
+
+
+  <!--<select id="selectBysNameAndsId" resultMap="BaseResultMap">-->
+    <!--SELECT-->
+     <!--*-->
+    <!--from salary_list-->
+    <!--<where>-->
+      <!--<if test="sname != null and sname != ''">-->
+        <!--and sname like CONCAT(CONCAT('%',#{sname}),'%')-->
+      <!--</if>-->
+      <!--<if test="pId==null">-->
+        <!--and 1=1-->
+      <!--</if>-->
+      <!--<if test="pId!=null">-->
+        <!--and p_id = #{pId}-->
+      <!--</if>-->
+    <!--</where>-->
+  <!--</select>-->
+
+
+
+<!--
+
+
+浩光的
+-->
+
+
+  <!--通过 sid 和 pid 确定 唯一的一条记录  更新它的 实际发放工资-->
+  <update id="updateRealWagesBySidAndPid">
+    update salary_list
+    <set>
+      <if test="real_wages != null">
+        real_wages = #{real_wages,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{sId,jdbcType=INTEGER} and p_id = #{pId,jdbcType=INTEGER}
+  </update>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+炯陈的
+
+-->
+
+
+
+  <select id="selectPartView" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="View_Column_List"/>
+    from salary_list
+    <where>
+      and kinder_name like CONCAT(CONCAT('%',#{kinderName}),'%')
+    </where>
+    order by create_date DESC
+  </select>
+
+  <select id="selectBysNameAndsId" resultMap="BaseResultMap">
+    SELECT
+    id, p_id, sname, age, sex, kinder_name, content, salary, create_date,real_wages
+    from salary_list
+    <where>
+      <if test="sname != null and sname != ''">
+        and sname like CONCAT(CONCAT('%',#{sname}),'%')
+      </if>
+      <if test="pId != null and pId != ''">
+        and p_id like CONCAT(CONCAT('%',#{pId}),'%')
+      </if>
+      <!--<if test="pId==null">-->
+      <!--and 1=1-->
+      <!--</if>-->
+      <!--<if test="pId!=null">-->
+      <!--and p_id = #{pId}-->
+      <!--</if>-->
+      and kinder_name like CONCAT(CONCAT('%',#{kinderName}),'%')
+    </where>
+    order by create_date DESC
+  </select>
+
+
+
+
+
+
+
+</mapper>

@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muji.zh.admin.mapper.StuPayListMapper">
+  <resultMap id="BaseResultMap" type="com.muji.zh.admin.model.StuPayList">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="sname" jdbcType="VARCHAR" property="sname" />
+    <result column="s_id" jdbcType="INTEGER" property="sId" />
+    <result column="p_id" jdbcType="INTEGER" property="pId" />
+    <result column="sign" jdbcType="INTEGER" property="sign" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="real_wa" jdbcType="REAL" property="realWa" />
+    <result column="staus" jdbcType="INTEGER" property="staus" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="end_date" jdbcType="TIMESTAMP" property="endDate" />
+    <result column="falg1" jdbcType="VARCHAR" property="falg1" />
+    <result column="flag2" jdbcType="VARCHAR" property="flag2" />
+    <result column="flag3" jdbcType="VARCHAR" property="flag3" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, sname, s_id, p_id, sign, content, real_wa, staus, create_date, end_date, falg1, 
+    flag2, flag3
+  </sql>
+  <select id="selectByExample" parameterType="com.muji.zh.admin.model.StuPayListExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from stu_pay_list
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from stu_pay_list
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from stu_pay_list
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.muji.zh.admin.model.StuPayListExample">
+    delete from stu_pay_list
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.muji.zh.admin.model.StuPayList">
+    insert into stu_pay_list (id, sname, s_id, 
+      p_id, sign, content, 
+      real_wa, staus, create_date, 
+      end_date, falg1, flag2, 
+      flag3)
+    values (#{id,jdbcType=INTEGER}, #{sname,jdbcType=VARCHAR}, #{sId,jdbcType=INTEGER}, 
+      #{pId,jdbcType=INTEGER}, #{sign,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, 
+      #{realWa,jdbcType=REAL}, #{staus,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{endDate,jdbcType=TIMESTAMP}, #{falg1,jdbcType=VARCHAR}, #{flag2,jdbcType=VARCHAR}, 
+      #{flag3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.muji.zh.admin.model.StuPayList">
+    insert into stu_pay_list
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="sname != null">
+        sname,
+      </if>
+      <if test="sId != null">
+        s_id,
+      </if>
+      <if test="pId != null">
+        p_id,
+      </if>
+      <if test="sign != null">
+        sign,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="realWa != null">
+        real_wa,
+      </if>
+      <if test="staus != null">
+        staus,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="endDate != null">
+        end_date,
+      </if>
+      <if test="falg1 != null">
+        falg1,
+      </if>
+      <if test="flag2 != null">
+        flag2,
+      </if>
+      <if test="flag3 != null">
+        flag3,
+      </if>
+    </trim>
+
+
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="sname != null">
+        #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="sId != null">
+        #{sId,jdbcType=INTEGER},
+      </if>
+      <if test="pId != null">
+        #{pId,jdbcType=INTEGER},
+      </if>
+      <if test="sign != null">
+        #{sign,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="realWa != null">
+        #{realWa,jdbcType=REAL},
+      </if>
+      <if test="staus != null">
+        #{staus,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null">
+        #{endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="falg1 != null">
+        #{falg1,jdbcType=VARCHAR},
+      </if>
+      <if test="flag2 != null">
+        #{flag2,jdbcType=VARCHAR},
+      </if>
+      <if test="flag3 != null">
+        #{flag3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.muji.zh.admin.model.StuPayListExample" resultType="java.lang.Long">
+    select count(*) from stu_pay_list
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update stu_pay_list
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.sname != null">
+        sname = #{record.sname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sId != null">
+        s_id = #{record.sId,jdbcType=INTEGER},
+      </if>
+      <if test="record.pId != null">
+        p_id = #{record.pId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sign != null">
+        sign = #{record.sign,jdbcType=INTEGER},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realWa != null">
+        real_wa = #{record.realWa,jdbcType=REAL},
+      </if>
+      <if test="record.staus != null">
+        staus = #{record.staus,jdbcType=INTEGER},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endDate != null">
+        end_date = #{record.endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.falg1 != null">
+        falg1 = #{record.falg1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag2 != null">
+        flag2 = #{record.flag2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag3 != null">
+        flag3 = #{record.flag3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update stu_pay_list
+    set id = #{record.id,jdbcType=INTEGER},
+      sname = #{record.sname,jdbcType=VARCHAR},
+      s_id = #{record.sId,jdbcType=INTEGER},
+      p_id = #{record.pId,jdbcType=INTEGER},
+      sign = #{record.sign,jdbcType=INTEGER},
+      content = #{record.content,jdbcType=VARCHAR},
+      real_wa = #{record.realWa,jdbcType=REAL},
+      staus = #{record.staus,jdbcType=INTEGER},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      end_date = #{record.endDate,jdbcType=TIMESTAMP},
+      falg1 = #{record.falg1,jdbcType=VARCHAR},
+      flag2 = #{record.flag2,jdbcType=VARCHAR},
+      flag3 = #{record.flag3,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+
+  <update id="updateList"  parameterType="java.util.List">
+
+
+
+
+      <foreach collection="list" item="bean" index="index" open="" close="" separator=";">
+
+        UPDATE stu_pay_list
+
+        <set>
+
+        staus=#{bean.staus}
+
+        </set>
+
+        <where>
+
+          id = #{bean.id}
+
+        </where>
+
+      </foreach>
+
+
+
+
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.muji.zh.admin.model.StuPayList">
+    update stu_pay_list
+    <set>
+      <if test="sname != null">
+        sname = #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="sId != null">
+        s_id = #{sId,jdbcType=INTEGER},
+      </if>
+      <if test="pId != null">
+        p_id = #{pId,jdbcType=INTEGER},
+      </if>
+      <if test="sign != null">
+        sign = #{sign,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="realWa != null">
+        real_wa = #{realWa,jdbcType=REAL},
+      </if>
+      <if test="staus != null">
+        staus = #{staus,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null">
+        end_date = #{endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="falg1 != null">
+        falg1 = #{falg1,jdbcType=VARCHAR},
+      </if>
+      <if test="flag2 != null">
+        flag2 = #{flag2,jdbcType=VARCHAR},
+      </if>
+      <if test="flag3 != null">
+        flag3 = #{flag3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.muji.zh.admin.model.StuPayList">
+    update stu_pay_list
+    set sname = #{sname,jdbcType=VARCHAR},
+      s_id = #{sId,jdbcType=INTEGER},
+      p_id = #{pId,jdbcType=INTEGER},
+      sign = #{sign,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      real_wa = #{realWa,jdbcType=REAL},
+      staus = #{staus,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      end_date = #{endDate,jdbcType=TIMESTAMP},
+      falg1 = #{falg1,jdbcType=VARCHAR},
+      flag2 = #{flag2,jdbcType=VARCHAR},
+      flag3 = #{flag3,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

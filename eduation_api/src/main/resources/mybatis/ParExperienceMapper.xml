@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muji.zh.admin.mapper.ParExperienceMapper">
+  <resultMap id="BaseResultMap" type="com.muji.zh.admin.model.ParExperience">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="sdates" jdbcType="DATE" property="sdates" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="p_id" jdbcType="INTEGER" property="pId" />
+    <result column="flag1" jdbcType="VARCHAR" property="flag1" />
+    <result column="flag2" jdbcType="VARCHAR" property="flag2" />
+    <result column="flag3" jdbcType="VARCHAR" property="flag3" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, title, sdates, content, p_id, flag1, flag2, flag3
+  </sql>
+  <select id="selectByExample" parameterType="com.muji.zh.admin.model.ParExperienceExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from par_experience
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from par_experience
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from par_experience
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.muji.zh.admin.model.ParExperienceExample">
+    delete from par_experience
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.muji.zh.admin.model.ParExperience">
+    insert into par_experience (id, title, sdates, 
+      content, p_id, flag1, 
+      flag2, flag3)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{sdates,jdbcType=DATE}, 
+      #{content,jdbcType=VARCHAR}, #{pId,jdbcType=INTEGER}, #{flag1,jdbcType=VARCHAR}, 
+      #{flag2,jdbcType=VARCHAR}, #{flag3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.muji.zh.admin.model.ParExperience">
+    insert into par_experience
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="sdates != null">
+        sdates,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="pId != null">
+        p_id,
+      </if>
+      <if test="flag1 != null">
+        flag1,
+      </if>
+      <if test="flag2 != null">
+        flag2,
+      </if>
+      <if test="flag3 != null">
+        flag3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="sdates != null">
+        #{sdates,jdbcType=DATE},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="pId != null">
+        #{pId,jdbcType=INTEGER},
+      </if>
+      <if test="flag1 != null">
+        #{flag1,jdbcType=VARCHAR},
+      </if>
+      <if test="flag2 != null">
+        #{flag2,jdbcType=VARCHAR},
+      </if>
+      <if test="flag3 != null">
+        #{flag3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.muji.zh.admin.model.ParExperienceExample" resultType="java.lang.Long">
+    select count(*) from par_experience
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update par_experience
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sdates != null">
+        sdates = #{record.sdates,jdbcType=DATE},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pId != null">
+        p_id = #{record.pId,jdbcType=INTEGER},
+      </if>
+      <if test="record.flag1 != null">
+        flag1 = #{record.flag1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag2 != null">
+        flag2 = #{record.flag2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag3 != null">
+        flag3 = #{record.flag3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update par_experience
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      sdates = #{record.sdates,jdbcType=DATE},
+      content = #{record.content,jdbcType=VARCHAR},
+      p_id = #{record.pId,jdbcType=INTEGER},
+      flag1 = #{record.flag1,jdbcType=VARCHAR},
+      flag2 = #{record.flag2,jdbcType=VARCHAR},
+      flag3 = #{record.flag3,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.muji.zh.admin.model.ParExperience">
+    update par_experience
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="sdates != null">
+        sdates = #{sdates,jdbcType=DATE},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="pId != null">
+        p_id = #{pId,jdbcType=INTEGER},
+      </if>
+      <if test="flag1 != null">
+        flag1 = #{flag1,jdbcType=VARCHAR},
+      </if>
+      <if test="flag2 != null">
+        flag2 = #{flag2,jdbcType=VARCHAR},
+      </if>
+      <if test="flag3 != null">
+        flag3 = #{flag3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.muji.zh.admin.model.ParExperience">
+    update par_experience
+    set title = #{title,jdbcType=VARCHAR},
+      sdates = #{sdates,jdbcType=DATE},
+      content = #{content,jdbcType=VARCHAR},
+      p_id = #{pId,jdbcType=INTEGER},
+      flag1 = #{flag1,jdbcType=VARCHAR},
+      flag2 = #{flag2,jdbcType=VARCHAR},
+      flag3 = #{flag3,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <delete id="deleteByIdAndPid">
+    delete from par_experience
+    where id = #{id,jdbcType=INTEGER} and p_id = #{pId,jdbcType=INTEGER}
+  </delete>
+
+  <!--- 从业者 查询 工作履历p_id -->
+  <select id="selectByPid" parameterType="java.lang.Integer" resultType="com.muji.zh.admin.model.ParExperience">
+    select
+    <include refid="Base_Column_List" />
+    from par_experience
+    where p_id = #{pId,jdbcType=INTEGER}
+  </select>
+
+  <!-- 从该从业者 工作履历-->
+  <update id="updateByIdAndPid" parameterType="com.muji.zh.admin.model.ParExperience">
+    update par_experience
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="sdates != null">
+        sdates = #{sdates,jdbcType=DATE},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="pId != null">
+        p_id = #{pId,jdbcType=INTEGER},
+      </if>
+      <if test="flag1 != null">
+        flag1 = #{flag1,jdbcType=VARCHAR},
+      </if>
+      <if test="flag2 != null">
+        flag2 = #{flag2,jdbcType=VARCHAR},
+      </if>
+      <if test="flag3 != null">
+        flag3 = #{flag3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER} and p_id = #{pId,jdbcType=INTEGER}
+  </update>
+
+
+</mapper>

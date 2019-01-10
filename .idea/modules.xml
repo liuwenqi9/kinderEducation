@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/com.muji.education.iml" filepath="$PROJECT_DIR$/com.muji.education.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eduation_api/eduation_api.iml" filepath="$PROJECT_DIR$/eduation_api/eduation_api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eduation_other/eduation_other.iml" filepath="$PROJECT_DIR$/eduation_other/eduation_other.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eduation_practitioner/eduation_practitioner.iml" filepath="$PROJECT_DIR$/eduation_practitioner/eduation_practitioner.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eduation_produce/eduation_produce.iml" filepath="$PROJECT_DIR$/eduation_produce/eduation_produce.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eduation_student/eduation_student.iml" filepath="$PROJECT_DIR$/eduation_student/eduation_student.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eduation_super_admin/eduation_super_admin.iml" filepath="$PROJECT_DIR$/eduation_super_admin/eduation_super_admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eduation_user_admin/eduation_user_admin.iml" filepath="$PROJECT_DIR$/eduation_user_admin/eduation_user_admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/education_kinder/education_kinder.iml" filepath="$PROJECT_DIR$/education_kinder/education_kinder.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,827 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muji.zh.admin.mapper.KindergartenMapper">
+  <resultMap id="BaseResultMap" type="com.muji.zh.admin.model.Kindergarten">
+    <id column="k_id" jdbcType="INTEGER" property="kId" />
+    <result column="kt_id" jdbcType="INTEGER" property="ktId" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="kname" jdbcType="VARCHAR" property="kname" />
+    <result column="business_nature" jdbcType="VARCHAR" property="businessNature" />
+    <result column="license_number" jdbcType="VARCHAR" property="licenseNumber" />
+    <result column="edu_id" jdbcType="INTEGER" property="eduId" />
+    <result column="create_date" jdbcType="DATE" property="createDate" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="legal_id" jdbcType="INTEGER" property="legalId" />
+    <result column="plan_class" jdbcType="INTEGER" property="planClass" />
+    <result column="plan_people" jdbcType="INTEGER" property="planPeople" />
+    <result column="plan_teacher" jdbcType="INTEGER" property="planTeacher" />
+    <result column="governess" jdbcType="INTEGER" property="governess" />
+    <result column="other_people" jdbcType="INTEGER" property="otherPeople" />
+    <result column="leave_people" jdbcType="INTEGER" property="leavePeople" />
+    <result column="wages" jdbcType="INTEGER" property="wages" />
+    <result column="gross_production" jdbcType="INTEGER" property="grossProduction" />
+    <result column="area_covered" jdbcType="INTEGER" property="areaCovered" />
+    <result column="annual" jdbcType="INTEGER" property="annual" />
+    <result column="social_donation" jdbcType="INTEGER" property="socialDonation" />
+    <result column="premiums" jdbcType="INTEGER" property="premiums" />
+    <result column="day_care" jdbcType="INTEGER" property="dayCare" />
+    <result column="full_care" jdbcType="INTEGER" property="fullCare" />
+    <result column="little_tob" jdbcType="INTEGER" property="littleTob" />
+    <result column="rank" jdbcType="INTEGER" property="rank" />
+    <result column="urban_id" jdbcType="INTEGER" property="urbanId" />
+    <result column="edu_department1" jdbcType="VARCHAR" property="eduDepartment1" />
+    <result column="edu_department2" jdbcType="VARCHAR" property="eduDepartment2" />
+    <result column="price_department2" jdbcType="VARCHAR" property="priceDepartment2" />
+    <result column="price_department1" jdbcType="VARCHAR" property="priceDepartment1" />
+    <result column="chargename2" jdbcType="VARCHAR" property="chargename2" />
+    <result column="officalname1" jdbcType="VARCHAR" property="officalname1" />
+    <result column="officalname2" jdbcType="VARCHAR" property="officalname2" />
+    <result column="firework" jdbcType="VARCHAR" property="firework" />
+    <result column="fireworkNo" jdbcType="VARCHAR" property="fireworkno" />
+    <result column="chargename1" jdbcType="VARCHAR" property="chargename1" />
+    <result column="area_id" jdbcType="INTEGER" property="areaId" />
+    <result column="flag1" jdbcType="VARCHAR" property="flag1" />
+    <result column="flag2" jdbcType="VARCHAR" property="flag2" />
+    <result column="flag3" jdbcType="VARCHAR" property="flag3" />
+    <result column="flag4" jdbcType="VARCHAR" property="flag4" />
+    <result column="flag5" jdbcType="VARCHAR" property="flag5" />
+    <result column="flag6" jdbcType="VARCHAR" property="flag6" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    k_id, kt_id, address, kname, business_nature, license_number, edu_id, create_date, 
+    phone, legal_id, plan_class, plan_people, plan_teacher, governess, other_people, 
+    leave_people, wages, gross_production, area_covered, annual, social_donation, premiums, 
+    day_care, full_care, little_tob, rank, urban_id, edu_department1, edu_department2, 
+    price_department2, price_department1, chargename2, officalname1, officalname2, firework, 
+    fireworkNo, chargename1, area_id, flag1, flag2, flag3, flag4, flag5, flag6
+  </sql>
+  <select id="selectByExample" parameterType="com.muji.zh.admin.model.KindergartenExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from kindergarten
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from kindergarten
+    where k_id = #{kId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from kindergarten
+    where k_id = #{kId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.muji.zh.admin.model.KindergartenExample">
+    delete from kindergarten
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.muji.zh.admin.model.Kindergarten">
+    insert into kindergarten (k_id, kt_id, address, 
+      kname, business_nature, license_number, 
+      edu_id, create_date, phone, 
+      legal_id, plan_class, plan_people, 
+      plan_teacher, governess, other_people, 
+      leave_people, wages, gross_production, 
+      area_covered, annual, social_donation, 
+      premiums, day_care, full_care, 
+      little_tob, rank, urban_id, 
+      edu_department1, edu_department2, price_department2, 
+      price_department1, chargename2, officalname1, 
+      officalname2, firework, fireworkNo, 
+      chargename1, area_id, flag1, 
+      flag2, flag3, flag4, 
+      flag5, flag6)
+    values (#{kId,jdbcType=INTEGER}, #{ktId,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, 
+      #{kname,jdbcType=VARCHAR}, #{businessNature,jdbcType=VARCHAR}, #{licenseNumber,jdbcType=VARCHAR}, 
+      #{eduId,jdbcType=INTEGER}, #{createDate,jdbcType=DATE}, #{phone,jdbcType=VARCHAR}, 
+      #{legalId,jdbcType=INTEGER}, #{planClass,jdbcType=INTEGER}, #{planPeople,jdbcType=INTEGER}, 
+      #{planTeacher,jdbcType=INTEGER}, #{governess,jdbcType=INTEGER}, #{otherPeople,jdbcType=INTEGER}, 
+      #{leavePeople,jdbcType=INTEGER}, #{wages,jdbcType=INTEGER}, #{grossProduction,jdbcType=INTEGER}, 
+      #{areaCovered,jdbcType=INTEGER}, #{annual,jdbcType=INTEGER}, #{socialDonation,jdbcType=INTEGER}, 
+      #{premiums,jdbcType=INTEGER}, #{dayCare,jdbcType=INTEGER}, #{fullCare,jdbcType=INTEGER}, 
+      #{littleTob,jdbcType=INTEGER}, #{rank,jdbcType=INTEGER}, #{urbanId,jdbcType=INTEGER}, 
+      #{eduDepartment1,jdbcType=VARCHAR}, #{eduDepartment2,jdbcType=VARCHAR}, #{priceDepartment2,jdbcType=VARCHAR}, 
+      #{priceDepartment1,jdbcType=VARCHAR}, #{chargename2,jdbcType=VARCHAR}, #{officalname1,jdbcType=VARCHAR}, 
+      #{officalname2,jdbcType=VARCHAR}, #{firework,jdbcType=VARCHAR}, #{fireworkno,jdbcType=VARCHAR}, 
+      #{chargename1,jdbcType=VARCHAR}, #{areaId,jdbcType=INTEGER}, #{flag1,jdbcType=VARCHAR}, 
+      #{flag2,jdbcType=VARCHAR}, #{flag3,jdbcType=VARCHAR}, #{flag4,jdbcType=VARCHAR}, 
+      #{flag5,jdbcType=VARCHAR}, #{flag6,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.muji.zh.admin.model.Kindergarten">
+    insert into kindergarten
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="kId != null">
+        k_id,
+      </if>
+      <if test="ktId != null">
+        kt_id,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="kname != null">
+        kname,
+      </if>
+      <if test="businessNature != null">
+        business_nature,
+      </if>
+      <if test="licenseNumber != null">
+        license_number,
+      </if>
+      <if test="eduId != null">
+        edu_id,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="legalId != null">
+        legal_id,
+      </if>
+      <if test="planClass != null">
+        plan_class,
+      </if>
+      <if test="planPeople != null">
+        plan_people,
+      </if>
+      <if test="planTeacher != null">
+        plan_teacher,
+      </if>
+      <if test="governess != null">
+        governess,
+      </if>
+      <if test="otherPeople != null">
+        other_people,
+      </if>
+      <if test="leavePeople != null">
+        leave_people,
+      </if>
+      <if test="wages != null">
+        wages,
+      </if>
+      <if test="grossProduction != null">
+        gross_production,
+      </if>
+      <if test="areaCovered != null">
+        area_covered,
+      </if>
+      <if test="annual != null">
+        annual,
+      </if>
+      <if test="socialDonation != null">
+        social_donation,
+      </if>
+      <if test="premiums != null">
+        premiums,
+      </if>
+      <if test="dayCare != null">
+        day_care,
+      </if>
+      <if test="fullCare != null">
+        full_care,
+      </if>
+      <if test="littleTob != null">
+        little_tob,
+      </if>
+      <if test="rank != null">
+        rank,
+      </if>
+      <if test="urbanId != null">
+        urban_id,
+      </if>
+      <if test="eduDepartment1 != null">
+        edu_department1,
+      </if>
+      <if test="eduDepartment2 != null">
+        edu_department2,
+      </if>
+      <if test="priceDepartment2 != null">
+        price_department2,
+      </if>
+      <if test="priceDepartment1 != null">
+        price_department1,
+      </if>
+      <if test="chargename2 != null">
+        chargename2,
+      </if>
+      <if test="officalname1 != null">
+        officalname1,
+      </if>
+      <if test="officalname2 != null">
+        officalname2,
+      </if>
+      <if test="firework != null">
+        firework,
+      </if>
+      <if test="fireworkno != null">
+        fireworkNo,
+      </if>
+      <if test="chargename1 != null">
+        chargename1,
+      </if>
+      <if test="areaId != null">
+        area_id,
+      </if>
+      <if test="flag1 != null">
+        flag1,
+      </if>
+      <if test="flag2 != null">
+        flag2,
+      </if>
+      <if test="flag3 != null">
+        flag3,
+      </if>
+      <if test="flag4 != null">
+        flag4,
+      </if>
+      <if test="flag5 != null">
+        flag5,
+      </if>
+      <if test="flag6 != null">
+        flag6,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="kId != null">
+        #{kId,jdbcType=INTEGER},
+      </if>
+      <if test="ktId != null">
+        #{ktId,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="kname != null">
+        #{kname,jdbcType=VARCHAR},
+      </if>
+      <if test="businessNature != null">
+        #{businessNature,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseNumber != null">
+        #{licenseNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="eduId != null">
+        #{eduId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=DATE},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="legalId != null">
+        #{legalId,jdbcType=INTEGER},
+      </if>
+      <if test="planClass != null">
+        #{planClass,jdbcType=INTEGER},
+      </if>
+      <if test="planPeople != null">
+        #{planPeople,jdbcType=INTEGER},
+      </if>
+      <if test="planTeacher != null">
+        #{planTeacher,jdbcType=INTEGER},
+      </if>
+      <if test="governess != null">
+        #{governess,jdbcType=INTEGER},
+      </if>
+      <if test="otherPeople != null">
+        #{otherPeople,jdbcType=INTEGER},
+      </if>
+      <if test="leavePeople != null">
+        #{leavePeople,jdbcType=INTEGER},
+      </if>
+      <if test="wages != null">
+        #{wages,jdbcType=INTEGER},
+      </if>
+      <if test="grossProduction != null">
+        #{grossProduction,jdbcType=INTEGER},
+      </if>
+      <if test="areaCovered != null">
+        #{areaCovered,jdbcType=INTEGER},
+      </if>
+      <if test="annual != null">
+        #{annual,jdbcType=INTEGER},
+      </if>
+      <if test="socialDonation != null">
+        #{socialDonation,jdbcType=INTEGER},
+      </if>
+      <if test="premiums != null">
+        #{premiums,jdbcType=INTEGER},
+      </if>
+      <if test="dayCare != null">
+        #{dayCare,jdbcType=INTEGER},
+      </if>
+      <if test="fullCare != null">
+        #{fullCare,jdbcType=INTEGER},
+      </if>
+      <if test="littleTob != null">
+        #{littleTob,jdbcType=INTEGER},
+      </if>
+      <if test="rank != null">
+        #{rank,jdbcType=INTEGER},
+      </if>
+      <if test="urbanId != null">
+        #{urbanId,jdbcType=INTEGER},
+      </if>
+      <if test="eduDepartment1 != null">
+        #{eduDepartment1,jdbcType=VARCHAR},
+      </if>
+      <if test="eduDepartment2 != null">
+        #{eduDepartment2,jdbcType=VARCHAR},
+      </if>
+      <if test="priceDepartment2 != null">
+        #{priceDepartment2,jdbcType=VARCHAR},
+      </if>
+      <if test="priceDepartment1 != null">
+        #{priceDepartment1,jdbcType=VARCHAR},
+      </if>
+      <if test="chargename2 != null">
+        #{chargename2,jdbcType=VARCHAR},
+      </if>
+      <if test="officalname1 != null">
+        #{officalname1,jdbcType=VARCHAR},
+      </if>
+      <if test="officalname2 != null">
+        #{officalname2,jdbcType=VARCHAR},
+      </if>
+      <if test="firework != null">
+        #{firework,jdbcType=VARCHAR},
+      </if>
+      <if test="fireworkno != null">
+        #{fireworkno,jdbcType=VARCHAR},
+      </if>
+      <if test="chargename1 != null">
+        #{chargename1,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null">
+        #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="flag1 != null">
+        #{flag1,jdbcType=VARCHAR},
+      </if>
+      <if test="flag2 != null">
+        #{flag2,jdbcType=VARCHAR},
+      </if>
+      <if test="flag3 != null">
+        #{flag3,jdbcType=VARCHAR},
+      </if>
+      <if test="flag4 != null">
+        #{flag4,jdbcType=VARCHAR},
+      </if>
+      <if test="flag5 != null">
+        #{flag5,jdbcType=VARCHAR},
+      </if>
+      <if test="flag6 != null">
+        #{flag6,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.muji.zh.admin.model.KindergartenExample" resultType="java.lang.Long">
+    select count(*) from kindergarten
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update kindergarten
+    <set>
+      <if test="record.kId != null">
+        k_id = #{record.kId,jdbcType=INTEGER},
+      </if>
+      <if test="record.ktId != null">
+        kt_id = #{record.ktId,jdbcType=INTEGER},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.kname != null">
+        kname = #{record.kname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessNature != null">
+        business_nature = #{record.businessNature,jdbcType=VARCHAR},
+      </if>
+      <if test="record.licenseNumber != null">
+        license_number = #{record.licenseNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.eduId != null">
+        edu_id = #{record.eduId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=DATE},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.legalId != null">
+        legal_id = #{record.legalId,jdbcType=INTEGER},
+      </if>
+      <if test="record.planClass != null">
+        plan_class = #{record.planClass,jdbcType=INTEGER},
+      </if>
+      <if test="record.planPeople != null">
+        plan_people = #{record.planPeople,jdbcType=INTEGER},
+      </if>
+      <if test="record.planTeacher != null">
+        plan_teacher = #{record.planTeacher,jdbcType=INTEGER},
+      </if>
+      <if test="record.governess != null">
+        governess = #{record.governess,jdbcType=INTEGER},
+      </if>
+      <if test="record.otherPeople != null">
+        other_people = #{record.otherPeople,jdbcType=INTEGER},
+      </if>
+      <if test="record.leavePeople != null">
+        leave_people = #{record.leavePeople,jdbcType=INTEGER},
+      </if>
+      <if test="record.wages != null">
+        wages = #{record.wages,jdbcType=INTEGER},
+      </if>
+      <if test="record.grossProduction != null">
+        gross_production = #{record.grossProduction,jdbcType=INTEGER},
+      </if>
+      <if test="record.areaCovered != null">
+        area_covered = #{record.areaCovered,jdbcType=INTEGER},
+      </if>
+      <if test="record.annual != null">
+        annual = #{record.annual,jdbcType=INTEGER},
+      </if>
+      <if test="record.socialDonation != null">
+        social_donation = #{record.socialDonation,jdbcType=INTEGER},
+      </if>
+      <if test="record.premiums != null">
+        premiums = #{record.premiums,jdbcType=INTEGER},
+      </if>
+      <if test="record.dayCare != null">
+        day_care = #{record.dayCare,jdbcType=INTEGER},
+      </if>
+      <if test="record.fullCare != null">
+        full_care = #{record.fullCare,jdbcType=INTEGER},
+      </if>
+      <if test="record.littleTob != null">
+        little_tob = #{record.littleTob,jdbcType=INTEGER},
+      </if>
+      <if test="record.rank != null">
+        rank = #{record.rank,jdbcType=INTEGER},
+      </if>
+      <if test="record.urbanId != null">
+        urban_id = #{record.urbanId,jdbcType=INTEGER},
+      </if>
+      <if test="record.eduDepartment1 != null">
+        edu_department1 = #{record.eduDepartment1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.eduDepartment2 != null">
+        edu_department2 = #{record.eduDepartment2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priceDepartment2 != null">
+        price_department2 = #{record.priceDepartment2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priceDepartment1 != null">
+        price_department1 = #{record.priceDepartment1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chargename2 != null">
+        chargename2 = #{record.chargename2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.officalname1 != null">
+        officalname1 = #{record.officalname1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.officalname2 != null">
+        officalname2 = #{record.officalname2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firework != null">
+        firework = #{record.firework,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fireworkno != null">
+        fireworkNo = #{record.fireworkno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chargename1 != null">
+        chargename1 = #{record.chargename1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areaId != null">
+        area_id = #{record.areaId,jdbcType=INTEGER},
+      </if>
+      <if test="record.flag1 != null">
+        flag1 = #{record.flag1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag2 != null">
+        flag2 = #{record.flag2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag3 != null">
+        flag3 = #{record.flag3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag4 != null">
+        flag4 = #{record.flag4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag5 != null">
+        flag5 = #{record.flag5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag6 != null">
+        flag6 = #{record.flag6,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update kindergarten
+    set k_id = #{record.kId,jdbcType=INTEGER},
+      kt_id = #{record.ktId,jdbcType=INTEGER},
+      address = #{record.address,jdbcType=VARCHAR},
+      kname = #{record.kname,jdbcType=VARCHAR},
+      business_nature = #{record.businessNature,jdbcType=VARCHAR},
+      license_number = #{record.licenseNumber,jdbcType=VARCHAR},
+      edu_id = #{record.eduId,jdbcType=INTEGER},
+      create_date = #{record.createDate,jdbcType=DATE},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      legal_id = #{record.legalId,jdbcType=INTEGER},
+      plan_class = #{record.planClass,jdbcType=INTEGER},
+      plan_people = #{record.planPeople,jdbcType=INTEGER},
+      plan_teacher = #{record.planTeacher,jdbcType=INTEGER},
+      governess = #{record.governess,jdbcType=INTEGER},
+      other_people = #{record.otherPeople,jdbcType=INTEGER},
+      leave_people = #{record.leavePeople,jdbcType=INTEGER},
+      wages = #{record.wages,jdbcType=INTEGER},
+      gross_production = #{record.grossProduction,jdbcType=INTEGER},
+      area_covered = #{record.areaCovered,jdbcType=INTEGER},
+      annual = #{record.annual,jdbcType=INTEGER},
+      social_donation = #{record.socialDonation,jdbcType=INTEGER},
+      premiums = #{record.premiums,jdbcType=INTEGER},
+      day_care = #{record.dayCare,jdbcType=INTEGER},
+      full_care = #{record.fullCare,jdbcType=INTEGER},
+      little_tob = #{record.littleTob,jdbcType=INTEGER},
+      rank = #{record.rank,jdbcType=INTEGER},
+      urban_id = #{record.urbanId,jdbcType=INTEGER},
+      edu_department1 = #{record.eduDepartment1,jdbcType=VARCHAR},
+      edu_department2 = #{record.eduDepartment2,jdbcType=VARCHAR},
+      price_department2 = #{record.priceDepartment2,jdbcType=VARCHAR},
+      price_department1 = #{record.priceDepartment1,jdbcType=VARCHAR},
+      chargename2 = #{record.chargename2,jdbcType=VARCHAR},
+      officalname1 = #{record.officalname1,jdbcType=VARCHAR},
+      officalname2 = #{record.officalname2,jdbcType=VARCHAR},
+      firework = #{record.firework,jdbcType=VARCHAR},
+      fireworkNo = #{record.fireworkno,jdbcType=VARCHAR},
+      chargename1 = #{record.chargename1,jdbcType=VARCHAR},
+      area_id = #{record.areaId,jdbcType=INTEGER},
+      flag1 = #{record.flag1,jdbcType=VARCHAR},
+      flag2 = #{record.flag2,jdbcType=VARCHAR},
+      flag3 = #{record.flag3,jdbcType=VARCHAR},
+      flag4 = #{record.flag4,jdbcType=VARCHAR},
+      flag5 = #{record.flag5,jdbcType=VARCHAR},
+      flag6 = #{record.flag6,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.muji.zh.admin.model.Kindergarten">
+    update kindergarten
+    <set>
+      <if test="ktId != null">
+        kt_id = #{ktId,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="kname != null">
+        kname = #{kname,jdbcType=VARCHAR},
+      </if>
+      <if test="businessNature != null">
+        business_nature = #{businessNature,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseNumber != null">
+        license_number = #{licenseNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="eduId != null">
+        edu_id = #{eduId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=DATE},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="legalId != null">
+        legal_id = #{legalId,jdbcType=INTEGER},
+      </if>
+      <if test="planClass != null">
+        plan_class = #{planClass,jdbcType=INTEGER},
+      </if>
+      <if test="planPeople != null">
+        plan_people = #{planPeople,jdbcType=INTEGER},
+      </if>
+      <if test="planTeacher != null">
+        plan_teacher = #{planTeacher,jdbcType=INTEGER},
+      </if>
+      <if test="governess != null">
+        governess = #{governess,jdbcType=INTEGER},
+      </if>
+      <if test="otherPeople != null">
+        other_people = #{otherPeople,jdbcType=INTEGER},
+      </if>
+      <if test="leavePeople != null">
+        leave_people = #{leavePeople,jdbcType=INTEGER},
+      </if>
+      <if test="wages != null">
+        wages = #{wages,jdbcType=INTEGER},
+      </if>
+      <if test="grossProduction != null">
+        gross_production = #{grossProduction,jdbcType=INTEGER},
+      </if>
+      <if test="areaCovered != null">
+        area_covered = #{areaCovered,jdbcType=INTEGER},
+      </if>
+      <if test="annual != null">
+        annual = #{annual,jdbcType=INTEGER},
+      </if>
+      <if test="socialDonation != null">
+        social_donation = #{socialDonation,jdbcType=INTEGER},
+      </if>
+      <if test="premiums != null">
+        premiums = #{premiums,jdbcType=INTEGER},
+      </if>
+      <if test="dayCare != null">
+        day_care = #{dayCare,jdbcType=INTEGER},
+      </if>
+      <if test="fullCare != null">
+        full_care = #{fullCare,jdbcType=INTEGER},
+      </if>
+      <if test="littleTob != null">
+        little_tob = #{littleTob,jdbcType=INTEGER},
+      </if>
+      <if test="rank != null">
+        rank = #{rank,jdbcType=INTEGER},
+      </if>
+      <if test="urbanId != null">
+        urban_id = #{urbanId,jdbcType=INTEGER},
+      </if>
+      <if test="eduDepartment1 != null">
+        edu_department1 = #{eduDepartment1,jdbcType=VARCHAR},
+      </if>
+      <if test="eduDepartment2 != null">
+        edu_department2 = #{eduDepartment2,jdbcType=VARCHAR},
+      </if>
+      <if test="priceDepartment2 != null">
+        price_department2 = #{priceDepartment2,jdbcType=VARCHAR},
+      </if>
+      <if test="priceDepartment1 != null">
+        price_department1 = #{priceDepartment1,jdbcType=VARCHAR},
+      </if>
+      <if test="chargename2 != null">
+        chargename2 = #{chargename2,jdbcType=VARCHAR},
+      </if>
+      <if test="officalname1 != null">
+        officalname1 = #{officalname1,jdbcType=VARCHAR},
+      </if>
+      <if test="officalname2 != null">
+        officalname2 = #{officalname2,jdbcType=VARCHAR},
+      </if>
+      <if test="firework != null">
+        firework = #{firework,jdbcType=VARCHAR},
+      </if>
+      <if test="fireworkno != null">
+        fireworkNo = #{fireworkno,jdbcType=VARCHAR},
+      </if>
+      <if test="chargename1 != null">
+        chargename1 = #{chargename1,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null">
+        area_id = #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="flag1 != null">
+        flag1 = #{flag1,jdbcType=VARCHAR},
+      </if>
+      <if test="flag2 != null">
+        flag2 = #{flag2,jdbcType=VARCHAR},
+      </if>
+      <if test="flag3 != null">
+        flag3 = #{flag3,jdbcType=VARCHAR},
+      </if>
+      <if test="flag4 != null">
+        flag4 = #{flag4,jdbcType=VARCHAR},
+      </if>
+      <if test="flag5 != null">
+        flag5 = #{flag5,jdbcType=VARCHAR},
+      </if>
+      <if test="flag6 != null">
+        flag6 = #{flag6,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where k_id = #{kId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.muji.zh.admin.model.Kindergarten">
+    update kindergarten
+    set kt_id = #{ktId,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      kname = #{kname,jdbcType=VARCHAR},
+      business_nature = #{businessNature,jdbcType=VARCHAR},
+      license_number = #{licenseNumber,jdbcType=VARCHAR},
+      edu_id = #{eduId,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=DATE},
+      phone = #{phone,jdbcType=VARCHAR},
+      legal_id = #{legalId,jdbcType=INTEGER},
+      plan_class = #{planClass,jdbcType=INTEGER},
+      plan_people = #{planPeople,jdbcType=INTEGER},
+      plan_teacher = #{planTeacher,jdbcType=INTEGER},
+      governess = #{governess,jdbcType=INTEGER},
+      other_people = #{otherPeople,jdbcType=INTEGER},
+      leave_people = #{leavePeople,jdbcType=INTEGER},
+      wages = #{wages,jdbcType=INTEGER},
+      gross_production = #{grossProduction,jdbcType=INTEGER},
+      area_covered = #{areaCovered,jdbcType=INTEGER},
+      annual = #{annual,jdbcType=INTEGER},
+      social_donation = #{socialDonation,jdbcType=INTEGER},
+      premiums = #{premiums,jdbcType=INTEGER},
+      day_care = #{dayCare,jdbcType=INTEGER},
+      full_care = #{fullCare,jdbcType=INTEGER},
+      little_tob = #{littleTob,jdbcType=INTEGER},
+      rank = #{rank,jdbcType=INTEGER},
+      urban_id = #{urbanId,jdbcType=INTEGER},
+      edu_department1 = #{eduDepartment1,jdbcType=VARCHAR},
+      edu_department2 = #{eduDepartment2,jdbcType=VARCHAR},
+      price_department2 = #{priceDepartment2,jdbcType=VARCHAR},
+      price_department1 = #{priceDepartment1,jdbcType=VARCHAR},
+      chargename2 = #{chargename2,jdbcType=VARCHAR},
+      officalname1 = #{officalname1,jdbcType=VARCHAR},
+      officalname2 = #{officalname2,jdbcType=VARCHAR},
+      firework = #{firework,jdbcType=VARCHAR},
+      fireworkNo = #{fireworkno,jdbcType=VARCHAR},
+      chargename1 = #{chargename1,jdbcType=VARCHAR},
+      area_id = #{areaId,jdbcType=INTEGER},
+      flag1 = #{flag1,jdbcType=VARCHAR},
+      flag2 = #{flag2,jdbcType=VARCHAR},
+      flag3 = #{flag3,jdbcType=VARCHAR},
+      flag4 = #{flag4,jdbcType=VARCHAR},
+      flag5 = #{flag5,jdbcType=VARCHAR},
+      flag6 = #{flag6,jdbcType=VARCHAR}
+    where k_id = #{kId,jdbcType=INTEGER}
+  </update>
+</mapper>

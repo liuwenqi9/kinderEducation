@@ -1,0 +1,511 @@
+html,body,div,p,form,label,ul,li,dl,dt,dd,ol,img,button,b,em,strong,small,h1,h2,h3,h4,h5,h6{margin:0;padding:0;border:0;list-style:none;font-style:normal;}
+body{font-family:SimHei,'Helvetica Neue',Arial,'Droid Sans',sans-serif;font-size:16px;color:#333;background:url(../../img/bodyback.png);}
+a, a.link{color:#666;text-decoration:none;font-weight:500;}
+a, a.link:hover{color:#666;}
+h1,h2,h3,h4,h5,h6{font-weight: normal;}
+
+* {
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	color: white;
+}
+
+canvas{z-index:-10000;position: absolute;top:0;left:0;}
+body, html{ 
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	width: 100%;
+	height:100%;
+	position: relative;
+}
+
+.left, .center, .right{
+	float: left;
+}
+
+.header{
+	width: 96%;
+  height: 8%;
+  margin-left: 2%; 
+}
+
+.topimg{
+	background-image: url(../../img/top.png);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	height: 85%;
+	position: relative;
+	 
+}
+.h-title{
+	 position: absolute;
+   font-size: 1.5rem;
+   letter-spacing: 0.2rem;
+   left:50%;
+   top:50%;
+   margin-left:-11.2rem;
+   margin-top:-1.2rem;    
+}
+.mes{
+	float:right;
+	font-size:0.8rem;
+	margin-top: 1.2rem;
+	margin-right: 1.6rem;
+}
+.mes label{
+	color: red;
+}
+.mes a{
+	color:blueviolet;
+}
+.main{
+	height: 92%;
+	width: 100%;
+}
+
+.left{
+	width: 28%;
+	height:100%;
+	margin-left:2%;
+}
+
+.left-t{
+	 padding-top: 6%;
+	 background-image: url(../../img/left-t.png);
+	 background-repeat: no-repeat;
+   background-size:  100% 100%;
+   height:27%; 
+}
+
+.left-t_title{
+	float: left;
+	margin-left: 5%;
+	font-size: 1.1rem;
+	margin-top: -5%;
+}
+.zhu_t{
+	width:94%;
+	height: 80%;
+	margin-left: 3%;
+	/*background-color: blue;*/
+}
+.bar{
+	width:100%;
+	height:30%;
+	margin-top: 3%;
+	/*background-color: snow;*/
+}
+.bar-left{
+	float: left;
+	font-size: 0.6rem;
+}
+.bar-right{
+	float: right;
+	font-size: 0.8rem;
+}
+.zhu_1{
+	width: 65%;
+	margin-left: 16%;
+	height:55%;
+	margin-top: 2%;
+	border: 0.05rem solid #6bc89b;
+	/*background-color: red;*/
+}
+
+.one{
+	height:70%;
+	width:92%;
+	margin-left: 4%;
+	margin-top: 1.3%;
+	border: 0.05rem solid #6bc89b ;
+}
+
+.zhu_one{
+	height: 100%;
+	width: 100%;
+}
+
+.left-f{
+	padding-top: 2%;
+	background-image: url(../../img/left-f.png);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	height: 63%;	
+	margin-top: 3%;
+}
+.left-f_title{
+	float:left;
+	font-size: 1.1rem;
+	margin-left: 6%;
+	margin-top:-1.6%;
+}
+.worker{
+	width:92%;
+	margin-left: 4%;
+	height: 46%;
+	margin-top: 2%;
+}
+.sex{
+	width: 86%;
+	margin-left: 7%;
+	height:14%;
+	margin-top: 1.2%;
+}
+.men{
+	float:left;
+	font-size: 0.8rem;
+	margin-top: 2%;
+}
+.women{
+	float:right;
+	margin-right: 20%;
+	font-size: 0.8rem;
+	margin-top: 2%;
+}
+.bar2{
+    width: 100%;
+	height:14%;
+	margin-top: 1.2%;
+}
+.bar2-left{
+   width: 15%;	
+   height:80%;
+   float:left;
+   font-size: 0.8rem;
+   margin-left: -3%;
+   text-align: center;
+}
+.bar2-right{
+   float:right;
+   font-size: 1em;
+   margin-right: 4%;
+}
+.zhu_2{
+	width: 68%;
+	margin-left: 14%;
+	height:90%;
+	margin-top: 1.2%;
+	border: 0.05rem solid #6bc89b;
+}
+
+.two{
+	height:70%;
+	width:92%;
+	margin-left: 3%;
+	margin-top: 1%;
+	border: 0.05rem solid #6bc89b ;
+}
+.zhu_two{
+	height: 100%;
+	width: 100%;
+}
+
+.line{
+	background-color:#86fcc2;
+	float: left;
+	width:2rem;
+	height: 0.1rem;
+	margin-top: 0.3rem;
+	margin-left: 4rem;
+}
+.line_font{
+	color: white;
+	font-size: 0.4rem;
+	float: left;
+	margin-left: 0.1rem;
+}
+.center{
+	width: 36%;
+	height: 100%;
+	margin-left: 2%;
+}
+
+.center-t{
+	background-image: url(../../img/center-t.png);
+  background-repeat: no-repeat;
+	background-size: 100% 100%;
+	height: 66%;	
+}
+.S{
+	float:right;
+	margin-right: 3%;
+	margin-top: -2%;
+  width:11%;
+}
+
+.F{
+	float:right;
+  margin-right: 2%;
+  margin-top: -2%;  
+	width:11%;
+}
+
+.B{
+	width:11%;
+	float:right;
+	margin-right: 2%;
+	margin-top: -2%;
+}
+
+.time{
+	 padding-top: 2%;
+	 margin-left: -12%; 
+}
+.three{
+	height:30%;
+	width: 88%;
+	margin-left: 9%;
+	margin-top: 4%;
+}
+
+.three_l{
+	background-image: url(../../img/three_l.png);
+	float: left;
+	width:25%;
+	height: 50%;
+	background-size: 100% 100%;
+	font-size: 0.6rem;
+	line-height: 1rem;
+	padding-top: 0.5rem;
+}
+
+.three_c{
+	background-image: url(../../img/three_c.png);
+  float: left;
+  width:33%;
+	margin-left: 5%;
+	height:55%;
+	background-size: 100% 100%;
+	font-size:0.9rem;
+	line-height: 1rem;
+	padding-top: 1rem;
+}
+
+.three_r{
+	background-image: url(../../img/three_l.png);
+	float: left;
+	width:25%;
+	height: 43%;
+	margin-left: 5%;
+	background-size: 100% 100%;
+	font-size: 0.6rem;
+	padding-top: 1rem;
+	line-height: 1.2rem;
+}
+
+#map{
+	height: 67%;
+	margin-top: -10%;
+}
+
+#map_city{
+	height: 66%;
+	margin-top: -6%;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+  width:80%;
+	margin-left: 10%;
+}
+#map_city2{
+	height: 63%;
+	margin-top: -5%;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+  width:40%;
+	margin-left: 30%;
+}
+
+.center-f{
+	background-image: url(../../img/center-f.png);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	height: 30%;
+	margin-top: 2%;
+}
+.xuesheng{
+	float:  left;
+	margin-top: 0.5rem;
+	margin-left: 1.5rem;
+	font-size: 1rem;
+}
+.bing{
+	width: 90%;
+	height:90%;
+	margin-left: 5%;
+}
+.stu-message{
+	width: 90%;
+	height:15%;
+	margin-top: -2%;
+	margin-left: 5%;
+	/*background-color: snow;*/
+}
+.stu-message{
+	font-size: 0.5rem;
+}
+.stu-l{
+	float:left;
+	margin-left: 2%;
+}
+.stu-c{
+	float:left;
+	margin-left: 20%;
+}
+.stu-r{
+	float:right;
+	margin-left: 70%;
+}
+
+.right{
+	width: 28%;
+	height: 100%;
+	margin-left: 2%;
+}
+
+.right-t{
+	padding-top: 6%;
+	background-image: url(../../img/right-t.png);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	height: 61%;
+}
+.biaoti{
+	float: left;
+	font-size:1rem;
+	margin-top: -5%;
+	margin-left: 5%;
+}
+.title{
+	font-size: 0.9rem;
+	margin-left: 30%;
+}  
+.jingbao p{
+	margin-top: 3%;
+	height:15%;
+}
+.sum{
+	margin-left:20%;
+	color: red;
+	font-size:0.7rem ;
+	font-weight:900 ;
+	margin-top: 8%;
+}
+.a1{
+	float:left;
+	margin-left: 6%;
+}
+.a2{
+	float:right;
+	margin-right: 5%;
+}
+.jingbao{
+	height: 24%;
+	width:96%;
+  background-image: url(../../img/touming.png);
+	background-repeat: no-repeat;
+	margin-top: -2%;
+	margin-left: 2%;
+  background-size: 100%  90%;
+  font-size: 0.8rem;
+  letter-spacing: 0.1rem;
+}
+.jingbao1{
+	height: 8%;
+	width:96%;
+	background-image: url(../../img/touming.png);
+	background-repeat: no-repeat;
+	margin-top: -2%;
+	margin-left: 2%;
+	background-size: 100%  90%;
+	font-size: 0.8rem;
+	letter-spacing: 0.1rem;
+}
+.b{
+	margin-left: 85%;
+	margin-top: -3%;
+}
+.b1{
+	background: none;
+	border: none;
+	outline: none;
+}
+.show{
+	display: none;
+	background-image: url(../../img2/center_tittle.png);
+	background-size: 100% 100%;
+	height:60%;
+	width: 96%;
+	margin-left: 2%;
+	overflow-x: hidden;
+  overflow-y: auto;
+	font-size: 0.8rem;
+}
+.show p{
+	width:90%;
+	margin-left: 5%;
+	height:10%;
+	margin-top:2%;
+}
+.show-l{
+	float:left;
+}
+.show-r{
+	float:right;
+}
+.right-f{
+	padding-top: 3%;
+	background-image: url(../../img/right-f.png);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	height: 30%;
+	margin-top: 2%;
+}
+.Ts{
+	float: left;
+	font-size:1rem;
+	margin-top: -3.5%;
+	margin-left: 5%;
+}
+.ts{
+	background-image: url(../../img/touming.png);
+	background-repeat: no-repeat;
+  background-size: 100% 90%;
+	height: 47%;
+	width: 96%;
+	margin-left: 2%;
+	margin-top: 2%;
+	font-size: 0.8rem;
+  letter-spacing: 0.1rem;
+  line-height: 1.1rem;
+}
+.ts1{
+	background-image: url(../../img/touming.png);
+	background-repeat: no-repeat;
+  background-size: 100% 90%;
+	height: 12%;
+	width: 96%;
+	margin-left: 2%;
+	margin-top: 2%;
+	font-size: 0.8rem;
+  letter-spacing: 0.1rem;
+  line-height: 1.1rem;
+}
+.ts p{
+	height: 15%;
+	margin-top: 2%;
+}
+.a1-f{
+	 float: left;
+	 margin-left: 6%;
+}
+.a2-f{
+	float:right;
+	margin-right: 5%;
+}
+#m5{
+	margin-top: -3%;
+}
+#m6{
+	margin-top: -3%;
+}

@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muji.zh.admin.mapper.KinderLegalMapper">
+  <resultMap id="BaseResultMap" type="com.muji.zh.admin.model.KinderLegal">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="klname" jdbcType="VARCHAR" property="klname" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="kind_id" jdbcType="INTEGER" property="kindId" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="ic_id" jdbcType="INTEGER" property="icId" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="area_id" jdbcType="INTEGER" property="areaId" />
+    <result column="falg1" jdbcType="VARCHAR" property="falg1" />
+    <result column="falg2" jdbcType="VARCHAR" property="falg2" />
+    <result column="falg3" jdbcType="VARCHAR" property="falg3" />
+    <result column="falg4" jdbcType="VARCHAR" property="falg4" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, password, klname, sex, kind_id, phone, ic_id, email, image, address, area_id, 
+    falg1, falg2, falg3, falg4
+  </sql>
+  <select id="selectByExample" parameterType="com.muji.zh.admin.model.KinderLegalExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from kinder_legal
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from kinder_legal
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from kinder_legal
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.muji.zh.admin.model.KinderLegalExample">
+    delete from kinder_legal
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.muji.zh.admin.model.KinderLegal">
+    insert into kinder_legal (id, password, klname, 
+      sex, kind_id, phone, 
+      ic_id, email, image, 
+      address, area_id, falg1, 
+      falg2, falg3, falg4
+      )
+    values (#{id,jdbcType=INTEGER}, #{password,jdbcType=VARCHAR}, #{klname,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{kindId,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+      #{icId,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{areaId,jdbcType=INTEGER}, #{falg1,jdbcType=VARCHAR}, 
+      #{falg2,jdbcType=VARCHAR}, #{falg3,jdbcType=VARCHAR}, #{falg4,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.muji.zh.admin.model.KinderLegal">
+    insert into kinder_legal
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="klname != null">
+        klname,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="kindId != null">
+        kind_id,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="icId != null">
+        ic_id,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="image != null">
+        image,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="areaId != null">
+        area_id,
+      </if>
+      <if test="falg1 != null">
+        falg1,
+      </if>
+      <if test="falg2 != null">
+        falg2,
+      </if>
+      <if test="falg3 != null">
+        falg3,
+      </if>
+      <if test="falg4 != null">
+        falg4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="klname != null">
+        #{klname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="kindId != null">
+        #{kindId,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="icId != null">
+        #{icId,jdbcType=INTEGER},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null">
+        #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="falg1 != null">
+        #{falg1,jdbcType=VARCHAR},
+      </if>
+      <if test="falg2 != null">
+        #{falg2,jdbcType=VARCHAR},
+      </if>
+      <if test="falg3 != null">
+        #{falg3,jdbcType=VARCHAR},
+      </if>
+      <if test="falg4 != null">
+        #{falg4,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.muji.zh.admin.model.KinderLegalExample" resultType="java.lang.Long">
+    select count(*) from kinder_legal
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update kinder_legal
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.klname != null">
+        klname = #{record.klname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.kindId != null">
+        kind_id = #{record.kindId,jdbcType=INTEGER},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.icId != null">
+        ic_id = #{record.icId,jdbcType=INTEGER},
+      </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image != null">
+        image = #{record.image,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areaId != null">
+        area_id = #{record.areaId,jdbcType=INTEGER},
+      </if>
+      <if test="record.falg1 != null">
+        falg1 = #{record.falg1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.falg2 != null">
+        falg2 = #{record.falg2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.falg3 != null">
+        falg3 = #{record.falg3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.falg4 != null">
+        falg4 = #{record.falg4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update kinder_legal
+    set id = #{record.id,jdbcType=INTEGER},
+      password = #{record.password,jdbcType=VARCHAR},
+      klname = #{record.klname,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      kind_id = #{record.kindId,jdbcType=INTEGER},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      ic_id = #{record.icId,jdbcType=INTEGER},
+      email = #{record.email,jdbcType=VARCHAR},
+      image = #{record.image,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      area_id = #{record.areaId,jdbcType=INTEGER},
+      falg1 = #{record.falg1,jdbcType=VARCHAR},
+      falg2 = #{record.falg2,jdbcType=VARCHAR},
+      falg3 = #{record.falg3,jdbcType=VARCHAR},
+      falg4 = #{record.falg4,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.muji.zh.admin.model.KinderLegal">
+    update kinder_legal
+    <set>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="klname != null">
+        klname = #{klname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="kindId != null">
+        kind_id = #{kindId,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="icId != null">
+        ic_id = #{icId,jdbcType=INTEGER},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null">
+        area_id = #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="falg1 != null">
+        falg1 = #{falg1,jdbcType=VARCHAR},
+      </if>
+      <if test="falg2 != null">
+        falg2 = #{falg2,jdbcType=VARCHAR},
+      </if>
+      <if test="falg3 != null">
+        falg3 = #{falg3,jdbcType=VARCHAR},
+      </if>
+      <if test="falg4 != null">
+        falg4 = #{falg4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.muji.zh.admin.model.KinderLegal">
+    update kinder_legal
+    set password = #{password,jdbcType=VARCHAR},
+      klname = #{klname,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      kind_id = #{kindId,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      ic_id = #{icId,jdbcType=INTEGER},
+      email = #{email,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      area_id = #{areaId,jdbcType=INTEGER},
+      falg1 = #{falg1,jdbcType=VARCHAR},
+      falg2 = #{falg2,jdbcType=VARCHAR},
+      falg3 = #{falg3,jdbcType=VARCHAR},
+      falg4 = #{falg4,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+
+
+
+
+  <select id="selectByklnameAndpassword" resultMap="BaseResultMap">
+    select *
+    from kinder_legal
+    where id = #{id} and password = #{password}
+  </select>
+
+
+
+
+
+<!--
+  <select id="selectByklnameAndpassword" resultMap="BaseResultMap">
+    select *
+    from kinder_legal
+    where id = #{id} and password = #{password}
+  </select>-->
+
+  <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select *
+    from kinder_legal
+    <where>
+      and klname like CONCAT(CONCAT('%',#{klname}),'%')
+    </where>
+  </select>
+
+  <select id="findAll" resultMap="BaseResultMap">
+    select id,klname,phone from kinder_legal
+  </select>
+
+
+
+
+
+
+
+</mapper>

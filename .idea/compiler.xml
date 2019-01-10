@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="eduation_api" />
+        <module name="eduation_other" />
+        <module name="eduation_practitioner" />
+        <module name="eduation_produce" />
+        <module name="eduation_student" />
+        <module name="eduation_super_admin" />
+        <module name="eduation_user_admin" />
+        <module name="education_kinder" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="com.muji.education" target="1.8" />
+      <module name="eduation_api" target="1.8" />
+      <module name="eduation_other" target="1.8" />
+      <module name="eduation_practitioner" target="1.8" />
+      <module name="eduation_produce" target="1.8" />
+      <module name="eduation_student" target="1.8" />
+      <module name="eduation_super_admin" target="1.8" />
+      <module name="eduation_user_admin" target="1.8" />
+      <module name="education_kinder" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

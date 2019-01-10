@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>缴费管理 - 缴费清单查询</title>
+    <meta name="renderer" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" th:href="@{~/static/css/font.css}"/>
+    <link rel="stylesheet" th:href="@{~/static/css/xadmin.css}"/>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" th:href="@{~/static/css/jquery-ui.css}"/>
+    <script type="text/javascript" th:src="@{~/static/lib/layui/layui.js}" charset="utf-8"></script>
+    <script type="text/javascript" th:src="@{~/static/js/xadmin.js}"></script>
+    <script type="text/javascript" th:src="@{~/static/js/jquery-ui.js}"></script>
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body class="layui-anim layui-anim-up">
+<div class="x-body">
+    <div class="layui-row">
+        <form class="layui-form layui-col-md8 x-so" action="/kinder/choosePayment" method="post">
+            <input type="text" name="pname" placeholder="请输入姓名"  autocomplete="off" class="layui-input"/>
+            <input type="text" name="sId" placeholder="请输入学号"  autocomplete="off" class="layui-input"/>
+            <input type="hidden" th:value="${check}" id="check" class="check"/>
+            <input type="hidden" th:value="${pname}" id="pname" class="pname"/>
+            <input type="hidden" th:value="${sId}" id="sId" class="sId"/>
+            <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+        </form>
+        <div style="float: right;">
+            <a class="layui-btn layui-btn-small"  href="javascript:window.location.replace('/kinder/payManageSearch?currentPage=1');" title="刷新">
+                <i class="layui-icon">ဂ</i>
+            </a>
+        </div>
+    </div>
+    <xblock>
+        <!--<button class="layui-btn" onclick="x_admin_add('添加班级信息','/kinder/classAdd',600,400)"><i class="layui-icon"></i>添加</button>-->
+        <span class="x-right" style="line-height:40px">共有数据：<i th:text="${count}"></i>条</span>
+    </xblock>
+    <table class="layui-table">
+        <thead>
+        <tr class="stu">
+            <!--<th>-->
+            <!--<div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>-->
+            <!--</th>-->
+            <th class="b">日期</th>
+            <th class="b stu_no">学号</th>
+            <th class="b">学生姓名</th>
+            <th class="b">性别</th>
+            <th class="b">所在学校</th>
+            <th class="b">所在班级</th>
+            <th class="b">实交学费(元/月)</th>
+            <th class="b">应交学费(元/月)</th>
+            <th class="b">基本学费(元/月)</th>
+            <!--<th class="b">操作</th>-->
+        </tr>
+        </thead>
+        <tbody class="stra">
+        </tbody>
+    </table>
+    <div id="laypage"></div>
+    <!-- <div class="page">
+      <div>
+        <a class="prev" href="">&lt;&lt;</a>
+        <a class="num" href="">1</a>
+        <span class="current">2</span>
+        <a class="num" href="">3</a>
+        <a class="num" href="">489</a>
+        <a class="next" href="">&gt;&gt;</a>
+      </div>
+    </div>
+-->
+</div>
+<script th:inline="javascript">
+    Date.prototype.Format = function (fmt) { //author: meizz
+        var o = {
+            "M+": this.getMonth() + 1, //月份
+            "d+": this.getDate(), //日
+            "h+": this.getHours(), //小时
+            "m+": this.getMinutes(), //分
+            "s+": this.getSeconds(), //秒
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+            "S": this.getMilliseconds() //毫秒
+        };
+        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+            if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+    }
+    $(function(){
+        show();
+        fenye();
+    })
+    function show(){
+        var paymentList=[[${paymentListList.list}]];
+        var i=0;
+        var z=0;
+        $.each(paymentList, function(index, item){
+            var content=item.content;
+            content=content.split(',');
+            var ent="";
+            i=0;
+            for(var p in content){
+                ent+='<th>'+content[p]+'</th>';
+                i++;
+            }
+            /* <![CDATA[ */
+            if(z<=i){
+                z=i;
+            }
+            var data=new Date(item.createDate).Format("yyyy/MM/dd")
+            /* ]]> */
+            var actual=item.actual;
+            if(item.actual==null){
+                actual='尚未支付';
+            }
+            $('.stra').append("<tr><th>"+data+"</th><th>"+item.sId+"</th><th>"+item.pname+"</th> <th>"+item.sex+"</th> <th>"+item.kindName+"</th><th>"+item.className+"</th><th>"+actual+"</th><th>"+item.tuition+"</th>'"+ent+"'</tr>");
+        });
+        var j=0;
+        var con="";
+        /* <![CDATA[ */
+        while(j<z-1){
+            con+='<th class="b">其他收费</th>';
+            j++;
+        }
+        /* ]]> */
+        $('.stu').append(con);
+    }
+    function fenye(){
+        layui.use(['laypage', 'layer','table'], function() {
+            var laypage = layui.laypage
+                , layer = layui.layer,table=layui.table;
+//              table.render({
+//                  elem: '#test'
+//                  ,id: 'testReload'
+//              })
+            laypage.render({
+                elem: 'laypage',
+                count: [[${paymentListList.total}]],
+                curr: [[${paymentListList.pageNum}]],
+                limit : [[${paymentListList.pageSize}]],
+                layout: ['prev', 'page', 'next'],
+                jump:function(obj,first){
+                    if(first){ return ; }
+                    //分页切换的回掉
+//                      $.ajax({
+//                          type:'get',
+//                          dataType:'json',
+//                          url:'/kinder/practitionList?currentPage='+obj.curr,
+//                          success:function(data){
+//                              showData(data);
+//                          }
+//                      })
+                    var url;
+                    var check=$('#check').val();
+                    var pname=$('#pname').val();
+                    var sId=$('#sId').val();
+                    /* <![CDATA[ */
+                    if(check==0){
+                        url='/kinder/payManageSearch?currentPage='+obj.curr;
+                    }else if(check==1){
+                        url='/kinder/chooseStudents?pname='+pname+'&sId='+sId+'&currentPage='+obj.curr;
+                    }
+                    /* ]]> */
+                    window.location.href = url;
+                }
+            });
+        });
+    }
+
+
+</script>
+
+</body>
+
+</html>

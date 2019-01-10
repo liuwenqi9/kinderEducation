@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>增加班级</title>
+    <meta name="renderer" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" th:href="@{~/static/css/font.css}"/>
+    <link rel="stylesheet" th:href="@{~/static/css/xadmin.css}"/>
+      <link rel="stylesheet" th:href="@{~/static/sweetalert/sweetalert.css}"/>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{~/static/lib/layui/layui.js}" charset="utf-8"></script>
+    <script type="text/javascript" th:src="@{~/static/js/xadmin.js}"></script>
+      <script type="text/javascript" th:src="@{~/static/sweetalert/sweetalert.min.js}"></script>
+      <script type="text/javascript" th:src="@{~/static/sweetalert/xlalert.js}"></script>
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+      <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  
+  <body>
+    <div class="x-body layui-anim layui-anim-up">
+        <form class="layui-form" id="classform">
+          <div class="layui-form-item">
+              <label for="class_name" class="layui-form-label">班级名称</label>
+              <div class="layui-input-inline">
+                  <input type="text" id="class_name" name="cname" required="true"
+                  autocomplete="off" maxlength="10" class="layui-input" lay-verify="required|username"/>
+              </div>
+          </div>
+            <div class="layui-form-item">
+			<label class="layui-form-label">班级类型</label>
+			<div class="layui-input-inline">
+                <select  lay-verify="required|select" name="cType">
+                    <option value="-1">请选择班级类型</option>
+                    <option th:each="classType:${classTypeList}" th:value="${classType.ctId}" th:text="${classType.aname}"></option>
+                </select>
+			</div>
+       </div>
+          <!--<div class="layui-form-item">-->
+              <!--<label for="clas" class="layui-form-label">年级</label>-->
+              <!--<div class="layui-input-inline">-->
+                  <!--<input type="text" id="clas" name="grade" required="true"-->
+                  <!--autocomplete="off" class="layui-input" lay-verify="required"/>-->
+              <!--</div>-->
+             <!---->
+          <!--</div>-->
+          <div class="layui-form-item">
+         			<label class="layui-form-label">班主任</label>
+         			<div class="layui-input-inline">
+                        <select name="pId" lay-verify="required|select">
+                            <option value="-1">请选择班主任</option>
+                            <option th:each="practitioner:${practitionerList}" th:value="${practitioner.id}" th:text="${practitioner.pname}"></option>
+                        </select>
+         		</div>
+         </div>
+		 
+          <div class="layui-form-item">
+              <label for="add" class="layui-form-label">
+              </label>
+              <button  class="layui-btn" id="add" lay-filter="add" lay-submit="">
+                  增加
+              </button>
+          </div>
+      </form>
+    </div>
+    <script>
+        $('#add').click(function () {
+            var classname=$('#class_name').val();
+            var tag=/^[\d|\u4e00-\u9fa5]+$/;
+            if(!tag.test(classname)){
+                zlalert.alertError('班级名不能有有空格且必须为中文和数字！');
+                return false;
+            }
+        })
+        layui.use(['form','layer'], function(){
+            $ = layui.jquery;
+          var form = layui.form
+          ,layer = layui.layer;
+        
+          //自定义验证规则
+          form.verify({
+            required: function(value){
+              if(value.length ==0){
+                return '请填写信息';
+              }
+            },
+              select: function (value) {
+                  if(value==-1){
+                      return '请选择相应信息';
+                  }
+              },username: function(value){ //value：表单的值、item：表单的DOM对象
+                  if(!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)){
+                      return '班级名不能有特殊字符';
+                  }
+                  if(/(^\_)|(\__)|(\_+$)/.test(value)){
+                      return '班级名首尾不能出现下划线\'_\'';
+                  }
+                  if(/^\d+\d+\d$/.test(value)){
+                      return '班级名不能全为数字';
+                  }
+              }
+        });
+
+          //监听提交
+          form.on('submit(add)', function(data){
+            var form = new FormData($('#classform')[0]);
+            //发异步，把数据提交给后台
+              $.ajax({
+                  type: 'POST',
+                  url:'/kinder/classInster',
+                  data: form,
+                  async: false,
+                  cache: false,
+                  contentType: false,
+                  processData: false,
+                  success: function (data) {
+                      if(data==403){
+                          layer.alert("登陆超时请重新登录", {icon: 5},function () {
+                              // 获得frame索引
+                              var index = parent.layer.getFrameIndex(window.name);
+                              //关闭当前frame
+                              parent.layer.close(index);
+                              window.location.replace('/kinder/tologin');
+                          });
+                          return false;
+                      }if(data==200){
+                          layer.alert("增加成功", {icon: 6},function () {
+                              // 获得frame索引
+                              var index = parent.layer.getFrameIndex(window.name);
+                              //关闭当前frame
+                              parent.layer.close(index);
+                  //            location.replace('/kinder/classList?currentPage=1');
+                          });
+//                          window.location.replace('/kinder/classList?currentPage=1');
+                          return false;
+                      }if(data==1){
+                          layer.alert('该班主任已有负责班级', {icon: 5});
+                          return false;
+                      }if(data==2){
+                          layer.alert('班级名重复', {icon: 5});
+                          return false;
+                      }
+                  },
+                  error: function () {
+                      //请求异常的回调
+                      alert("数据添加失败！");
+                  }
+              });
+            return false;
+          });
+        });
+    </script>
+   
+  </body>
+
+</html>

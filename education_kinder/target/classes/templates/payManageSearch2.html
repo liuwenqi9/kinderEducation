@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>缴费管理 - 缴费清单查询</title>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="stylesheet" th:href="@{~/static/lib/layui/css/layui.css}"/>
+    <link rel="stylesheet" th:href="@{~/static/css/pay_manage.css}"/>
+    <link rel="stylesheet" th:href="@{~/static/css/global.css}"/>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script th:src="@{~/static/lib/layui/layui.js}" charset="utf-8"></script>
+    <script type="text/javascript" th:src="@{~/static/js/xadmin.js}"></script>
+</head>
+<body>
+<p class="pay_title">缴费清单查询</p>
+<div class="search" style="text-align: center">
+    <form action="/kinder/choosePayment" method="post">
+        <input type="text" placeholder="请输入姓名" name="pname"/>
+        <input type="text" placeholder="请输入编号" name="sId"/>
+        <button type="submit" style="height:30px;width:60px;">查询</button>
+    </form>
+</div>
+<div class="stu_free_table">
+    <table class="stra">
+        <tr class="stu">
+            <th class="b stu_no">学号</th>
+            <th class="b">学生姓名</th>
+            <th class="b">性别</th>
+            <th class="b">所在学校</th>
+            <th class="b">所在年级</th>
+            <th class="b">所在班级</th>
+            <th class="b">应交学费(月)</th>
+            <th class="b">基本学费(月)</th>
+        </tr>
+    </table>
+</div>
+<script th:inline="javascript">
+    var paymentList=[[${paymentListList}]];
+    var i=0;
+    var z=0;
+    $.each(paymentList, function(index, item){
+        var content=item.content;
+        content=content.split(',');
+        var ent="";
+        i=0;
+        for(var p in content){
+            ent+='<th>'+content[p]+'</th>';
+            i++;
+        }
+        /* <![CDATA[ */
+        if(z<=i){
+            z=i;
+        }
+        /* ]]> */
+        $('.stra').append("<tr><th>"+item.sId+"</th><th>"+item.pname+"</th> <th>"+item.sex+"</th> <th>"+item.kinderName+"</th><th>"+item.gradeName+"</th><th>"+item.className+"</th><th>"+item.tuition+"</th>'"+ent+"'</tr>");
+    });
+    var j=0;
+    var con="";
+    /* <![CDATA[ */
+    while(j<z-1){
+        con+='<th class="b">其他收费</th>';
+        j++;
+    }
+    /* ]]> */
+    $('.stu').append(con);
+</script>
+</body>
+</html>

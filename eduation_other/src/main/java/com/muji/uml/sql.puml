@@ -1,0 +1,69 @@
+@startuml
+
+Student --> (学生id自增):学生id自增
+Student --> (sname)
+Student --> (image:"头像")
+Student --> (sex:"性别")
+Student --> (birthday:"生日")
+Student --> (native_place:"籍贯")
+Student --> (stu_id:"学籍id")
+Student --> (kid:"幼儿园id"):所在幼儿园
+Student --> (clas_id:"所在班级"):学生与班级关联c_id
+Student --> ("edu_id":"所在教育局")
+Student --> (ic_card:"身份编码")
+Student --> (area_id:所属县区)
+Student --> (ubran:所属市区)
+Student --> (tuition:学费情况)
+
+
+Parent--> (家长id"自增")
+Parent--> (密码)
+Parent--> (身份id)
+Parent--> (姓名)
+Parent--> (地址)
+Parent--> (性别)
+Parent--> (手机号)
+Parent--> (邮箱)
+Parent--> (头像)
+
+
+
+
+Stu_Parent-->("关联的id")
+Stu_Parent--->(学生id自增):关联sid
+Stu_Parent--->(家长id"自增"):关联pid
+Stu_Parent-->(relation:所属关系)
+Stu_Parent-->(relationname:关系名称)
+
+Clas--->(clas_id:"所在班级"):学生与班级关联c_id
+Clas-->(cname:"班级名称")
+Clas-->(grade:"年纪")
+Clas-->(c_type:"班级类型"):关联class_type的id班级类型（小中大）
+Clas-->(p_id:"班主任id")
+Clas-->(kid:"幼儿园id")
+
+Clas_Type--->(c_type:"班级类型"):关联ct_id
+Clas_Type--->(name:"班级名称")
+
+Kindergraten--->(kid:"幼儿园id"):所属幼儿园id
+Kindergraten-->(kt_id:"幼儿园所属类型")
+Kindergraten-->(address:"地址")
+Kindergraten-->(kname:"幼儿园名称")
+Kindergraten-->(edu_id:"教育局id")
+Kindergraten-->(create_date:"创建时间")
+Kindergraten-->(phone:"联系方式")
+Kindergraten-->(legal_id:"法人id")
+Kindergraten-->(annual:"年度总收入")
+Kindergraten-->(rank:"等级")
+Kindergraten-->(urban_id:"市区id"):所属市区
+Kindergraten-->(area_id:"县区id"):所属县区
+
+Kinder_Type-->(kt_id:"幼儿园所属类型"):定义类别（公办，民办）
+Kinder_Type-->(kname:"名称")
+
+
+
+
+
+
+@enduml

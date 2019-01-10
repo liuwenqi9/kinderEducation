@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Title</title>
+</head>
+<body>
+
+<div class="col-sm-2 m-b-xs">
+    <select name="cid" id="cid" class="form-control" >
+
+        <!--/*@thymesVar id="areaList" type=""*/-->
+        <!--/*@thymesVar id="aId" type=""*/-->
+        <option th:each="ic : ${areaList}" th:value="${ic.aId}" th:text="${ic.name}" th:selected="${ic.aId}">分类</option>
+    </select>
+</div>
+
+
+</body>
+</html>

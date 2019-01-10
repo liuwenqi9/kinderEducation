@@ -1,0 +1,683 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muji.zh.admin.mapper.StudentMapper">
+  <resultMap id="BaseResultMap" type="com.muji.zh.admin.model.Student">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="sname" jdbcType="VARCHAR" property="sname" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="birthday" jdbcType="VARCHAR" property="birthday" />
+    <result column="native_place" jdbcType="INTEGER" property="nativePlace" />
+    <result column="stu_id" jdbcType="INTEGER" property="stuId" />
+    <result column="kid" jdbcType="INTEGER" property="kid" />
+    <result column="clas_id" jdbcType="INTEGER" property="clasId" />
+    <result column="edu_id" jdbcType="INTEGER" property="eduId" />
+    <result column="create_date" jdbcType="DATE" property="createDate" />
+    <result column="ic_id" jdbcType="INTEGER" property="icId" />
+    <result column="area_id" jdbcType="INTEGER" property="areaId" />
+    <result column="ubran_id" jdbcType="INTEGER" property="ubranId" />
+    <result column="tuition" jdbcType="INTEGER" property="tuition" />
+    <result column="flag1" jdbcType="VARCHAR" property="flag1" />
+    <result column="falg2" jdbcType="VARCHAR" property="falg2" />
+    <result column="flag3" jdbcType="VARCHAR" property="flag3" />
+    <result column="flag4" jdbcType="VARCHAR" property="flag4" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+
+
+  <sql id="Base_Column_List">
+    id, sname, image, sex, birthday, native_place, stu_id, kid, clas_id, edu_id, create_date, 
+    ic_id, area_id, ubran_id, tuition, flag1, falg2, flag3, flag4
+  </sql>
+  <select id="selectByExample" parameterType="com.muji.zh.admin.model.StudentExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from student
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from student
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from student
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.muji.zh.admin.model.StudentExample">
+    delete from student
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.muji.zh.admin.model.Student">
+    insert into student (id, sname, image, 
+      sex, birthday, native_place, 
+      stu_id, kid, clas_id, 
+      edu_id, create_date, ic_id, 
+      area_id, ubran_id, tuition, 
+      flag1, falg2, flag3, 
+      flag4)
+    values (#{id,jdbcType=INTEGER}, #{sname,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{birthday,jdbcType=VARCHAR}, #{nativePlace,jdbcType=INTEGER}, 
+      #{stuId,jdbcType=INTEGER}, #{kid,jdbcType=INTEGER}, #{clasId,jdbcType=INTEGER}, 
+      #{eduId,jdbcType=INTEGER}, #{createDate,jdbcType=DATE}, #{icId,jdbcType=INTEGER}, 
+      #{areaId,jdbcType=INTEGER}, #{ubranId,jdbcType=INTEGER}, #{tuition,jdbcType=INTEGER}, 
+      #{flag1,jdbcType=VARCHAR}, #{falg2,jdbcType=VARCHAR}, #{flag3,jdbcType=VARCHAR}, 
+      #{flag4,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.muji.zh.admin.model.Student">
+    insert into student
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="sname != null">
+        sname,
+      </if>
+      <if test="image != null">
+        image,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="nativePlace != null">
+        native_place,
+      </if>
+      <if test="stuId != null">
+        stu_id,
+      </if>
+      <if test="kid != null">
+        kid,
+      </if>
+      <if test="clasId != null">
+        clas_id,
+      </if>
+      <if test="eduId != null">
+        edu_id,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="icId != null">
+        ic_id,
+      </if>
+      <if test="areaId != null">
+        area_id,
+      </if>
+      <if test="ubranId != null">
+        ubran_id,
+      </if>
+      <if test="tuition != null">
+        tuition,
+      </if>
+      <if test="flag1 != null">
+        flag1,
+      </if>
+      <if test="falg2 != null">
+        falg2,
+      </if>
+      <if test="flag3 != null">
+        flag3,
+      </if>
+      <if test="flag4 != null">
+        flag4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="sname != null">
+        #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="nativePlace != null">
+        #{nativePlace,jdbcType=INTEGER},
+      </if>
+      <if test="stuId != null">
+        #{stuId,jdbcType=INTEGER},
+      </if>
+      <if test="kid != null">
+        #{kid,jdbcType=INTEGER},
+      </if>
+      <if test="clasId != null">
+        #{clasId,jdbcType=INTEGER},
+      </if>
+      <if test="eduId != null">
+        #{eduId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=DATE},
+      </if>
+      <if test="icId != null">
+        #{icId,jdbcType=INTEGER},
+      </if>
+      <if test="areaId != null">
+        #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="ubranId != null">
+        #{ubranId,jdbcType=INTEGER},
+      </if>
+      <if test="tuition != null">
+        #{tuition,jdbcType=INTEGER},
+      </if>
+      <if test="flag1 != null">
+        #{flag1,jdbcType=VARCHAR},
+      </if>
+      <if test="falg2 != null">
+        #{falg2,jdbcType=VARCHAR},
+      </if>
+      <if test="flag3 != null">
+        #{flag3,jdbcType=VARCHAR},
+      </if>
+      <if test="flag4 != null">
+        #{flag4,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.muji.zh.admin.model.StudentExample" resultType="java.lang.Long">
+    select count(*) from student
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update student
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.sname != null">
+        sname = #{record.sname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image != null">
+        image = #{record.image,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birthday != null">
+        birthday = #{record.birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nativePlace != null">
+        native_place = #{record.nativePlace,jdbcType=INTEGER},
+      </if>
+      <if test="record.stuId != null">
+        stu_id = #{record.stuId,jdbcType=INTEGER},
+      </if>
+      <if test="record.kid != null">
+        kid = #{record.kid,jdbcType=INTEGER},
+      </if>
+      <if test="record.clasId != null">
+        clas_id = #{record.clasId,jdbcType=INTEGER},
+      </if>
+      <if test="record.eduId != null">
+        edu_id = #{record.eduId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=DATE},
+      </if>
+      <if test="record.icId != null">
+        ic_id = #{record.icId,jdbcType=INTEGER},
+      </if>
+      <if test="record.areaId != null">
+        area_id = #{record.areaId,jdbcType=INTEGER},
+      </if>
+      <if test="record.ubranId != null">
+        ubran_id = #{record.ubranId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tuition != null">
+        tuition = #{record.tuition,jdbcType=INTEGER},
+      </if>
+      <if test="record.flag1 != null">
+        flag1 = #{record.flag1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.falg2 != null">
+        falg2 = #{record.falg2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag3 != null">
+        flag3 = #{record.flag3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag4 != null">
+        flag4 = #{record.flag4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update student
+    set id = #{record.id,jdbcType=INTEGER},
+      sname = #{record.sname,jdbcType=VARCHAR},
+      image = #{record.image,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      birthday = #{record.birthday,jdbcType=VARCHAR},
+      native_place = #{record.nativePlace,jdbcType=INTEGER},
+      stu_id = #{record.stuId,jdbcType=INTEGER},
+      kid = #{record.kid,jdbcType=INTEGER},
+      clas_id = #{record.clasId,jdbcType=INTEGER},
+      edu_id = #{record.eduId,jdbcType=INTEGER},
+      create_date = #{record.createDate,jdbcType=DATE},
+      ic_id = #{record.icId,jdbcType=INTEGER},
+      area_id = #{record.areaId,jdbcType=INTEGER},
+      ubran_id = #{record.ubranId,jdbcType=INTEGER},
+      tuition = #{record.tuition,jdbcType=INTEGER},
+      flag1 = #{record.flag1,jdbcType=VARCHAR},
+      falg2 = #{record.falg2,jdbcType=VARCHAR},
+      flag3 = #{record.flag3,jdbcType=VARCHAR},
+      flag4 = #{record.flag4,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.muji.zh.admin.model.Student">
+    update student
+    <set>
+      <if test="sname != null">
+        sname = #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="nativePlace != null">
+        native_place = #{nativePlace,jdbcType=INTEGER},
+      </if>
+      <if test="stuId != null">
+        stu_id = #{stuId,jdbcType=INTEGER},
+      </if>
+      <if test="kid != null">
+        kid = #{kid,jdbcType=INTEGER},
+      </if>
+      <if test="clasId != null">
+        clas_id = #{clasId,jdbcType=INTEGER},
+      </if>
+      <if test="eduId != null">
+        edu_id = #{eduId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=DATE},
+      </if>
+      <if test="icId != null">
+        ic_id = #{icId,jdbcType=INTEGER},
+      </if>
+      <if test="areaId != null">
+        area_id = #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="ubranId != null">
+        ubran_id = #{ubranId,jdbcType=INTEGER},
+      </if>
+      <if test="tuition != null">
+        tuition = #{tuition,jdbcType=INTEGER},
+      </if>
+      <if test="flag1 != null">
+        flag1 = #{flag1,jdbcType=VARCHAR},
+      </if>
+      <if test="falg2 != null">
+        falg2 = #{falg2,jdbcType=VARCHAR},
+      </if>
+      <if test="flag3 != null">
+        flag3 = #{flag3,jdbcType=VARCHAR},
+      </if>
+      <if test="flag4 != null">
+        flag4 = #{flag4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.muji.zh.admin.model.Student">
+    update student
+    set sname = #{sname,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=VARCHAR},
+      native_place = #{nativePlace,jdbcType=INTEGER},
+      stu_id = #{stuId,jdbcType=INTEGER},
+      kid = #{kid,jdbcType=INTEGER},
+      clas_id = #{clasId,jdbcType=INTEGER},
+      edu_id = #{eduId,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=DATE},
+      ic_id = #{icId,jdbcType=INTEGER},
+      area_id = #{areaId,jdbcType=INTEGER},
+      ubran_id = #{ubranId,jdbcType=INTEGER},
+      tuition = #{tuition,jdbcType=INTEGER},
+      flag1 = #{flag1,jdbcType=VARCHAR},
+      falg2 = #{falg2,jdbcType=VARCHAR},
+      flag3 = #{flag3,jdbcType=VARCHAR},
+      flag4 = #{flag4,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <select id="findClasType" resultMap="BaseResultMap">
+
+    SELECT
+
+	count(clas_id)
+FROM
+	student
+WHERE
+	clas_id IN (
+		SELECT
+			c_id
+		FROM
+			clas
+		WHERE
+			c_type = #{c_type}
+		AND c_id IN (
+			SELECT
+				clas_id
+			FROM
+				student
+			WHERE
+				kid = #{kid}
+		)
+	)
+  </select>
+
+<select id="findClasTypeCount" resultMap="BaseResultMap">
+
+  SELECT
+	count(c_id)
+FROM
+	clas
+WHERE
+	kid = #{kid}
+and c_type=#{c_type}
+
+
+</select>
+
+
+
+  <select id="findByLikeName" resultMap="BaseResultMap">
+
+    <choose>
+      <when test="pattern">
+        <bind name="pattern" value="'%' + pattern + '%'"/>
+      </when>
+
+    </choose>
+    <choose>
+      <when test="id">
+        <bind name="id" value="'%' + id + '%'"/>
+      </when>
+
+    </choose>
+
+
+    <choose>
+      <when test="studentname">
+        <bind name="studentname" value="'%' + studentname + '%'"/>
+      </when>
+      <!--<otherwise>-->
+        <!--<bind name="studentname" value="'%%'"/>-->
+      <!--</otherwise>-->
+    </choose>
+    <choose>
+
+      <when test="phone">
+        <bind name="phone" value="'%' + phone + '%'"/>
+      </when>
+      <!--<otherwise>-->
+        <!--<bind name="phone" value="'%%'"/>-->
+      <!--</otherwise>-->
+    </choose>
+
+    SELECT
+    *
+    FROM
+    student
+    <where>
+
+      <if test="pattern!=null ">
+        kid in (SELECT
+        k_id
+        FROM
+        kindergarten
+        WHERE
+        kname like #{pattern})
+      </if>
+
+      <if test="id!=null">
+        and id like #{id}
+      </if>
+      <if test="studentname!=null">
+        and sname like #{studentname}
+      </if>
+
+
+
+      <if test="sign==0">
+        and area_id = #{ubran_id}
+      </if>
+
+      <if test="sign==1">
+        and ubran_id =  #{ubran_id}
+      </if>
+    </where>
+
+
+  </select>
+
+
+
+
+
+  <select id="findByPid" resultMap="BaseResultMap">
+SELECT
+	*
+FROM
+	student
+WHERE
+	id IN (
+		SELECT
+			sid
+		FROM
+			stu_parent
+		WHERE
+			pid = #{pid})
+
+  </select>
+
+  <select id="findByCtypeCount" resultType="Integer">
+
+    SELECT
+	count(*)
+FROM
+	student
+WHERE
+	clas_id IN (
+		SELECT
+			c_id
+		FROM
+		clas
+		WHERE
+			c_type =#{c_type}
+and flag2=#{flag2}
+	)
+
+    <if test="sex!=null">
+      and sex=#{sex}
+    </if>
+
+
+  </select>
+
+
+  <select id="findByCtypeCount1" resultType="Integer">
+
+    SELECT
+    count(*)
+    FROM
+    student
+    WHERE
+    clas_id IN (
+    SELECT
+    c_id
+    FROM
+    clas
+    WHERE
+    c_type =#{c_type}
+    and flag1=#{flag1}
+    )
+
+    <if test="sex!=null">
+      and sex=#{sex}
+    </if>
+
+
+  </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <select id="findStudentVo" parameterType="java.lang.Integer" resultType="com.muji.zh.admin.model.StudentVo">
+    select s.stu_id,s.sname,s.sex,c.cname,p.address,p.pname,sp.relationname,p.phone,s.flag1,s.falg2,s.flag3 from student s,parent p,stu_parent sp,clas c where s.id=sp.sid and p.id=sp.pid and s.clas_id=c.c_id and s.kid=#{kId} order by s.stu_id
+  </select>
+  <select id="selectCount" parameterType="java.lang.Integer" resultType="java.lang.Long">
+    select count(*) from student s,parent p,stu_parent sp,clas c where s.id=sp.sid and p.id=sp.pid and s.clas_id=c.c_id and s.kid=#{kId}
+  </select>
+  <select id="selectBysNameAndstuId" resultType="com.muji.zh.admin.model.StudentVo">
+    select s.stu_id,s.sname,s.sex,c.cname,p.address,p.pname,sp.relationname,p.phone,s.flag1,s.falg2,s.flag3
+    from student s,parent p,stu_parent sp,clas c
+    <where>
+      <if test="sname != null and sname != ''">
+        and s.sname like CONCAT(CONCAT('%',#{sname}),'%')
+      </if>
+      <if test="stuId != null and stuId != ''">
+        and s.stu_id like CONCAT(CONCAT('%',#{stuId}),'%')
+      </if>
+      and s.kid = #{kId} and s.id=sp.sid and p.id=sp.pid and s.clas_id=c.c_id order by s.stu_id
+    </where>
+  </select>
+  <select id="checkCount"  resultType="java.lang.Long">
+    SELECT count(*) from student s,parent p,stu_parent sp,clas c
+    <where>
+      <if test="sname != null and sname != ''">
+        and s.sname like CONCAT(CONCAT('%',#{sname}),'%')
+      </if>
+      <if test="stuId != null and stuId != ''">
+        and s.stu_id like CONCAT(CONCAT('%',#{stuId}),'%')
+      </if>
+      and s.kid = #{kId} and s.id=sp.sid and p.id=sp.pid and s.clas_id=c.c_id
+    </where>
+  </select>
+
+</mapper>

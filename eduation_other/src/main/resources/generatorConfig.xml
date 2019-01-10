@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+		PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+		"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+
+	<!-- 生成简单的方式 targetRuntime = "MyBatis3Simple" -->
+	<context id="testTables" targetRuntime="Mybatis3">
+		<!-- 配置pojo的序列化 -->
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+		<commentGenerator>
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		<!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver" userId="root" password="root"
+						connectionURL="jdbc:mysql://192.168.1.140:3306/zh_education?useSSL=false">
+			<!-- 修改数据库连接信息 -->
+		</jdbcConnection>
+
+
+		<!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和
+			NUMERIC 类型解析为java.math.BigDecimal -->
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!-- targetProject:生成Model类的位置 -->
+		<javaModelGenerator targetPackage="com.muji.zh.admin.model"
+							targetProject=".\src\test\java">
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+			<property name="enableSubPackages" value="false" />
+			<!-- 从数据库返回的值被清理前后的空格 -->
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		<!-- targetProject:mapper映射文件生成的位置 -->
+		<sqlMapGenerator targetPackage="com.muji.zh.admin.xml"
+						 targetProject=".\src\test\java">
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+			<property name="enableSubPackages" value="false" />
+		</sqlMapGenerator>
+		<!-- targetPackage：mapper接口生成的位置 -->
+		<javaClientGenerator type="XMLMAPPER"
+							 targetPackage="com.muji.zh.admin.mapper"
+							 targetProject=".\src\test\java">
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+			<property name="enableSubPackages" value="false" />
+		</javaClientGenerator>
+
+		<table tableName="kinder_file"></table>
+		<!--<table tableName="notice_type"></table>-->
+		<!--<table tableName="area"></table>
+		<table tableName="clas"></table>
+		<table tableName="class_type"></table>
+		<table tableName="com_type"></table>
+		<table tableName="complaint"></table>
+		<table tableName="course"></table>
+		<table tableName="course_type"></table>
+		<table tableName="edu_user"></table>
+		<table tableName="education"></table>
+		<table tableName="kind_warn"></table>
+		<table tableName="kinder_legal"></table>
+		<table tableName="kindergarten"></table>
+		<table tableName="kindergarten_copy"></table>
+		<table tableName="kindergarten_type"></table>
+		<table tableName="notice"></table>
+		<table tableName="par_experience"></table>
+		<table tableName="par_slar_list"></table>
+		<table tableName="parent"></table>
+		<table tableName="part_login"></table>
+		<table tableName="part_sign"></table>
+		<table tableName="part_warn"></table>
+		<table tableName="part_win_record"></table>
+		<table tableName="payment_list"></table>
+		<table tableName="practitioner"></table>
+		<table tableName="practitioner_copy"></table>
+		<table tableName="reply"></table>
+		<table tableName="salary_list"></table>
+		<table tableName="station"></table>
+		<table tableName="stu_experience"></table>
+		<table tableName="stu_parent"></table>
+		<table tableName="stu_pay_list"></table>
+		<table tableName="stu_win_record"></table>
+		<table tableName="student"></table>
+		<table tableName="student_copy"></table>
+		<table tableName="urban"></table>
+		<table tableName="warning"></table>-->
+		<!--<table tableName=""></table>
+		<table tableName=""></table>
+		<table tableName=""></table>
+		<table tableName=""></table>
+		<table tableName=""></table>
+		<table tableName=""></table>
+		<table tableName=""></table>
+		<table tableName=""></table>
+		<table tableName=""></table>
+		<table tableName=""></table>
+		<table tableName=""></table>
+		<table tableName=""></table>-->
+	</context>
+</generatorConfiguration>

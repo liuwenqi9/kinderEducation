@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="UTF-8"/>
+		<meta name="Author" content="SuperDrew"/>
+        <meta name="Description" content="Form Validation"/>
+		<title>登录页面</title>
+		<link rel="stylesheet" type="text/css" href="/static/css/login.css" />
+		
+		<script src="/static/js/jquery.min.js"></script>
+
+	</head>
+	<body>
+   <!-- <div class="all">-->
+	
+		 <div class="header">
+		   	<div class="topimg">
+		   		<span class="h-title">
+		   			郑州市教育局幼儿园管理平台
+		   		</span>
+		   		
+		   	</div>
+	   </div>
+		
+		<div class="center">
+			 <form method="post" action="/login" id="allow">
+                 <div id="form">
+                     <div class="int">
+                         <label for="uname" >账 号</label>
+                         <input type="text" id="uname" name="epId" class="input" />
+                     </div>
+                     <div class="int">
+                         <label for="pwd">密 码</label>
+                         <input type="password" id="pwd"  name="password" class="input" />
+                     </div>
+                     <!--填写要求验证如下：-->
+                     <div id="msg"></div>
+                     <div id="msg2"></div>
+                     <br>
+                     <div class="button">
+                         <button class="button_b" value="提交" onclick="submitForm()">
+                         	<img src="/static/img/login_btn.png" width="100%"/>
+                         </button>
+                     </div>
+                     <span class="url"><a href="#">忘记密码？</a></span>
+
+                     <span><font color="red" id="error" th:text="${errorInfo }"></font></span>
+                 </div>
+             </form>
+		</div>
+    <!--</div>-->
+    
+    
+     <!--<script>-->
+         <!--//<![CDATA[-->
+             <!--function verifyTel1() {-->
+                 <!--var regexp1 = /^[a-z0-9]{3,9}$/;-->
+                 <!--var uname = document.getElementById("uname").value;-->
+                 <!--if(!regexp1.test(uname)) {-->
+                     <!--document.getElementById("msg").style.display = "inline-block";-->
+                     <!--document.getElementById("msg").innerHTML = "用户名是3-9位不得使用_+!@#$等特殊符号";-->
+                     <!--document.getElementById("uname").focus(); //让输入框获得焦点-->
+                     <!--document.getElementById("uname").select(); //选中输入框的内容-->
+                     <!--return false;-->
+                 <!--} else {-->
+                     <!--document.getElementById("msg").style.display = "none";-->
+                     <!--return true;-->
+                 <!--}-->
+             <!--}-->
+ <!---->
+             <!--function verifyTel2() {-->
+                 <!--var regexp2 = /^[a-z0-9]{6,13}$/;-->
+                 <!--var pwd = document.getElementById("pwd").value;-->
+                 <!--if(!regexp2.test(pwd)) {-->
+                     <!--document.getElementById("msg2").style.display = "inline-block";-->
+                     <!--document.getElementById("msg2").innerHTML = "请输入正确的密码！";-->
+                     <!--document.getElementById("pwd").focus(); //让输入框获得焦点-->
+                     <!--document.getElementById("pwd").select(); //选中输入框的内容-->
+                     <!--return false;-->
+                 <!--} else {-->
+                     <!--document.getElementById("msg2").style.display = "none";-->
+                     <!--return true;-->
+                 <!--}-->
+             <!--}-->
+ <!---->
+             <!--//提交表单-->
+             <!--function submitForm() {-->
+                 <!--if(verifyTel1() && verifyTel2()) {-->
+                     <!--document.getElementById("allow").submit();-->
+                 <!--}-->
+             <!--}-->
+             <!---->
+             <!--function teat(){-->
+                 <!--alert(123);-->
+             <!--}-->
+         <!--//]]>-->
+         <!--</script>-->
+	</body>
+</html>

@@ -1,0 +1,38 @@
+server:
+  port: 9995
+
+
+
+spring:
+  thymeleaf:
+    suffix: .html
+    content-type: text/html
+    cache: false
+    encoding: UTF-8
+    prefix: classpath:/templates/
+
+
+redis:
+  database: 0
+  host: 127.0.0.1
+  port: 6379
+  password:
+  pool:
+    max-active: 8
+    max-wait: 1
+    max-idel: 8
+    min-idel: 0
+  timeout: 3000
+
+fdfs:
+  soTimeout: 1501
+  connectTimeout: 601
+  thumbImage:
+    width: 150
+    height: 150
+  trackerList:
+  - 119.29.230.78:22122
+# - 192.168.1.215:22122
+spring.jmx.enabled: false
+
+file.path.head: http://119.29.230.78:9999/

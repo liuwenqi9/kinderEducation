@@ -1,0 +1,47 @@
+body{
+	font-size: 16px;
+}
+
+#ban8-h-title{
+	margin-left: -10%;
+}
+
+.ban8-content{
+	width: 92%;
+	margin-left: 4%;
+	height: 92%;
+	margin-top: 3%;
+	/*background-color: red;*/
+}
+.ban8-content ul{
+	height: 92%;
+	line-height: 100%;
+    /*background-color: snow;*/
+    padding-top: 5%;
+}
+.ban8-content ul li{
+	text-align:left;
+	height: 2.9%;
+	padding-top: 1.2%;
+	letter-spacing: 0.04rem;  
+	font-size: 0.9rem; 
+}
+.r80{
+	margin-left: 60%;
+}
+.r81{
+	margin-left: 60%;
+	margin-top: -5%;
+}
+.r82{
+	margin-left: 40%;
+	margin-top: -5%;
+}
+.r83{
+	margin-left: 13%;
+}
+.r84 img{
+	width: 20%;
+	margin-left: 70%;
+	margin-top: -14%;
+}

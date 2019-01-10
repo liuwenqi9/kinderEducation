@@ -1,0 +1,147 @@
+
+#ban10-center{
+	height: 98%;
+	background-image: url(../img2/ban9.png);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	position: relative;
+}
+
+.center-top{
+	height: 15%;
+}
+.JM10{
+	width:11%;
+	float:left;
+	margin-left: 2%;
+	margin-top: -2%;
+}
+.JM11{
+	width:11%;
+	float:right;
+	margin-right: 4%;
+	margin-top: -2%;
+}
+.search{
+	width:4%;
+	position: absolute;
+	right: 7.5%;
+	top:1.8%;
+}
+.publish{
+    width:4%;
+	position: absolute;
+	left: 6%;
+	top:1.8%;
+}
+.time{
+     margin-top: 1%;
+     margin-left: 4%;
+}
+
+.input_area{
+	margin-top: 5%;
+	margin-left: 8%;
+	height: 40%;
+	width:80%;
+}
+.input1{
+	width: 30%;
+	height: 60%;
+	float: left;
+	margin-top: 2%;
+	margin-left: 3.2%;
+}
+.input1_1{
+	background: none;
+	border: solid 0.08rem #dbfcdd;
+	width: 100%;
+	height: 100%;
+	border-radius: 2rem;
+	font-size: 0.7rem;
+	outline: none;
+	text-align: center;
+}
+::-moz-placeholder { color: #FFFFFF; opacity: 0.8; }
+::-webkit-input-placeholder { color:#FFFFFF;opacity: 0.8; }
+:-ms-input-placeholder { color:#FFFFFF; opacity: 0.8;}
+
+
+.search1{
+	float: right;
+	/*margin-left: 80%;*/
+	/*margin-top: -18%;*/
+	margin-right: 7%;
+	margin-top: 2%;
+}
+.search1 img{
+	width: 80%;
+}
+.search1_but{
+	background: none;
+	border: none;
+	outline: none;
+}
+.center_bottom{
+	height: 80%;
+	width: 80%;
+	margin-left: 10%;
+	/*background-color: red;*/
+}
+.center_table{
+	width: 100%;
+	font-size: 1rem;
+	border-collapse: collapse;
+}
+.center_table td{
+	height: 2rem;
+	width: 33.3%;
+}
+.center_table td a{
+	color: white;
+}
+.center_table th{
+	background-color: #2e8f62;
+	height: 2rem;
+}
+.paging{
+	width: 30%;
+	height: 5%;
+	/*background-color: red;*/
+    margin-left: 35%;
+    margin-top: -5%;
+}
+
+ul.pagination {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+ul.pagination li {display: inline;}
+
+ul.pagination li a {
+    color: white;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: none;
+    font-size: 18px;
+    outline: none;
+}
+
+ul.pagination li a.active {
+    /*background-color: #eee;*/
+    color: black;
+    border: none;
+}
+
+ul.pagination li a:hover:not(.active) {/*background-color: #ddd;*/
+
+}
+
+/*.JM1{float: left;}*/
+
+
+

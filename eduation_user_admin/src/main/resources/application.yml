@@ -1,0 +1,49 @@
+server:
+  port: 9997
+
+
+
+spring:
+  thymeleaf:
+    suffix: .html
+    content-type: text/html
+    cache: false
+    encoding: UTF-8
+    prefix: classpath:/templates/
+    mode: LEGACYHTML5
+  jackson:
+    date-format: yyyy-MM-dd #如果使用字符串表示，用这行设置格式
+    timezone: GMT+8
+    serialization:
+    write-dates-as-timestamps: false #使用时间戳，使用数值timestamp表示日期
+
+
+  mvc:
+    static-path-pattern: /static/**
+
+
+redis:
+  database: 0
+  host: 127.0.0.1
+  port: 6379
+  password:
+  pool:
+    max-active: 8
+    max-wait: 1
+    max-idel: 8
+    min-idel: 0
+  timeout: 3000
+
+fdfs:
+  soTimeout: 1501
+  connectTimeout: 601
+  thumbImage:
+    width: 150
+    height: 150
+  trackerList:
+  - 119.29.230.78:22122
+#    - 192.168.1.215:22122
+spring.jmx.enabled: false
+
+file.path.head: http://119.29.230.78:9999/
+

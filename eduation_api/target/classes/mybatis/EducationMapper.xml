@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muji.zh.admin.mapper.EducationMapper">
+  <resultMap id="BaseResultMap" type="com.muji.zh.admin.model.Education">
+    <id column="e_id" jdbcType="INTEGER" property="eId" />
+    <result column="ename" jdbcType="VARCHAR" property="ename" />
+    <result column="ubran_id" jdbcType="INTEGER" property="ubranId" />
+    <result column="area_id" jdbcType="INTEGER" property="areaId" />
+    <result column="flag1" jdbcType="VARCHAR" property="flag1" />
+    <result column="flag2" jdbcType="VARCHAR" property="flag2" />
+    <result column="flag3" jdbcType="VARCHAR" property="flag3" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    e_id, ename, ubran_id, area_id, flag1, flag2, flag3
+  </sql>
+  <select id="selectByExample" parameterType="com.muji.zh.admin.model.EducationExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from education
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from education
+    where e_id = #{eId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from education
+    where e_id = #{eId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.muji.zh.admin.model.EducationExample">
+    delete from education
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.muji.zh.admin.model.Education">
+    insert into education (e_id, ename, ubran_id, 
+      area_id, flag1, flag2, 
+      flag3)
+    values (#{eId,jdbcType=INTEGER}, #{ename,jdbcType=VARCHAR}, #{ubranId,jdbcType=INTEGER}, 
+      #{areaId,jdbcType=INTEGER}, #{flag1,jdbcType=VARCHAR}, #{flag2,jdbcType=VARCHAR}, 
+      #{flag3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.muji.zh.admin.model.Education">
+    insert into education
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="eId != null">
+        e_id,
+      </if>
+      <if test="ename != null">
+        ename,
+      </if>
+      <if test="ubranId != null">
+        ubran_id,
+      </if>
+      <if test="areaId != null">
+        area_id,
+      </if>
+      <if test="flag1 != null">
+        flag1,
+      </if>
+      <if test="flag2 != null">
+        flag2,
+      </if>
+      <if test="flag3 != null">
+        flag3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="eId != null">
+        #{eId,jdbcType=INTEGER},
+      </if>
+      <if test="ename != null">
+        #{ename,jdbcType=VARCHAR},
+      </if>
+      <if test="ubranId != null">
+        #{ubranId,jdbcType=INTEGER},
+      </if>
+      <if test="areaId != null">
+        #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="flag1 != null">
+        #{flag1,jdbcType=VARCHAR},
+      </if>
+      <if test="flag2 != null">
+        #{flag2,jdbcType=VARCHAR},
+      </if>
+      <if test="flag3 != null">
+        #{flag3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.muji.zh.admin.model.EducationExample" resultType="java.lang.Long">
+    select count(*) from education
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="distinctName" parameterType="Integer" resultMap="BaseResultMap">
+    SELECT DISTINCT e_id, ename from education where area_id=#{id}
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update education
+    <set>
+      <if test="record.eId != null">
+        e_id = #{record.eId,jdbcType=INTEGER},
+      </if>
+      <if test="record.ename != null">
+        ename = #{record.ename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ubranId != null">
+        ubran_id = #{record.ubranId,jdbcType=INTEGER},
+      </if>
+      <if test="record.areaId != null">
+        area_id = #{record.areaId,jdbcType=INTEGER},
+      </if>
+      <if test="record.flag1 != null">
+        flag1 = #{record.flag1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag2 != null">
+        flag2 = #{record.flag2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag3 != null">
+        flag3 = #{record.flag3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update education
+    set e_id = #{record.eId,jdbcType=INTEGER},
+      ename = #{record.ename,jdbcType=VARCHAR},
+      ubran_id = #{record.ubranId,jdbcType=INTEGER},
+      area_id = #{record.areaId,jdbcType=INTEGER},
+      flag1 = #{record.flag1,jdbcType=VARCHAR},
+      flag2 = #{record.flag2,jdbcType=VARCHAR},
+      flag3 = #{record.flag3,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.muji.zh.admin.model.Education">
+    update education
+    <set>
+      <if test="ename != null">
+        ename = #{ename,jdbcType=VARCHAR},
+      </if>
+      <if test="ubranId != null">
+        ubran_id = #{ubranId,jdbcType=INTEGER},
+      </if>
+      <if test="areaId != null">
+        area_id = #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="flag1 != null">
+        flag1 = #{flag1,jdbcType=VARCHAR},
+      </if>
+      <if test="flag2 != null">
+        flag2 = #{flag2,jdbcType=VARCHAR},
+      </if>
+      <if test="flag3 != null">
+        flag3 = #{flag3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where e_id = #{eId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.muji.zh.admin.model.Education">
+    update education
+    set ename = #{ename,jdbcType=VARCHAR},
+      ubran_id = #{ubranId,jdbcType=INTEGER},
+      area_id = #{areaId,jdbcType=INTEGER},
+      flag1 = #{flag1,jdbcType=VARCHAR},
+      flag2 = #{flag2,jdbcType=VARCHAR},
+      flag3 = #{flag3,jdbcType=VARCHAR}
+    where e_id = #{eId,jdbcType=INTEGER}
+  </update>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select *
+    from education
+    <where>
+      and ename like CONCAT(CONCAT('%',#{ename}),'%')
+    </where>
+  </select>
+
+
+
+</mapper>

@@ -1,0 +1,6 @@
+com\muji\zh\admin\mapper\NoticeTypeMapper.class
+com\muji\zh\admin\model\NoticeTypeExample$Criteria.class
+com\muji\zh\admin\model\NoticeTypeExample.class
+com\muji\zh\admin\model\NoticeType.class
+com\muji\zh\admin\model\NoticeTypeExample$Criterion.class
+com\muji\zh\admin\model\NoticeTypeExample$GeneratedCriteria.class

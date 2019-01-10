@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>工资管理 - 工资清单导入</title>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="stylesheet" th:href="@{~/static/css/pay_manage.css}"/>
+    <link rel="stylesheet" th:href="@{~/static/css/global.css}"/>
+    <link rel="stylesheet" th:href="@{~/static/lib/layui/css/layui.css}"/>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script th:src="@{~/static/lib/layui/layui.js}" charset="utf-8"></script>
+    <script type="text/javascript" th:src="@{~/static/js/xadmin.js}"></script>
+    <link rel="stylesheet" th:href="@{~/static/sweetalert/sweetalert.css}"/>
+    <script type="text/javascript" th:src="@{~/static/sweetalert/sweetalert.min.js}"></script>
+    <script type="text/javascript" th:src="@{~/static/sweetalert/xlalert.js}"></script>
+</head>
+<body>
+<p class="pay_title">教职工导入</p>
+<div class="stu_free_table">
+
+    <table class="stra">
+        <tr class="stu">
+<!--            <th class="b stu_no">学号</th>
+            <th class="b">老师姓名</th>
+            <th class="b">年龄</th>
+            <th class="b">性别</th>
+            <th class="b">所在学校</th>
+            <th class="b">所在年级</th>
+            <th class="b">所在班级</th>
+            <th class="b">基本工资(月)</th>
+            <th class="b">午餐补助(月)</th>
+            <th class="b">通讯补助(月)</th>-->
+        </tr>
+    </table>
+</div>
+<div class="fenye" style="margin-top:20px;">
+    <div id="demo0"></div>
+</div>
+<label class="btn import" id="import" for="file">选择文件</label>
+<form id="fileUpload" method="post" action="#" enctype="multipart/form-data">
+    <input id="file" type="file" accept=".xls,.xlsx" name="file" style="position:absolute;clip:rect(0 0 0 0);" onchange="Javascript:validate_xls(this);"/>
+    <div id="show" style="margin-left: 505px;font-size:20px;margin-top:30px;"></div>
+    <input class="btn import"  onclick="fileImport()" type="button" value="工资清单 EXCEL 格式导入"  id="sumbit"/>
+</form>
+<script>
+    $('#file').change(function () {
+        var file = this.files[0];
+        $('#show').text(file.name);
+    })
+    //导入文件
+    function fileImport(){
+        var fileInput = $('#file').get(0).files[0];
+        if(!fileInput){
+            zlalert.alertError('请选择文件');
+            return false;
+        }else{
+            var type = "file";          //后台接收时需要的参数名称，自定义即可
+            var id = "file";            //即input的id，用来寻找值
+            var formData = new FormData();
+            formData.append(type, $("#"+id)[0].files[0]);
+            $.ajax({
+                type: 'POST',
+                url:'/kinder/fileUpload',
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                dataType: "json",
+                success: function (data) {
+                    console.log(JSON.stringify(data));
+                    //成功的回调
+                    if(data.status==200){
+                        var titles=data.titles;
+
+                        titles=titles.split(',');
+
+                        var con="";
+                        for(var p in titles){
+                            con+='<th class="b">'+titles[p]+'</th>';
+                        }
+                        $('.stu').html(con);
+                        var salaryListList=data.salaryListList;
+                        $.each(salaryListList, function(index, item){
+                            var content=item.content;
+                            content=content.split(',');
+                            var ent="";
+                            for(var p in content){
+                                ent+='<th>'+content[p]+'</th>';
+                            }
+                            $('.stra').append("<tr><th>"+item.pId+"</th><th>"+item.sname+"</th> <th>"+item.age+"</th> <th>"+item.sex+"</th> <th>"+item.kinderName+"</th><th>"+item.salary+"</th>'"+ent+"'</tr>");
+                        });
+                        $(".import").fadeOut(1000);
+                        $(".submit").fadeOut(1000);
+                        $('#show').fadeOut(1000);
+                    }
+                    if(data.status==403){
+                        zlalert.alertError("表内数据有误请检查后上传");
+                    }
+
+                },
+                error: function (returndata) {
+                    //请求异常的回调
+                    zlalert.alertError("表内数据有误请检查后上传");
+                }
+            });
+        }
+    }
+//    layui.use(['laypage', 'layer'], function() {
+//        var laypage = layui.laypage
+//            , layer = layui.layer;
+//
+//        //总页数低于页码总数
+//        laypage.render({
+//            elem: 'demo0'
+//            , count: 50 //数据总数
+//        });
+//    })
+</script>
+</body>
+
+</html>

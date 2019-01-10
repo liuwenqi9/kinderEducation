@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>通知查看</title>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link rel="stylesheet" th:href="@{~/static/css/font.css}"/>
+    <link rel="stylesheet" th:href="@{~/static/css/xadmin.css}"/>
+    <link rel="stylesheet" th:href="@{~/static/css/school_manage.css}"/>
+    <link rel="stylesheet" th:href="@{~/static/css/global.css}"/>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script th:src="@{~/static/lib/layui/layui.js}" charset="utf-8"></script>
+    <script type="text/javascript" th:src="@{~/static/js/xadmin.js}"></script>
+</head>
+<body>
+<!--<div class="search" style="text-align: center;margin-top:20px;">-->
+    <!--<form action="/kinder/choosePractitioner">-->
+        <!--&lt;!&ndash;<input type="text" placeholder="请输入幼儿园名" name="child_garden">&ndash;&gt;-->
+        <!--<input type="text" placeholder="请输入姓名" name="pname"/>-->
+        <!--<input type="text" placeholder="请输入手机号" name="phone"/>-->
+        <!--<button type="submit" style="height:30px;width:50px;">查询</button>-->
+    <!--</form>-->
+<!--</div>-->
+<div class="search_result" style="margin-left:50px;">
+    <table id="table">
+        <tr>
+            <th class="b">公告类型</th>
+            <th class="b">公告标题</th>
+            <th class="b">内容</th>
+            <th class="b">发送时间</th>
+            <th class="b">审核时间</th>
+        </tr>
+        <tr th:each="notice:${noticeList}">
+            <th class="message" th:text="${notice.type}"></th>
+            <th class="message" th:text="${notice.title}"></th>
+            <th class="message" th:text="${notice.content}"></th>
+            <th class="message" th:text="${#dates.format(notice.createDate, 'yyyy年MM月dd日')}"></th>
+            <th class="message" th:if="${notice?.approvalTime!=null}" th:text="${#dates.format(notice.approvalTime, 'yyyy年MM月dd日')}"></th>
+            <th class="message" th:if="${notice?.approvalTime==null}">该条信息无需审核</th>
+        </tr>
+    </table>
+</div>
+<!--<script>-->
+<!--var tds = $(".message");-->
+<!--alert(tds)-->
+<!--/* <![CDATA[ */-->
+<!--for (var i = 0; i < tds.length; i++){-->
+<!--alert(tds[i].text);-->
+<!--if(tds[i].text==''||tds[i].text==null||tds[i].text=="undefined"){-->
+<!--tds[i].text='未知';-->
+<!--}-->
+<!--}-->
+<!--/* ]]> */-->
+<!--</script>-->
+</body>
+</html>

@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muji.zh.admin.mapper.ReplyMapper">
+  <resultMap id="BaseResultMap" type="com.muji.zh.admin.model.Reply">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="rname" jdbcType="VARCHAR" property="rname" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="c_id" jdbcType="INTEGER" property="cId" />
+    <result column="who_id" jdbcType="INTEGER" property="whoId" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="file" jdbcType="VARCHAR" property="file" />
+    <result column="flag1" jdbcType="VARCHAR" property="flag1" />
+    <result column="falg2" jdbcType="VARCHAR" property="falg2" />
+    <result column="flag3" jdbcType="VARCHAR" property="flag3" />
+    <result column="flag4" jdbcType="VARCHAR" property="flag4" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, rname, title, c_id, who_id, content, create_date, file, flag1, falg2, flag3, 
+    flag4
+  </sql>
+  <select id="selectByExample" parameterType="com.muji.zh.admin.model.ReplyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from reply
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from reply
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from reply
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.muji.zh.admin.model.ReplyExample">
+    delete from reply
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.muji.zh.admin.model.Reply">
+    insert into reply (id, rname, title, 
+      c_id, who_id, content, 
+      create_date, file, flag1, 
+      falg2, flag3, flag4
+      )
+    values (#{id,jdbcType=INTEGER}, #{rname,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{cId,jdbcType=INTEGER}, #{whoId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{file,jdbcType=VARCHAR}, #{flag1,jdbcType=VARCHAR}, 
+      #{falg2,jdbcType=VARCHAR}, #{flag3,jdbcType=VARCHAR}, #{flag4,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.muji.zh.admin.model.Reply">
+    insert into reply
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="rname != null">
+        rname,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="cId != null">
+        c_id,
+      </if>
+      <if test="whoId != null">
+        who_id,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="file != null">
+        file,
+      </if>
+      <if test="flag1 != null">
+        flag1,
+      </if>
+      <if test="falg2 != null">
+        falg2,
+      </if>
+      <if test="flag3 != null">
+        flag3,
+      </if>
+      <if test="flag4 != null">
+        flag4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="rname != null">
+        #{rname,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="cId != null">
+        #{cId,jdbcType=INTEGER},
+      </if>
+      <if test="whoId != null">
+        #{whoId,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="file != null">
+        #{file,jdbcType=VARCHAR},
+      </if>
+      <if test="flag1 != null">
+        #{flag1,jdbcType=VARCHAR},
+      </if>
+      <if test="falg2 != null">
+        #{falg2,jdbcType=VARCHAR},
+      </if>
+      <if test="flag3 != null">
+        #{flag3,jdbcType=VARCHAR},
+      </if>
+      <if test="flag4 != null">
+        #{flag4,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.muji.zh.admin.model.ReplyExample" resultType="java.lang.Long">
+    select count(*) from reply
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update reply
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.rname != null">
+        rname = #{record.rname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cId != null">
+        c_id = #{record.cId,jdbcType=INTEGER},
+      </if>
+      <if test="record.whoId != null">
+        who_id = #{record.whoId,jdbcType=INTEGER},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.file != null">
+        file = #{record.file,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag1 != null">
+        flag1 = #{record.flag1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.falg2 != null">
+        falg2 = #{record.falg2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag3 != null">
+        flag3 = #{record.flag3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag4 != null">
+        flag4 = #{record.flag4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update reply
+    set id = #{record.id,jdbcType=INTEGER},
+      rname = #{record.rname,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      c_id = #{record.cId,jdbcType=INTEGER},
+      who_id = #{record.whoId,jdbcType=INTEGER},
+      content = #{record.content,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      file = #{record.file,jdbcType=VARCHAR},
+      flag1 = #{record.flag1,jdbcType=VARCHAR},
+      falg2 = #{record.falg2,jdbcType=VARCHAR},
+      flag3 = #{record.flag3,jdbcType=VARCHAR},
+      flag4 = #{record.flag4,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.muji.zh.admin.model.Reply">
+    update reply
+    <set>
+      <if test="rname != null">
+        rname = #{rname,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="cId != null">
+        c_id = #{cId,jdbcType=INTEGER},
+      </if>
+      <if test="whoId != null">
+        who_id = #{whoId,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="file != null">
+        file = #{file,jdbcType=VARCHAR},
+      </if>
+      <if test="flag1 != null">
+        flag1 = #{flag1,jdbcType=VARCHAR},
+      </if>
+      <if test="falg2 != null">
+        falg2 = #{falg2,jdbcType=VARCHAR},
+      </if>
+      <if test="flag3 != null">
+        flag3 = #{flag3,jdbcType=VARCHAR},
+      </if>
+      <if test="flag4 != null">
+        flag4 = #{flag4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.muji.zh.admin.model.Reply">
+    update reply
+    set rname = #{rname,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      c_id = #{cId,jdbcType=INTEGER},
+      who_id = #{whoId,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      file = #{file,jdbcType=VARCHAR},
+      flag1 = #{flag1,jdbcType=VARCHAR},
+      falg2 = #{falg2,jdbcType=VARCHAR},
+      flag3 = #{flag3,jdbcType=VARCHAR},
+      flag4 = #{flag4,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <select id="selectReplyBycid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from reply
+    where c_id=#{cid,jdbcType=INTEGER}
+  </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!--  从业者查看回复信息 -->
+  <select id="selectReplyByCIdAndWhoId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from reply
+    where c_id=#{cid,jdbcType=INTEGER} and who_id=#{whoId,jdbcType=INTEGER}
+  </select>
+
+</mapper>

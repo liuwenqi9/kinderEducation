@@ -1,0 +1,836 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muji.zh.admin.mapper.PractitionerMapper">
+    <resultMap id="BaseResultMap" type="com.muji.zh.admin.model.Practitioner">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="pname" jdbcType="VARCHAR" property="pname"/>
+        <result column="sex" jdbcType="VARCHAR" property="sex"/>
+        <result column="birthday" jdbcType="VARCHAR" property="birthday"/>
+        <result column="age" jdbcType="INTEGER" property="age"/>
+        <result column="bank_card_number" jdbcType="VARCHAR" property="bankCardNumber"/>
+        <result column="native_place" jdbcType="VARCHAR" property="nativePlace"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="arrderss" jdbcType="VARCHAR" property="arrderss"/>
+        <result column="id_card" jdbcType="VARCHAR" property="idCard"/>
+        <result column="graduation" jdbcType="VARCHAR" property="graduation"/>
+        <result column="certificate" jdbcType="VARCHAR" property="certificate"/>
+        <result column="isussing_deartment" jdbcType="VARCHAR" property="isussingDeartment"/>
+        <result column="kinder_id" jdbcType="INTEGER" property="kinderId"/>
+        <result column="legal_person" jdbcType="VARCHAR" property="legalPerson"/>
+        <result column="legal_parson_name" jdbcType="VARCHAR" property="legalParsonName"/>
+        <result column="legal_parson_phone" jdbcType="VARCHAR" property="legalParsonPhone"/>
+        <result column="wages" jdbcType="INTEGER" property="wages"/>
+        <result column="social_security" jdbcType="VARCHAR" property="socialSecurity"/>
+        <result column="p_id" jdbcType="INTEGER" property="pId"/>
+        <result column="positional_titles" jdbcType="VARCHAR" property="positionalTitles"/>
+        <result column="mental_image" jdbcType="VARCHAR" property="mentalImage"/>
+        <result column="mental_health" jdbcType="VARCHAR" property="mentalHealth"/>
+        <result column="physical_image" jdbcType="VARCHAR" property="physicalImage"/>
+        <result column="physical_health" jdbcType="VARCHAR" property="physicalHealth"/>
+        <result column="image" jdbcType="VARCHAR" property="image"/>
+        <result column="ubran_id" jdbcType="INTEGER" property="ubranId"/>
+        <result column="area_id" jdbcType="INTEGER" property="areaId"/>
+        <result column="clas_director" jdbcType="INTEGER" property="clasDirector"/>
+        <result column="sign" jdbcType="INTEGER" property="sign"/>
+        <result column="falg1" jdbcType="VARCHAR" property="falg1"/>
+        <result column="flag2" jdbcType="VARCHAR" property="flag2"/>
+        <result column="flag3" jdbcType="VARCHAR" property="flag3"/>
+        <result column="flag4" jdbcType="VARCHAR" property="flag4"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, pname, sex, birthday, age, bank_card_number, native_place, phone, email, arrderss, 
+    id_card, graduation, certificate, isussing_deartment, kinder_id, legal_person, legal_parson_name, 
+    legal_parson_phone, wages, social_security, p_id, positional_titles, mental_image, 
+    mental_health, physical_image, physical_health, image, ubran_id, area_id, clas_director, 
+    sign, falg1, flag2, flag3, flag4
+  </sql>
+    <select id="selectByExample" parameterType="com.muji.zh.admin.model.PractitionerExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from practitioner
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from practitioner
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from practitioner
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.muji.zh.admin.model.PractitionerExample">
+        delete from practitioner
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.muji.zh.admin.model.Practitioner">
+    insert into practitioner (id, pname, sex, 
+      birthday, age, bank_card_number, 
+      native_place, phone, email, 
+      arrderss, id_card, graduation, 
+      certificate, isussing_deartment, kinder_id, 
+      legal_person, legal_parson_name, legal_parson_phone, 
+      wages, social_security, p_id, 
+      positional_titles, mental_image, mental_health, 
+      physical_image, physical_health, image, 
+      ubran_id, area_id, clas_director, 
+      sign, falg1, flag2, 
+      flag3, flag4)
+    values (#{id,jdbcType=INTEGER}, #{pname,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{birthday,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{bankCardNumber,jdbcType=VARCHAR}, 
+      #{nativePlace,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{arrderss,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, #{graduation,jdbcType=VARCHAR}, 
+      #{certificate,jdbcType=VARCHAR}, #{isussingDeartment,jdbcType=VARCHAR}, #{kinderId,jdbcType=INTEGER}, 
+      #{legalPerson,jdbcType=VARCHAR}, #{legalParsonName,jdbcType=VARCHAR}, #{legalParsonPhone,jdbcType=VARCHAR}, 
+      #{wages,jdbcType=INTEGER}, #{socialSecurity,jdbcType=VARCHAR}, #{pId,jdbcType=INTEGER}, 
+      #{positionalTitles,jdbcType=VARCHAR}, #{mentalImage,jdbcType=VARCHAR}, #{mentalHealth,jdbcType=VARCHAR}, 
+      #{physicalImage,jdbcType=VARCHAR}, #{physicalHealth,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, 
+      #{ubranId,jdbcType=INTEGER}, #{areaId,jdbcType=INTEGER}, #{clasDirector,jdbcType=INTEGER}, 
+      #{sign,jdbcType=INTEGER}, #{falg1,jdbcType=VARCHAR}, #{flag2,jdbcType=VARCHAR}, 
+      #{flag3,jdbcType=VARCHAR}, #{flag4,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.muji.zh.admin.model.Practitioner">
+        insert into practitioner
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="pname != null">
+                pname,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="birthday != null">
+                birthday,
+            </if>
+            <if test="age != null">
+                age,
+            </if>
+            <if test="bankCardNumber != null">
+                bank_card_number,
+            </if>
+            <if test="nativePlace != null">
+                native_place,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="arrderss != null">
+                arrderss,
+            </if>
+            <if test="idCard != null">
+                id_card,
+            </if>
+            <if test="graduation != null">
+                graduation,
+            </if>
+            <if test="certificate != null">
+                certificate,
+            </if>
+            <if test="isussingDeartment != null">
+                isussing_deartment,
+            </if>
+            <if test="kinderId != null">
+                kinder_id,
+            </if>
+            <if test="legalPerson != null">
+                legal_person,
+            </if>
+            <if test="legalParsonName != null">
+                legal_parson_name,
+            </if>
+            <if test="legalParsonPhone != null">
+                legal_parson_phone,
+            </if>
+            <if test="wages != null">
+                wages,
+            </if>
+            <if test="socialSecurity != null">
+                social_security,
+            </if>
+            <if test="pId != null">
+                p_id,
+            </if>
+            <if test="positionalTitles != null">
+                positional_titles,
+            </if>
+            <if test="mentalImage != null">
+                mental_image,
+            </if>
+            <if test="mentalHealth != null">
+                mental_health,
+            </if>
+            <if test="physicalImage != null">
+                physical_image,
+            </if>
+            <if test="physicalHealth != null">
+                physical_health,
+            </if>
+            <if test="image != null">
+                image,
+            </if>
+            <if test="ubranId != null">
+                ubran_id,
+            </if>
+            <if test="areaId != null">
+                area_id,
+            </if>
+            <if test="clasDirector != null">
+                clas_director,
+            </if>
+            <if test="sign != null">
+                sign,
+            </if>
+            <if test="falg1 != null">
+                falg1,
+            </if>
+            <if test="flag2 != null">
+                flag2,
+            </if>
+            <if test="flag3 != null">
+                flag3,
+            </if>
+            <if test="flag4 != null">
+                flag4,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="pname != null">
+                #{pname,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="birthday != null">
+                #{birthday,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                #{age,jdbcType=INTEGER},
+            </if>
+            <if test="bankCardNumber != null">
+                #{bankCardNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="nativePlace != null">
+                #{nativePlace,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="arrderss != null">
+                #{arrderss,jdbcType=VARCHAR},
+            </if>
+            <if test="idCard != null">
+                #{idCard,jdbcType=VARCHAR},
+            </if>
+            <if test="graduation != null">
+                #{graduation,jdbcType=VARCHAR},
+            </if>
+            <if test="certificate != null">
+                #{certificate,jdbcType=VARCHAR},
+            </if>
+            <if test="isussingDeartment != null">
+                #{isussingDeartment,jdbcType=VARCHAR},
+            </if>
+            <if test="kinderId != null">
+                #{kinderId,jdbcType=INTEGER},
+            </if>
+            <if test="legalPerson != null">
+                #{legalPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="legalParsonName != null">
+                #{legalParsonName,jdbcType=VARCHAR},
+            </if>
+            <if test="legalParsonPhone != null">
+                #{legalParsonPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="wages != null">
+                #{wages,jdbcType=INTEGER},
+            </if>
+            <if test="socialSecurity != null">
+                #{socialSecurity,jdbcType=VARCHAR},
+            </if>
+            <if test="pId != null">
+                #{pId,jdbcType=INTEGER},
+            </if>
+            <if test="positionalTitles != null">
+                #{positionalTitles,jdbcType=VARCHAR},
+            </if>
+            <if test="mentalImage != null">
+                #{mentalImage,jdbcType=VARCHAR},
+            </if>
+            <if test="mentalHealth != null">
+                #{mentalHealth,jdbcType=VARCHAR},
+            </if>
+            <if test="physicalImage != null">
+                #{physicalImage,jdbcType=VARCHAR},
+            </if>
+            <if test="physicalHealth != null">
+                #{physicalHealth,jdbcType=VARCHAR},
+            </if>
+            <if test="image != null">
+                #{image,jdbcType=VARCHAR},
+            </if>
+            <if test="ubranId != null">
+                #{ubranId,jdbcType=INTEGER},
+            </if>
+            <if test="areaId != null">
+                #{areaId,jdbcType=INTEGER},
+            </if>
+            <if test="clasDirector != null">
+                #{clasDirector,jdbcType=INTEGER},
+            </if>
+            <if test="sign != null">
+                #{sign,jdbcType=INTEGER},
+            </if>
+            <if test="falg1 != null">
+                #{falg1,jdbcType=VARCHAR},
+            </if>
+            <if test="flag2 != null">
+                #{flag2,jdbcType=VARCHAR},
+            </if>
+            <if test="flag3 != null">
+                #{flag3,jdbcType=VARCHAR},
+            </if>
+            <if test="flag4 != null">
+                #{flag4,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.muji.zh.admin.model.PractitionerExample" resultType="java.lang.Long">
+        select count(*) from practitioner
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update practitioner
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.pname != null">
+                pname = #{record.pname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sex != null">
+                sex = #{record.sex,jdbcType=VARCHAR},
+            </if>
+            <if test="record.birthday != null">
+                birthday = #{record.birthday,jdbcType=VARCHAR},
+            </if>
+            <if test="record.age != null">
+                age = #{record.age,jdbcType=INTEGER},
+            </if>
+            <if test="record.bankCardNumber != null">
+                bank_card_number = #{record.bankCardNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="record.nativePlace != null">
+                native_place = #{record.nativePlace,jdbcType=VARCHAR},
+            </if>
+            <if test="record.phone != null">
+                phone = #{record.phone,jdbcType=VARCHAR},
+            </if>
+            <if test="record.email != null">
+                email = #{record.email,jdbcType=VARCHAR},
+            </if>
+            <if test="record.arrderss != null">
+                arrderss = #{record.arrderss,jdbcType=VARCHAR},
+            </if>
+            <if test="record.idCard != null">
+                id_card = #{record.idCard,jdbcType=VARCHAR},
+            </if>
+            <if test="record.graduation != null">
+                graduation = #{record.graduation,jdbcType=VARCHAR},
+            </if>
+            <if test="record.certificate != null">
+                certificate = #{record.certificate,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isussingDeartment != null">
+                isussing_deartment = #{record.isussingDeartment,jdbcType=VARCHAR},
+            </if>
+            <if test="record.kinderId != null">
+                kinder_id = #{record.kinderId,jdbcType=INTEGER},
+            </if>
+            <if test="record.legalPerson != null">
+                legal_person = #{record.legalPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="record.legalParsonName != null">
+                legal_parson_name = #{record.legalParsonName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.legalParsonPhone != null">
+                legal_parson_phone = #{record.legalParsonPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="record.wages != null">
+                wages = #{record.wages,jdbcType=INTEGER},
+            </if>
+            <if test="record.socialSecurity != null">
+                social_security = #{record.socialSecurity,jdbcType=VARCHAR},
+            </if>
+            <if test="record.pId != null">
+                p_id = #{record.pId,jdbcType=INTEGER},
+            </if>
+            <if test="record.positionalTitles != null">
+                positional_titles = #{record.positionalTitles,jdbcType=VARCHAR},
+            </if>
+            <if test="record.mentalImage != null">
+                mental_image = #{record.mentalImage,jdbcType=VARCHAR},
+            </if>
+            <if test="record.mentalHealth != null">
+                mental_health = #{record.mentalHealth,jdbcType=VARCHAR},
+            </if>
+            <if test="record.physicalImage != null">
+                physical_image = #{record.physicalImage,jdbcType=VARCHAR},
+            </if>
+            <if test="record.physicalHealth != null">
+                physical_health = #{record.physicalHealth,jdbcType=VARCHAR},
+            </if>
+            <if test="record.image != null">
+                image = #{record.image,jdbcType=VARCHAR},
+            </if>
+            <if test="record.ubranId != null">
+                ubran_id = #{record.ubranId,jdbcType=INTEGER},
+            </if>
+            <if test="record.areaId != null">
+                area_id = #{record.areaId,jdbcType=INTEGER},
+            </if>
+            <if test="record.clasDirector != null">
+                clas_director = #{record.clasDirector,jdbcType=INTEGER},
+            </if>
+            <if test="record.sign != null">
+                sign = #{record.sign,jdbcType=INTEGER},
+            </if>
+            <if test="record.falg1 != null">
+                falg1 = #{record.falg1,jdbcType=VARCHAR},
+            </if>
+            <if test="record.flag2 != null">
+                flag2 = #{record.flag2,jdbcType=VARCHAR},
+            </if>
+            <if test="record.flag3 != null">
+                flag3 = #{record.flag3,jdbcType=VARCHAR},
+            </if>
+            <if test="record.flag4 != null">
+                flag4 = #{record.flag4,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update practitioner
+        set id = #{record.id,jdbcType=INTEGER},
+        pname = #{record.pname,jdbcType=VARCHAR},
+        sex = #{record.sex,jdbcType=VARCHAR},
+        birthday = #{record.birthday,jdbcType=VARCHAR},
+        age = #{record.age,jdbcType=INTEGER},
+        bank_card_number = #{record.bankCardNumber,jdbcType=VARCHAR},
+        native_place = #{record.nativePlace,jdbcType=VARCHAR},
+        phone = #{record.phone,jdbcType=VARCHAR},
+        email = #{record.email,jdbcType=VARCHAR},
+        arrderss = #{record.arrderss,jdbcType=VARCHAR},
+        id_card = #{record.idCard,jdbcType=VARCHAR},
+        graduation = #{record.graduation,jdbcType=VARCHAR},
+        certificate = #{record.certificate,jdbcType=VARCHAR},
+        isussing_deartment = #{record.isussingDeartment,jdbcType=VARCHAR},
+        kinder_id = #{record.kinderId,jdbcType=INTEGER},
+        legal_person = #{record.legalPerson,jdbcType=VARCHAR},
+        legal_parson_name = #{record.legalParsonName,jdbcType=VARCHAR},
+        legal_parson_phone = #{record.legalParsonPhone,jdbcType=VARCHAR},
+        wages = #{record.wages,jdbcType=INTEGER},
+        social_security = #{record.socialSecurity,jdbcType=VARCHAR},
+        p_id = #{record.pId,jdbcType=INTEGER},
+        positional_titles = #{record.positionalTitles,jdbcType=VARCHAR},
+        mental_image = #{record.mentalImage,jdbcType=VARCHAR},
+        mental_health = #{record.mentalHealth,jdbcType=VARCHAR},
+        physical_image = #{record.physicalImage,jdbcType=VARCHAR},
+        physical_health = #{record.physicalHealth,jdbcType=VARCHAR},
+        image = #{record.image,jdbcType=VARCHAR},
+        ubran_id = #{record.ubranId,jdbcType=INTEGER},
+        area_id = #{record.areaId,jdbcType=INTEGER},
+        clas_director = #{record.clasDirector,jdbcType=INTEGER},
+        sign = #{record.sign,jdbcType=INTEGER},
+        falg1 = #{record.falg1,jdbcType=VARCHAR},
+        flag2 = #{record.flag2,jdbcType=VARCHAR},
+        flag3 = #{record.flag3,jdbcType=VARCHAR},
+        flag4 = #{record.flag4,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.muji.zh.admin.model.Practitioner">
+        update practitioner
+        <set>
+            <if test="pname != null">
+                pname = #{pname,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="birthday != null">
+                birthday = #{birthday,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                age = #{age,jdbcType=INTEGER},
+            </if>
+            <if test="bankCardNumber != null">
+                bank_card_number = #{bankCardNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="nativePlace != null">
+                native_place = #{nativePlace,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="arrderss != null">
+                arrderss = #{arrderss,jdbcType=VARCHAR},
+            </if>
+            <if test="idCard != null">
+                id_card = #{idCard,jdbcType=VARCHAR},
+            </if>
+            <if test="graduation != null">
+                graduation = #{graduation,jdbcType=VARCHAR},
+            </if>
+            <if test="certificate != null">
+                certificate = #{certificate,jdbcType=VARCHAR},
+            </if>
+            <if test="isussingDeartment != null">
+                isussing_deartment = #{isussingDeartment,jdbcType=VARCHAR},
+            </if>
+            <if test="kinderId != null">
+                kinder_id = #{kinderId,jdbcType=INTEGER},
+            </if>
+            <if test="legalPerson != null">
+                legal_person = #{legalPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="legalParsonName != null">
+                legal_parson_name = #{legalParsonName,jdbcType=VARCHAR},
+            </if>
+            <if test="legalParsonPhone != null">
+                legal_parson_phone = #{legalParsonPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="wages != null">
+                wages = #{wages,jdbcType=INTEGER},
+            </if>
+            <if test="socialSecurity != null">
+                social_security = #{socialSecurity,jdbcType=VARCHAR},
+            </if>
+            <if test="pId != null">
+                p_id = #{pId,jdbcType=INTEGER},
+            </if>
+            <if test="positionalTitles != null">
+                positional_titles = #{positionalTitles,jdbcType=VARCHAR},
+            </if>
+            <if test="mentalImage != null">
+                mental_image = #{mentalImage,jdbcType=VARCHAR},
+            </if>
+            <if test="mentalHealth != null">
+                mental_health = #{mentalHealth,jdbcType=VARCHAR},
+            </if>
+            <if test="physicalImage != null">
+                physical_image = #{physicalImage,jdbcType=VARCHAR},
+            </if>
+            <if test="physicalHealth != null">
+                physical_health = #{physicalHealth,jdbcType=VARCHAR},
+            </if>
+            <if test="image != null">
+                image = #{image,jdbcType=VARCHAR},
+            </if>
+            <if test="ubranId != null">
+                ubran_id = #{ubranId,jdbcType=INTEGER},
+            </if>
+            <if test="areaId != null">
+                area_id = #{areaId,jdbcType=INTEGER},
+            </if>
+            <if test="clasDirector != null">
+                clas_director = #{clasDirector,jdbcType=INTEGER},
+            </if>
+            <if test="sign != null">
+                sign = #{sign,jdbcType=INTEGER},
+            </if>
+            <if test="falg1 != null">
+                falg1 = #{falg1,jdbcType=VARCHAR},
+            </if>
+            <if test="flag2 != null">
+                flag2 = #{flag2,jdbcType=VARCHAR},
+            </if>
+            <if test="flag3 != null">
+                flag3 = #{flag3,jdbcType=VARCHAR},
+            </if>
+            <if test="flag4 != null">
+                flag4 = #{flag4,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.muji.zh.admin.model.Practitioner">
+    update practitioner
+    set pname = #{pname,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      bank_card_number = #{bankCardNumber,jdbcType=VARCHAR},
+      native_place = #{nativePlace,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      arrderss = #{arrderss,jdbcType=VARCHAR},
+      id_card = #{idCard,jdbcType=VARCHAR},
+      graduation = #{graduation,jdbcType=VARCHAR},
+      certificate = #{certificate,jdbcType=VARCHAR},
+      isussing_deartment = #{isussingDeartment,jdbcType=VARCHAR},
+      kinder_id = #{kinderId,jdbcType=INTEGER},
+      legal_person = #{legalPerson,jdbcType=VARCHAR},
+      legal_parson_name = #{legalParsonName,jdbcType=VARCHAR},
+      legal_parson_phone = #{legalParsonPhone,jdbcType=VARCHAR},
+      wages = #{wages,jdbcType=INTEGER},
+      social_security = #{socialSecurity,jdbcType=VARCHAR},
+      p_id = #{pId,jdbcType=INTEGER},
+      positional_titles = #{positionalTitles,jdbcType=VARCHAR},
+      mental_image = #{mentalImage,jdbcType=VARCHAR},
+      mental_health = #{mentalHealth,jdbcType=VARCHAR},
+      physical_image = #{physicalImage,jdbcType=VARCHAR},
+      physical_health = #{physicalHealth,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      ubran_id = #{ubranId,jdbcType=INTEGER},
+      area_id = #{areaId,jdbcType=INTEGER},
+      clas_director = #{clasDirector,jdbcType=INTEGER},
+      sign = #{sign,jdbcType=INTEGER},
+      falg1 = #{falg1,jdbcType=VARCHAR},
+      flag2 = #{flag2,jdbcType=VARCHAR},
+      flag3 = #{flag3,jdbcType=VARCHAR},
+      flag4 = #{flag4,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+    <select id="findByLikeName" resultMap="BaseResultMap">
+
+        <choose>
+            <when test="pattern">
+                <bind name="pattern" value="'%' + pattern + '%'"/>
+            </when>
+
+        </choose>
+        <choose>
+            <when test="id">
+                <bind name="id" value="'%' + id + '%'"/>
+            </when>
+
+        </choose>
+
+
+        <choose>
+            <when test="studentname">
+                <bind name="studentname" value="'%' + studentname + '%'"/>
+            </when>
+
+        </choose>
+        <choose>
+
+            <when test="phone">
+                <bind name="phone" value="'%' + phone + '%'"/>
+            </when>
+
+        </choose>
+
+
+
+        SELECT
+        *
+        FROM
+        practitioner
+
+        <where>
+
+            <if test="pattern!=null ">
+                kinder_id in (SELECT
+                k_id
+                FROM
+                kindergarten
+                WHERE
+                kname like #{pattern})
+            </if>
+
+            <if test="id!=null">
+                or id like #{id}
+            </if>
+            <if test="studentname!=null">
+                or pname like #{studentname}
+            </if>
+            <if test="phone!=null">
+               or phone like #{phone}
+            </if>
+            <if test="sign==0">
+               and area_id = #{ubran_id}
+            </if>
+            <if test="sign==1">
+                and ubran_id = #{ubran_id}
+            </if>
+        </where>
+    </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <select id="findBykinId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select *
+    from practitioner
+    where kinder_id=#{kId}
+  </select>
+
+    <select id="selectBypNameAndphone" resultMap="BaseResultMap">
+        SELECT
+        id, pname, sex, age, phone, email, arrderss
+        from practitioner
+        <where>
+            <if test="pname != null and pname != ''">
+                and pname like CONCAT(CONCAT('%',#{pname}),'%')
+            </if>
+            <if test="phone != null and phone != ''">
+                and phone = #{phone}
+            </if>
+            and kinder_id = #{kId}
+        </where>
+    </select>
+
+    <select id="findClasPra" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id,pname from practitioner where kinder_id=#{kId} and clas_director=1
+  </select>
+
+    <select id="selectPraVo" parameterType="java.lang.Integer" resultType="com.muji.zh.admin.model.PraVo">
+    select p.id,p.kinder_id,p.pname,p.sex,p.legal_person,p.legal_parson_name,p.legal_parson_phone,p.clas_director,s.sname,p.wages,p.phone,p.id_card,p.bank_card_number from station s,practitioner p where s.s_id = p.p_id  and p.kinder_id = #{kId} ORDER BY p.id
+  </select>
+
+    <select id="selectCount" parameterType="java.lang.Integer" resultType="java.lang.Long">
+    select count(*) from station s,practitioner p where s.s_id = p.p_id  and p.kinder_id = #{kId}
+  </select>
+
+    <select id="checkPra" resultType="com.muji.zh.admin.model.PraVo">
+    select p.id,p.kinder_id,p.pname,p.sex,p.legal_person,p.legal_parson_name,p.legal_parson_phone,p.clas_director,s.sname,p.wages,p.phone,p.id_card,p.bank_card_number from station s,practitioner p where s.s_id = p.p_id  and p.pname like CONCAT(CONCAT('%',#{pname}),'%') and p.kinder_id = #{kId} ORDER BY p.id
+  </select>
+
+    <select id="checkCount"  resultType="java.lang.Long">
+    select count(*) from station s,practitioner p where s.s_id = p.p_id  and p.pname like CONCAT(CONCAT('%',#{pname}),'%') and p.kinder_id = #{kId}
+  </select>
+
+    <select id="checkSalay"  resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from practitioner
+        where id = #{pId} and pname = #{pname}
+    </select>
+</mapper>

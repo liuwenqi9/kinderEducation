@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="UTF-8">
+	<title>二七</title>
+	<link rel="stylesheet" type="text/css" href="/static/css/index.css" />
+	<script src="/static/js/echarts.min.js"></script>
+	<script src="/static/js/zhengzhou.js"></script>
+	<script src="/static/js/jquery.min.js"></script>
+	<script src="/static/js/jquery.rotate.min.js"></script>
+	<style>
+		#map_city{
+			height: 66%;
+			margin-top: -6%;
+			background-repeat: no-repeat;
+			background-size: 100% 100%;
+			width:60%;
+			margin-left: 18%;
+			background-image: url(./static/img2/map/erqi.png);
+		}
+		.B{
+			width:5%;
+			position: absolute;
+			right:31.8%;
+			top:0.5%;
+		}
+		.MAP{
+			float:right;
+			width:11%;
+			margin-right: 2%;
+			margin-top: -2.5%;
+		}
+		.left_bottom{margin-top:3%; margin-left: 5%;width:90%;height:35%;}
+		.pass{height:100%;width:100%;}
+		.line{background-color:#86fcc2;float: left;width:2rem;height: 0.8rem;margin-top: 0.3rem;margin-left: 4rem;border-radius: 0.1rem;}
+		.line_font{color: white;font-size: 0.8rem;float: left;margin-left: 0.1rem;margin-top:0.2rem;}
+		.bl{background-color:#12604c;float: left;width:2rem;height: 0.8rem;margin-top: 0.3rem;margin-left: 4rem;border-radius: 0.1rem;}
+		.type{margin-top:1rem;width:80%;margin-left:10%;}
+	</style>
+</head>
+<body oncontextmenu="return false;" onselectstart="return false">
+<!--粒子 -->
+<!--<canvas id="cas"></canvas>  -->
+<!-- 上-->
+<div class="header">
+	<div class="topimg">
+		   		<span class="h-title" >
+					<label th:text="${session.education.ename}"></label><label>幼儿园管理平台</label>
+		   		</span>
+
+		<span class="mes">
+		   			<p>欢迎您! <label th:text="${session.eduUser.nname}">XXX教育局&nbsp;</label>管理中心&nbsp;<a href="/logout">退出</a></p>
+		   		</span>
+	</div>
+</div>
+<!-- 整体-->
+<div  class="main">
+
+	<!-- 左边-->
+	<div class="left">
+		<!-- 左上 -->
+		<div class="left-t">
+			<span class="left-t_title">幼儿园</span>
+			<!-- 3个柱状图 -->
+			<div class="zhu_t" >
+				<!-- 柱状图区域-->
+				<div class="bar">
+					<span class="bar-left"><p>公办</p><span th:text="${publicCount}"><span>所</span></span><span>所</span></span>
+					<span class="bar-right"><p>非公办</p><span th:text="${sum}"><span>所</span></span><span>所</span></span>
+					<div class="zhu_1">                                   <!--外框-->
+						<div class="one">  <!--内框 -->
+							<div class="zhu_one" id="property1"></div> <!--柱状 -->
+						</div>
+					</div>
+				</div>
+				<div class="bar">
+					<span class="bar-left"><p>惠普</p><p>1000所</p></span>
+					<span class="bar-right"><p>非惠普</p><p>2000所</p></span>
+					<div class="zhu_1">
+						<div class="one">
+							<div class="zhu_one" id="property2"></div>
+						</div>
+					</div>
+				</div>
+				<div class="bar">
+					<span class="bar-left"><p>合理</p><p>1000所</p></span>
+					<span class="bar-right"><p>非合理</p><p>2000所</p></span>
+					<div class="zhu_1">
+						<div class="one">
+							<div class="zhu_one" id="property3"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+		<div class="left-f">
+			<span class="left-f_title">教育从业者</span>
+			<!--从业者信息 -->
+			<div class="worker">
+				<div class="sex">
+					<span class="men">男</span>
+					<span class="women">女</span>
+				</div>
+				<div class="bar2">
+					<span class="bar2-left">园长</span>
+					<span class="bar2-right"><label th:text="${mapSexMan['part_1']}"></label>:<label th:text="${mapSexWoman['part_1']}"></label></span>
+					<div class="zhu_2"><!--外框 -->
+						<div class="two"><!--内框 -->
+							<div class="zhu_two" id="ICRADE1"></div> <!-- 柱状-->
+						</div>
+					</div>
+				</div>
+				<div class="bar2">
+					<span class="bar2-left">幼师</span>
+					<span class="bar2-right"><label th:text="${mapSexMan['part_2']}"></label>:<label th:text="${mapSexWoman['part_2']}"></label></span>
+
+					<div class="zhu_2"><!--外框 -->
+						<div class="two"><!--内框 -->
+							<div class="zhu_two" id="ICRADE2"></div> <!-- 柱状-->
+						</div>
+					</div>
+				</div>
+				<div class="bar2">
+					<span class="bar2-left">保育员</span>
+					<span class="bar2-right"><label th:text="${mapSexMan['part_3']}"></label>:<label th:text="${mapSexWoman['part_3']}"></label></span>
+					<div class="zhu_2"><!--外框 -->
+						<div class="two"><!--内框 -->
+							<div class="zhu_two" id="ICRADE3"></div> <!-- 柱状-->
+						</div>
+					</div>
+				</div>
+				<div class="bar2">
+					<span class="bar2-left">保健医</span>
+					<span class="bar2-right"><label th:text="${mapSexMan['part_4']}"></label>:<label th:text="${mapSexWoman['part_4']}"></label></span>
+
+					<div class="zhu_2"><!--外框 -->
+						<div class="two"><!--内框 -->
+							<div class="zhu_two" id="ICRADE4"></div> <!-- 柱状-->
+						</div>
+					</div>
+				</div>
+				<div class="bar2">
+					<span class="bar2-left">后勤人员</span>
+					<span class="bar2-right"><label th:text="${mapSexMan['part_5']}"></label>:<label th:text="${mapSexWoman['part_5']}"></label></span>
+
+					<div class="zhu_2"><!--外框 -->
+						<div class="two"><!--内框 -->
+							<div class="zhu_two" id="ICRADE5"></div> <!-- 柱状-->
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="left_bottom" >
+				<div style="background-image:url('/static/img/teacher.png'); width:20%; height:10%; margin-left: 10%;">教师资格</div>
+				<div id="JM" class="pass"></div>
+				<div class="type">
+					<div  class='line'></div>
+					<div  class="line_font">合格</div>
+					<div  class='bl' ></div>
+					<div  class="line_font">不合格</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 中间   -->
+	<div class="center">
+		<!-- 中上 -->
+		<div class="center-t">
+			<!-- 搜索与发布按钮 -->
+
+			<div class="Anniu">
+				<img class="JM" src="/static/img2/JM.png">	<a href="/toFind"><img class="S" src="/static/img2/sousuo.png"/></a>
+				<img class="JM1" src="/static/img2/JM.png"><a href="/toAddNotice"><img  class="F" src="/static/img2/fabu.png"/></a>
+
+				<a href="#" onClick="javascript :history.back(-1);" th:if="${session.education.areaId}==410100"> <img class="MAP" src="/static/img2/JM.png"><img  class="B" src="/static/img2/back.png"></a>
+			</div>
+			<!--显示时间 -->
+			<div id="showTime" class="time"></div>
+			<!-- 幼儿园3框 -->
+			<div class="three">
+				<div  class="three_l">
+					<p></p>
+					<p><span>幼儿园小班</span><span th:text="${clasStuTotal['clasTypeTotal0']}"></span><span>人</span></p>
+					<p><span>幼儿园中班</span><span th:text="${clasStuTotal['clasTypeTotal1']}"></span><span>人</span></p>
+					<p><span>幼儿园大班</span><span th:text="${clasStuTotal['clasTypeTotal2']}"></span><span>人</span></p>
+
+				</div>
+				<div class="three_c">
+
+					<p><span>幼儿园总数</span><span th:text="${kinderTotal}"></span><span>所</span></p>
+
+					<p><span>教师总人数</span><span th:text="${partTotal}"></span><span>人</span></p>
+					<p><span>幼儿总人数</span><span th:text="${studentTotal}"></span><span>人</span></p>
+
+				</div>
+				<div class="three_r">
+					<p><span>入园</span><span th:text="${comeStudentToal}"></span><span>人</span></p>
+
+					<p><span>出园</span><span th:text="${leaveStudenttotal}"></span><span>人</span></p>
+				</div>
+			</div>
+
+			<!-- 地图-->
+
+
+			<!--&lt;!&ndash;各 区展示&ndash;&gt;-->
+			<!--<div id="map_city"></div>-->
+			<!--<div id="map_city2"></div>-->
+			<div id="map_city"></div>
+		</div>
+		<!-- 中下-->
+		<div class="center-f">
+			<span class="xuesheng">学生</span>
+			<!-- 饼图 three-->
+			<div class="bing" id="YC"></div>
+
+			<!--<div class="stu-message">-->
+			<!--<span class="stu-l"><p>大班男生:大班女生</p><span th:text="${clasStuTotalMan['clasTypeTotal0']}">:</span>:<span th:text="${clasStuTotalWoMan['clasTypeTotal0']}"></span></span>-->
+
+			<!--</div>-->
+		</div>
+	</div>
+
+
+	<!--  右边 -->
+	<div class="right">
+		<!-- 右上 -->
+		<div class="right-t">
+			<!--警报框 -->
+			<span  class="biaoti">警报信息</span>
+
+			<div class="jingbao" id="t1">
+				<p><label class="title">一级警报</label><label class="sum" th:text="${cso1}">19条</label></p>
+				<div class="b"><button  bchange="1" class="b1" id="m1"><img src="/static/img/redwrong.png" width="60%"/></button></div>
+				<!--<p><label class="a1">内容概述</label><label class="a2">时间</label></p>-->
+				<!--<p ><label class="a1">内容概述</label><label class="a2">时间</label></p>-->
+
+				<th th:each="complaintList ,itemStat: ${warningMap['warning1']}" th:if="${itemStat.count}<=1">
+					<p ><a th:href="@{'/findByKid?kid='+${complaintList.kId}}"><label class="a1" th:text="${complaintList.content}"></label></a>
+						<label class="a2" th:text="${complaintList.id}"></label>
+					</p>
+				</th>
+
+				<th th:each="complaintLists ,itemStats: ${partwarningMap['warning2']}" th:if="${itemStats.count}<=1">
+					<p ><a th:href="@{'/findByPid?pid='+${complaintLists.pId}}"><label class="a1" th:text="${complaintLists.content}"></label></a>
+						<label class="a2" th:text="${complaintLists.id}"></label>
+					</p>
+				</th>
+
+
+
+			</div>
+			<!--信息展示 -->
+			<div class="show" id="show1">
+
+
+				<th th:each="complaintLists ,itemStats: ${partwarningMap['warning1']}">
+					<p >
+						<a th:href="@{'/findByPid?pid='+${complaintLists.pId}}">
+							<label class="show-l" th:text="${complaintLists.content}"></label>
+						</a>
+						<label class="show-r" th:text="${complaintLists.id}"></label>
+					</p>
+				</th>
+				<th th:each="complaintList ,itemStat: ${warningMap['warning1']}" >
+					<p ><a th:href="@{'/findByKid?kid='+${complaintList.kId}}"><label class="show-l" th:text="${complaintList.content}"></label></a>
+						<label class="show-r" th:text="${complaintList.id}"></label>
+					</p>
+				</th>
+
+
+
+
+			</div>
+
+
+			<div class="jingbao" id="t2">
+				<p><label class="title">二级警报</label>   <label class="sum" style="color: orange;" th:text="${cso2}">19条</label></p>
+				<div class="b"><button bchange="1" class="b1" id="m2"><img src="/static/img/orange.png" width="60%"/></button></div>
+				<th th:each="complaintList ,itemStat: ${warningMap['warning2']}" th:if="${itemStat.count}<=1">
+					<p ><a th:href="@{'/findByKid?kid='+${complaintList.kId}}"><label class="a1" th:text="${complaintList.content}"></label></a>
+						<label class="a2" th:text="${complaintList.id}"></label>
+					</p>
+				</th>
+
+				<th th:each="complaintLists ,itemStats: ${partwarningMap['warning2']}" th:if="${itemStats.count}<=1">
+					<p ><a th:href="@{'/findByPid?pid='+${complaintLists.pId}}"><label class="a1" th:text="${complaintLists.content}"></label></a>
+						<label class="a2" th:text="${complaintLists.id}"></label>
+					</p>
+				</th>
+			</div>
+			<!--信息展示 -->
+			<div class="show" id="show2">
+
+				<th th:each="complaintList : ${warningMap['warning2']}" >
+					<p ><a th:href="@{'/findByKid?kid='+${complaintList.kId}}"><label class="show-l" th:text="${complaintList.content}"></label></a>
+						<label class="show-r" th:text="${complaintList.id}"></label>
+					</p>
+				</th>
+
+				<th th:each="complaintLists : ${partwarningMap['warning2']}" >
+					<p ><a th:href="@{'/findByPid?pid='+${complaintLists.pId}}"><label class="show-l" th:text="${complaintLists.content}"></label></a>
+						<label class="show-2" th:text="${complaintLists.id}"></label>
+					</p>
+				</th>
+
+			</div>
+
+			<div class="jingbao" id="t3">
+				<p><label class="title">三级警报</label><label class="sum" style="color: #c865e9;" th:text="${cso3}" >19条</label></p>
+				<div class="b"><button bchange="1" class="b1" id="m3"><img src="/static/img/purple.png"  width=60%></button></div>
+
+
+				<th th:each="complaintList ,itemStat: ${warningMap['warning3']}" th:if="${itemStat.count}<=1">
+					<p ><a th:href="@{'/findByKid?kid='+${complaintList.kId}}"><label class="a1" th:text="${complaintList.content}"></label></a>
+						<label class="a2" th:text="${complaintList.id}"></label>
+					</p>
+				</th>
+
+				<th th:each="complaintLists ,itemStats: ${partwarningMap['warning3']}" th:if="${itemStats.count}<=1">
+					<p ><a th:href="@{'/findByPid?pid='+${complaintLists.pId}}"><label class="a1" th:text="${complaintLists.content}"></label></a>
+						<label class="a2" th:text="${complaintLists.id}"></label>
+					</p>
+				</th>
+			</div>
+
+
+			<div class="show" id="show3">
+
+
+				<th th:each="complaintList : ${warningMap['warning3']}" >
+					<p ><a th:href="@{'/findByKid?kid='+${complaintList.kId}}"><label class="show-l" th:text="${complaintList.content}"></label></a>
+						<label class="show-r" th:text="${complaintList.id}"></label>
+					</p>
+				</th>
+
+				<th th:each="complaintLists : ${partwarningMap['warning3']}" >
+					<p ><a th:href="@{'/findByPid?pid='+${complaintLists.pId}}"><label class="show-l" th:text="${complaintLists.content}"></label></a>
+						<label class="show-2" th:text="${complaintLists.id}"></label>
+					</p>
+				</th>
+
+			</div>
+
+
+			<div class="jingbao" id="t4">
+				<p><label class="title">四级警报</label><label class="sum" style="color: #5ccf98;" th:text="${cso4}">19条</label></p>
+				<div class="b"><button bchange="1" class="b1" id="m4"><img src="/static/img/gren.png" width=60%></button></div>
+
+				<th th:each="complaintList ,itemStat: ${warningMap['warning4']}" th:if="${itemStat.count}<=1">
+					<p ><a th:href="@{'/findByKid?kid='+${complaintList.kId}}"><label class="a1" th:text="${complaintList.content}"></label></a>
+						<label class="a2" th:text="${complaintList.id}"></label>
+					</p>
+				</th>
+
+				<th th:each="complaintLists ,itemStats: ${partwarningMap['warning4']}" th:if="${itemStats.count}<=1">
+					<p ><a th:href="@{'/findByPid?pid='+${complaintLists.pId}}"><label class="a1" th:text="${complaintLists.content}"></label></a>
+						<label class="a2" th:text="${complaintLists.id}"></label>
+					</p>
+				</th>
+			</div>
+
+			<!--信息展示 -->
+			<div class="show" id="show4">
+
+				<th th:each="complaintList : ${warningMap['warning4']}" >
+					<p ><a th:href="@{'/findByKid?kid='+${complaintList.kId}}"><label class="show-l" th:text="${complaintList.content}"></label></a>
+						<label class="show-r" th:text="${complaintList.id}"></label>
+					</p>
+				</th>
+
+				<th th:each="complaintLists : ${partwarningMap['warning4']}" >
+					<p ><a th:href="@{'/findByPid?pid='+${complaintLists.pId}}"><label class="show-l" th:text="${complaintLists.content}"></label></a>
+						<label class="show-r" th:text="${complaintLists.id}"></label>
+					</p>
+				</th>
+
+
+			</div>
+
+
+		</div>
+		<!--右下 -->
+		<div class="right-f">
+
+			<!-- 投诉框 -->
+			<span class="Ts">投诉</span>
+
+			<div class="ts" id="ts1">
+				<p><label class="title">从业者投诉</label> <label class="sum" th:text="${tsp}">19条</label><label>条</label></p>
+				<div class="bf"><button bchange="1" class="b1" id="m5"><img src="/static/img/redwrong.png" width="60%"/></button></div>
+
+
+				<th th:each="complaintList ,itemStat: ${ComMap['complaints']}" th:if="${itemStat.count}<=2">
+					<p ><a th:href="@{'/lookCom?id='+${complaintList.id}}"><label class="a1-f" th:text="${complaintList.title}"></label></a>
+						<label class="a2-f" th:text="${complaintList.flag1}"></label>
+
+
+					</p>
+				</th>
+			</div>
+			<!--投诉信息展示 -->
+			<div class="show" id="show5">
+
+				<th th:each="complaintList ,itemStat: ${ComMap['complaints']}" >
+					<p ><a th:href="@{'/lookCom?id='+${complaintList.id}}"><label class="show-l" th:text="${complaintList.title}"></label></a>
+						<label class="show-r" th:text="${complaintList.flag1}"></label>
+
+
+					</p>
+				</th>
+
+
+			</div>
+			<div class="ts" id="ts2">
+				<!--<p><label class="title">家长投诉</label> <label class="sum">19条</label></p>-->
+				<!--<div class="b"><button class="b1" id="m6"><img src="/static/img/redwrong.png" width=60%></button></div>-->
+				<!--<p><label class="a1-f">内容概述</label><label class="a2-f">时间</label></p>-->
+				<!--<p ><label class="a1-f">内容概述</label><label class="a2-f">时间</label></p>-->
+
+				<p><label class="title">家长投诉&nbsp;&nbsp;</label> <label class="sum" th:text="${ts}">19条</label><label>条</label></p>
+				<div class="bf"><button bchange="1" class="b1" id="m6"><img src="/static/img/redwrong.png" width="60%"/></button></div>
+
+
+				<th th:each="complaintList ,itemStat: ${ComMap['complaintParent']}" th:if="${itemStat.count}<=2">
+					<p ><a th:href="@{'/lookCom?id='+${complaintList.id}}"><label class="a1-f" th:text="${complaintList.title}"></label></a>
+						<label class="a2-f" th:text="${complaintList.flag1}"></label>
+					</p>
+				</th>
+			</div>
+			<!--投诉信息展示 -->
+			<div class="show" id="show6">
+
+				<th th:each="complaintList ,itemStat: ${ComMap['complaintParent']}"  >
+					<p >
+						<a th:href="@{'/lookCom?id='+${complaintList.id}}"><label  th:text="${complaintList.title}" class="show-l">
+						</label></a>
+						<label  th:text="${complaintList.flag1}" class="show-r"></label>
+					</p>
+				</th>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+
+<!-- 显示时间 -->
+<script type="text/javascript">
+    setInterval("fun(showTime)", 1);
+    function fun(timeID) {
+        var date = new Date(); //创建对象
+        var y = date.getFullYear(); //获取年份
+        var m = date.getMonth() + 1; //获取月份  返回0-11
+        var d = date.getDate(); // 获取日
+        var w = date.getDay(); //获取星期几  返回0-6   (0=星期天)
+        var ww = '周' + '日一二三四五六'.charAt(new Date().getDay()); //星期几
+        var h = date.getHours(); //时
+        var minute = date.getMinutes() //分
+        var s = date.getSeconds(); //秒
+
+        if(m < 10) {
+            m = "0" + m;
+        }
+
+        if(d < 10) {
+            d = "0" + d;
+        }
+
+        if(h < 10) {
+            h = "0" + h;
+        }
+
+        if(minute < 10) {
+            minute = "0" + minute;
+        }
+
+        if(s < 10) {
+            s = "0" + s;
+        }
+
+        document.getElementById(timeID.id).innerHTML =  y + "年" + m + "月" + d + "日" + "   " +
+            h + ":" + minute + ":" + s + "  " + ww;
+
+    }
+</script>
+
+<!-- 柱状图--->
+<script>
+    $(document).ready(function(){
+
+        var publicCount=[[${publicCount}]]
+
+        var sum=[[${sum}]]
+        if(sum==publicCount)
+        {
+            var property1=50;
+        }else {
+            var property1=publicCount/(sum+publicCount)*100
+        }
+
+
+
+
+        var property2=50;
+        var property3=50;
+
+        $("#property1").css({"background-color":"#6bc89b","width":property1+'%'});
+
+
+        $("#property2").css({"background-color":"#6bc89b","width":property2+'%'});
+        $("#property3").css({"background-color":"#6bc89b","width":property3+'%'});
+
+
+
+        var n= [[${mapSexMan['part_1']}]]
+
+        var s= [[${mapSexTotal['part_total1']}]]
+        if(n==0&&s==0)
+        {
+            green_width =50;
+        }else {
+            var green_width =n/s*100
+        }
+
+
+
+
+
+        //alert(s)
+        //alert(n)
+
+
+        var n1= [[${mapSexMan['part_2']}]]
+        var s1= [[${mapSexTotal['part_total2']}]]
+
+        if(n1==0&&s1==0)
+        {
+            green_width1 =50;
+        }else {
+            var green_width1 =n1/s1*100
+        }
+
+
+
+        //alert(green_width1)
+
+
+        var n2= [[${mapSexMan['part_3']}]]
+        var s2= [[${mapSexTotal['part_total3']}]]
+
+        if(n2==0&&s2==0)
+        {
+            green_width3 =50;
+        }else {
+            var green_width3 =n2/s2*100
+        }
+        //var green_width3 =n2/s2*100
+        //alert(green_width3)
+
+        var n3= [[${mapSexMan['part_4']}]]
+        var s3= [[${mapSexTotal['part_total4']}]]
+
+        if(n3==0&&s3==0)
+        {
+            green_width4 =50;
+        }else {
+            var green_width4 =n3/s3*100
+        }
+        //var green_width4 =n3/s3*100
+        // alert(n3)
+        // alert(s3)
+        // alert(green_width4)
+        var n4= [[${mapSexMan['part_5']}]]
+        var s4= [[${mapSexTotal['part_total5']}]]
+
+        if(n4==0&&s4==0)
+        {
+            green_width5 =50;
+        }else {
+            var green_width5 =n4/s4*100
+        }
+
+
+
+        $("#ICRADE1").css({"background-color":"#6bc89b","width":green_width+'%'});
+
+        $("#ICRADE2").css({"background-color":"#6bc89b","width":green_width1+'%'});
+        $("#ICRADE3").css({"background-color":"#6bc89b","width":green_width3+'%'});
+        $("#ICRADE4").css({"background-color":"#6bc89b","width":green_width4+'%'});
+        $("#ICRADE5").css({"background-color":"#6bc89b","width":green_width5+'%'});
+
+
+    });
+</script>
+<!--地图js-->
+<script>
+    var chart = echarts.init(document.getElementById("map"));
+    var option = {
+        title: {
+            text: ''
+        },
+        tooltip: {
+            trigger: 'item'
+        },
+        legend: {
+            show: false,
+        },
+        series: [{
+            type: 'map',
+//					name: "退服占比",
+            map: '郑州',
+            //roam: true,
+            zoom: 1.24, //设置缩放比例
+            scaleLimit: {
+                min: 1,
+                max: 3
+            }, //滚轮放大缩小的极限
+            //center:[114.026063,34.022956],//地图中心点
+            itemStyle: {
+                //normal 是图形在默认状态下的样式；
+                normal: {
+                    show: false,
+                    areaColor: "rgba(1,70,49,0.4)",
+                    borderColor: "#abae81",
+                    borderWidth: 1.4,
+                    shadowColor: '#56b67b',
+                    shadowBlur: 100,
+                },
+                //emphasis 是图形在高亮状态下的样式，比如在鼠标悬浮或者图例联动高亮时。
+                emphasis: {
+//							show: true,
+                    areaColor: "#01764c"
+                }
+            },
+            showLegendSymbol: false,
+            label: {
+                normal: {
+                    show: true,
+                    textStyle: {
+                        color: 'white',
+                        fontSize: 10,
+                        fontWeight: 'bold'
+                    }
+                },
+                emphasis: {
+                    show: true,
+                    textStyle: {
+                        color: "#000"
+                    }
+                }
+            },
+            data:[
+                {name: '登封', id: 410185},
+                {name: '二七', id: 410103},
+                {name: '巩义', id: 410181},
+                {name: '管城', id: 410104},
+                {name: '惠济', id: 410108},
+                {name: '金水', id: 410105},
+                {name: '上街', id: 410106},
+                {name: '新密', id: 410183},
+                {name: '新郑', id: 410184},
+                {name: '中牟', id: 410122},
+                {name: '中原', id: 410102},
+                {name: '荥阳', id: 410182},
+
+
+            ]
+        }]
+    };
+    chart.setOption(option);
+    window.onresize = chart.resize;
+    chart.on('click', function (params) {     //点击事件
+        var provinceId =params.data.id;
+        var provinceName =params.data.name;
+        //alert(provinceId)
+        if (provinceId== '410102'){
+            // document.location.href = "/toAreaId?areaid="+provinceId
+            window.location="/toAreaId?areaid="+provinceId
+
+        }
+        if (provinceId== '410185'){
+            window.location="/toAreaId?areaid="+provinceId
+        }
+        if (provinceId== '410181'){
+            window.location="/toAreaId?areaid="+provinceId
+        }
+        if (provinceId== '410103'){
+            window.location="/toAreaId?areaid="+provinceId
+        }
+        if (provinceId== '410108'){
+            window.location="/toAreaId?areaid="+provinceId
+        }
+        if (provinceId== '410105'){
+            window.location="/toAreaId?areaid="+provinceId
+        }
+        if (provinceId== '410106'){
+            window.location="/toAreaId?areaid="+provinceId
+        }
+        if (provinceId== '410183'){
+            window.location="/toAreaId?areaid="+provinceId
+        }
+        if (provinceId== '410184'){
+            window.location="/toAreaId?areaid="+provinceId
+        }
+        if (provinceId== '410122'){
+            window.location="/toAreaId?areaid="+provinceId
+        }
+        if (provinceId== '410102'){
+            window.location="/toAreaId?areaid="+provinceId
+        }
+        if (provinceId== '410182'){
+            window.location="/toAreaId?areaid="+provinceId
+//             $('.B').css("display", "block");
+//             $('#map').css("display","none");
+//             $('#map_city2').css("display","block");
+//             $('#map_city2').css("background-image","url(../img2/map/rongyang.png)");
+        }
+
+    });
+</script>
+
+<script>
+    var mychart = echarts.init(document.getElementById("YC"));
+
+    var sd=[[${clasStuTotalMan['clasTypeTotal0']}]]
+
+    var sc=[[${clasStuTotalWoMan['clasTypeTotal0']}]]
+
+    var sd1=[[${clasStuTotalMan['clasTypeTotal1']}]]
+
+    var sc1=[[${clasStuTotalWoMan['clasTypeTotal1']}]]
+
+    var sd2=[[${clasStuTotalMan['clasTypeTotal2']}]]
+
+    var sc2=[[${clasStuTotalWoMan['clasTypeTotal2']}]]
+
+
+    // var mapQualifiedTotal=[[${mapQualifiedTotal}]]
+    // var mapQualified=[[${mapQualified}]]
+    //var sums=
+
+    var option = {
+        //  backgroundColor: '#014131',//背景颜色
+        tooltip : {
+            show: true,
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        /* legend: {
+                    x : 'center',
+                    data:['班车','包车']
+                },
+               */
+        toolbox: {
+            show : false,
+            feature : {
+                mark : {show: true},
+                dataView : {show: true, readOnly: false},
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        calculable:false,
+
+        series : [
+            {
+                name:'小班学生',
+                type:'pie',
+                center: ['15%', '45%'],
+                radius : '62%',
+                data:[
+                    {value:sc, name:'小班女生'},
+                    {value:sd, name:'小班男生'},
+                ],
+                itemStyle: {//系列级个性化
+                    normal: {
+                        color: function(params) {
+                            var colorList = [
+                                '#12604c','#4ed394'
+                            ];
+                            return colorList[params.dataIndex]
+                        },
+                        labelLine:{//饼图不显示线条
+                            length:2,
+                            show:false
+                        },
+                        label:{//饼图不显示文字
+                            show:true,
+                            position : 'inner',//饼图图上显示百分比
+                            formatter : function (params) {
+                                return (params.percent - 0).toFixed(0) + '%'
+                            },
+                            textStyle:{
+                                fontSize:14
+                            }
+                        },
+                    }
+                }
+            },
+            {
+                name:'中班学生',
+                type:'pie',
+                center: ['50%', '45%'],
+                radius : '62%',
+                data:[
+                    {value:sc1, name:'中班女生'},
+                    {value:sd1, name:'中班男生'},
+                ],
+                itemStyle: {//系列级个性化
+                    normal: {
+                        color: function(params) {
+                            var colorList = [
+                                '#12604c','#4ed394'
+                            ];
+                            return colorList[params.dataIndex]
+                        },
+                        labelLine:{//饼图不显示线条
+                            length:2,
+                            show:false
+                        },
+                        label:{//饼图不显示文字
+                            show:true,
+                            position : 'inner',//饼图图上显示百分比
+                            formatter : function (params) {
+                                return (params.percent - 0).toFixed(0) + '%'
+                            },
+                            textStyle:{
+                                fontSize:14
+                            }
+                        }
+                    }
+                }
+            }, {
+                name:'大班学生',
+                type:'pie',
+                center: ['85%', '45%'],
+                radius : '62%',
+                data:[
+                    {value:sc2, name:'大班女生'},
+                    {value:sd2, name:'大班男生'},
+                ],
+                itemStyle: {//系列级个性化
+                    normal: {
+                        color: function(params) {
+                            var colorList = [
+                                '#12604c','#4ed394'
+                            ];
+                            return colorList[params.dataIndex]
+                        },
+                        labelLine:{//饼图不显示线条
+                            length:2,
+                            show:false
+                        },
+                        label:{//饼图不显示文字
+                            show:true,
+                            position : 'inner',//饼图图上显示百分比
+                            formatter : function (params) {
+                                return (params.percent - 0).toFixed(0) + '%'
+                            },
+                            textStyle:{
+                                fontSize:14
+                            }
+                        }
+                    }
+                }
+            }
+        ]
+    };
+    mychart.setOption(option);
+</script>
+
+
+<script type="text/javascript">
+    //饼状图1
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('JM'));
+    // 指定图表的配置项和数据
+    var mapQualifiedTotal=[[${mapQualifiedTotal}]]
+    var mapQualified=[[${mapQualified}]]
+    var sums=mapQualifiedTotal-mapQualified;
+
+    var option = {
+        tooltip : {
+            trigger: 'item',
+            // formatter: "{b} : {c}",
+            formatter:'{b}:{d}%({c}) ' ,
+
+        },
+        //backgroundColor: '#002a26',
+        series : [
+            {
+                name: '访问来源',
+                type: 'pie',
+                radius: '55%',
+                color:["#12604c","#4ed394"] ,
+                calculable : true,
+
+                data:[
+                    // {value:mapQualified, name:'合ss格'},
+                    // {value:sums, name:'不合格'},
+
+                    {value:sums, name:'不合格'},
+                    {value:mapQualified, name:'合格'},
+
+
+                ],
+                label: {
+                    normal: {
+                        textStyle: {
+                            color: 'white'
+                        }
+                    }
+                },
+                labelLine:{
+                    normal:{
+                        length:10,  // 改变标示线的长度
+                        lineStyle: {
+                            color: "#47bc87"  // 改变标示线的颜色
+
+                        }
+                    },
+                },
+                label: {
+                    normal: {
+                        textStyle: {
+                            color: 'white'  // 改变标示文字的颜色
+                        }
+                    }
+                },
+
+
+                itemStyle: {
+                    normal: {
+                        shadowBlur: 200,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                },
+                // 高亮样式。
+                emphasis: {
+                    itemStyle: {
+                        // 高亮时点的颜色。
+//						color: '#7CFC00'
+                    },
+                    label: {
+//						show: true,
+//						// 高亮时标签的文字。
+//						formatter:'dayLabel',
+                    }
+                }
+            }
+        ]
+    };
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+
+
+<!--警报点击样式  -->
+<script type="text/javascript">
+    $(document).ready(function(){
+        //警报点击
+        $("#m1").click(function(){
+            var n = $("#m1").attr("bchange");
+            //下拉框是关闭的的
+            if(n==1){
+                var n2=$("#m2").attr("bchange");
+                var n3=$("#m3").attr("bchange");
+                var n4=$("#m4").attr("bchange");
+                if(n2==0){
+                    //该下拉框开启
+                    $(".b").toggleClass("bnew");
+                    $(".jingbao").toggleClass("jingbao1");
+                    $(".a1").toggle();
+                    $(".a2").toggle();
+                    $("#show2").toggle();
+                    $("#m2").attr("bchange","1");
+                    $("#t2").css({"background-image":"url('/static/img/touming.png')"});
+                }
+                if(n3==0){
+                    //该下拉框开启
+                    $(".b").toggleClass("bnew");
+                    $(".jingbao").toggleClass("jingbao1");
+                    $(".a1").toggle();
+                    $(".a2").toggle();
+                    $("#show3").toggle();
+                    $("#m3").attr("bchange","1");
+                    $("#t3").css({"background-image":"url('/static/img/touming.png')"});
+                }
+                if(n4==0){
+                    //该下拉框开启
+                    $(".b").toggleClass("bnew");
+                    $(".jingbao").toggleClass("jingbao1");
+                    $(".a1").toggle();
+                    $(".a2").toggle();
+                    $("#show4").toggle();
+                    $("#m4").attr("bchange","1");
+                    $("#t4").css({"background-image":"url('/static/img/touming.png')"});
+                }
+                $(".b").toggleClass("bnew");
+                $(".jingbao").toggleClass("jingbao1");
+                $(".a1").toggle();
+                $(".a2").toggle();
+                $("#show1").toggle();
+                $("#m1").attr("bchange","0");
+                $("#t1").css({"background-image":"url('/static/img/shine.png')"});
+            }
+            if(n==0){
+                $(".b").toggleClass("bnew");
+                $(".jingbao").toggleClass("jingbao1");
+                $(".a1").toggle();
+                $(".a2").toggle();
+                $("#show1").toggle();
+                $("#m1").attr("bchange","1");
+                $("#t1").css({"background-image":"url('/static/img/touming.png')"});
+            }
+
+        });
+        $("#m2").click(function(){
+            var n = $("#m2").attr("bchange");
+            //下拉框是关闭的的
+            if(n==1){
+                var n1=$("#m1").attr("bchange");
+                var n3=$("#m3").attr("bchange");
+                var n4=$("#m4").attr("bchange");
+                if(n1==0){
+                    //该下拉框开启
+                    $(".b").toggleClass("bnew");
+                    $(".jingbao").toggleClass("jingbao1");
+                    $(".a1").toggle();
+                    $(".a2").toggle();
+                    $("#show1").toggle();
+                    $("#m1").attr("bchange","1");
+                    $("#t1").css({"background-image":"url('/static/img/touming.png')"});
+                }
+                if(n3==0){
+                    //该下拉框开启
+                    $(".b").toggleClass("bnew");
+                    $(".jingbao").toggleClass("jingbao1");
+                    $(".a1").toggle();
+                    $(".a2").toggle();
+                    $("#show3").toggle();
+                    $("#m3").attr("bchange","1");
+                    $("#t3").css({"background-image":"url('/static/img/touming.png')"});
+                }
+                if(n4==0){
+                    //该下拉框开启
+                    $(".b").toggleClass("bnew");
+                    $(".jingbao").toggleClass("jingbao1");
+                    $(".a1").toggle();
+                    $(".a2").toggle();
+                    $("#show4").toggle();
+                    $("#m4").attr("bchange","1");
+                    $("#t4").css({"background-image":"url('/static/img/touming.png')"});
+                }
+                $(".b").toggleClass("bnew");
+                $(".jingbao").toggleClass("jingbao1");
+                $(".a1").toggle();
+                $(".a2").toggle();
+                $("#show2").toggle();
+                $("#m2").attr("bchange","0");
+                $("#t2").css({"background-image":"url('/static/img/shine.png')"});
+            }
+            if(n==0){
+                $(".b").toggleClass("bnew");
+                $(".jingbao").toggleClass("jingbao1");
+                $(".a1").toggle();
+                $(".a2").toggle();
+                $("#show2").toggle();
+                $("#m2").attr("bchange","1");
+                $("#t2").css({"background-image":"url('/static/img/touming.png')"});
+            }
+        });
+        $("#m3").click(function(){
+            var n = $("#m3").attr("bchange");
+            //下拉框是关闭的的
+            if(n==1){
+                var n2=$("#m2").attr("bchange");
+                var n1=$("#m1").attr("bchange");
+                var n4=$("#m4").attr("bchange");
+                if(n2==0){
+                    //该下拉框开启
+                    $(".b").toggleClass("bnew");
+                    $(".jingbao").toggleClass("jingbao1");
+                    $(".a1").toggle();
+                    $(".a2").toggle();
+                    $("#show2").toggle();
+                    $("#m2").attr("bchange","1");
+                    $("#t2").css({"background-image":"url('/static/img/touming.png')"});
+                }
+                if(n1==0){
+                    //该下拉框开启
+                    $(".b").toggleClass("bnew");
+                    $(".jingbao").toggleClass("jingbao1");
+                    $(".a1").toggle();
+                    $(".a2").toggle();
+                    $("#show1").toggle();
+                    $("#m1").attr("bchange","1");
+                    $("#t1").css({"background-image":"url('/static/img/touming.png')"});
+                }
+                if(n4==0){
+                    //该下拉框开启
+                    $(".b").toggleClass("bnew");
+                    $(".jingbao").toggleClass("jingbao1");
+                    $(".a1").toggle();
+                    $(".a2").toggle();
+                    $("#show4").toggle();
+                    $("#m4").attr("bchange","1");
+                    $("#t4").css({"background-image":"url('/static/img/touming.png')"});
+                }
+                $(".b").toggleClass("bnew");
+                $(".jingbao").toggleClass("jingbao1");
+                $(".a1").toggle();
+                $(".a2").toggle();
+                $("#show3").toggle();
+                $("#m3").attr("bchange","0");
+                $("#t3").css({"background-image":"url('/static/img/shine.png')"});
+            }
+            if(n==0){
+                $(".b").toggleClass("bnew");
+                $(".jingbao").toggleClass("jingbao1");
+                $(".a1").toggle();
+                $(".a2").toggle();
+                $("#show3").toggle();
+                $("#m3").attr("bchange","1");
+                $("#t3").css({"background-image":"url('/static/img/touming.png')"});
+            }
+
+        });
+        $("#m4").click(function(){
+            var n = $("#m4").attr("bchange");
+            //下拉框是关闭的的
+            if(n==1){
+                var n2=$("#m2").attr("bchange");
+                var n3=$("#m3").attr("bchange");
+                var n1=$("#m1").attr("bchange");
+                if(n2==0){
+                    //该下拉框开启
+                    $(".b").toggleClass("bnew");
+                    $(".jingbao").toggleClass("jingbao1");
+                    $(".a1").toggle();
+                    $(".a2").toggle();
+                    $("#show2").toggle();
+                    $("#m2").attr("bchange","1");
+                    $("#t2").css({"background-image":"url('/static/img/touming.png')"});
+                }
+                if(n3==0){
+                    //该下拉框开启
+                    $(".b").toggleClass("bnew");
+                    $(".jingbao").toggleClass("jingbao1");
+                    $(".a1").toggle();
+                    $(".a2").toggle();
+                    $("#show3").toggle();
+                    $("#m3").attr("bchange","1");
+                    $("#t3").css({"background-image":"url('/static/img/touming.png')"});
+                }
+                if(n1==0){
+                    //该下拉框开启
+                    $(".b").toggleClass("bnew");
+                    $(".jingbao").toggleClass("jingbao1");
+                    $(".a1").toggle();
+                    $(".a2").toggle();
+                    $("#show1").toggle();
+                    $("#m1").attr("bchange","1");
+                    $("#t1").css({"background-image":"url('/static/img/touming.png')"});
+                }
+                $(".b").toggleClass("bnew");
+                $(".jingbao").toggleClass("jingbao1");
+                $(".a1").toggle();
+                $(".a2").toggle();
+                $("#show4").toggle();
+                $("#m4").attr("bchange","0");
+                $("#t4").css({"background-image":"url('/static/img/shine.png')"});
+            }
+            if(n==0){
+                $(".b").toggleClass("bnew");
+                $(".jingbao").toggleClass("jingbao1");
+                $(".a1").toggle();
+                $(".a2").toggle();
+                $("#show4").toggle();
+                $("#m4").attr("bchange","1");
+                $("#t4").css({"background-image":"url('/static/img/touming.png')"});
+            }
+
+        });
+        $("#m5").click(function(){
+            //警报点击
+            var n = $("#m5").attr("bchange");
+            //下拉框是关闭的的
+            if(n==1){
+                var n2=$("#m6").attr("bchange");
+                if(n2==0){
+                    //该下拉框开启
+                    $(".bf").toggleClass("bnew1");
+                    $(".ts").toggleClass("ts1");
+                    $(".a1-f").toggle();
+                    $(".a2-f").toggle();
+                    $("#show6").toggle();
+                    $("#m6").attr("bchange","1");
+                    $("#ts2").css({"background-image":"url('/static/img/touming.png')"});
+                }
+                $(".bf").toggleClass("bnew1");
+                $(".ts").toggleClass("ts1");
+                $(".a1-f").toggle();
+                $(".a2-f").toggle();
+                $("#show5").toggle();
+                $("#m5").attr("bchange","0");
+                $("#ts1").css({"background-image":"url('/static/img/shine.png')"});
+            }
+            if(n==0){
+                $(".bf").toggleClass("bnew1");
+                $(".ts").toggleClass("ts1");
+                $(".a1-f").toggle();
+                $(".a2-f").toggle();
+                $("#show5").toggle();
+                $("#m5").attr("bchange","1");
+                $("#ts1").css({"background-image":"url('/static/img/touming.png')"});
+            }
+        });
+        $("#m6").click(function(){
+            //警报点击
+            var n = $("#m6").attr("bchange");
+            //下拉框是关闭的的
+            if(n==1){
+                var n2=$("#m5").attr("bchange");
+                if(n2==0){
+                    //该下拉框开启
+                    $(".bf").toggleClass("bnew1");
+                    $(".ts").toggleClass("ts1");
+                    $(".a1-f").toggle();
+                    $(".a2-f").toggle();
+                    $("#show5").toggle();
+                    $("#m5").attr("bchange","1");
+                    $("#ts1").css({"background-image":"url('/static/img/touming.png')"});
+                }
+                $(".bf").toggleClass("bnew1");
+                $(".ts").toggleClass("ts1");
+                $(".a1-f").toggle();
+                $(".a2-f").toggle();
+                $("#show6").toggle();
+                $("#m6").attr("bchange","0");
+                $("#ts2").css({"background-image":"url('/static/img/shine.png')"});
+            }
+            if(n==0){
+                $(".bf").toggleClass("bnew1");
+                $(".ts").toggleClass("ts1");
+                $(".a1-f").toggle();
+                $(".a2-f").toggle();
+                $("#show6").toggle();
+                $("#m6").attr("bchange","1");
+                $("#ts2").css({"background-image":"url('/static/img/touming.png')"});
+            }
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var rotation2 = function (){
+            $(".JM").rotate({
+                angle:0,
+                animateTo:360,
+                callback: rotation2,
+                easing: function (x,t,b,c,d){        // t: current time, b: begInnIng value, c: change In value, d: duratio
+                    d = d*2;
+                    return c*(t/d)+b;
+                }
+            });
+        }
+        rotation2();
+    });
+    $(document).ready(function(){
+        $(".S").mouseleave(function () {
+            var rotation2 = function (){
+                $(".JM").rotate({
+                    angle:0,
+                    animateTo:360,
+                    callback: rotation2,
+                    easing: function (x,t,b,c,d){        // t: current time, b: begInnIng value, c: change In value, d: duratio
+                        d = d*2;
+                        return c*(t/d)+b;
+                    }
+                });
+            }
+            rotation2();
+        });
+    });
+    $(document).ready(function(){
+        $(".S").mouseover(function () {
+            var rotation1 = function (){
+                $(".JM").rotate({
+                    angle:0,
+                    animateTo:360,
+                    callback: rotation1,
+                    easing: function (x,t,b,c,d){        // t: current time, b: begInnIng value, c: change In value, d: durati
+                        return c*(t/d)+b;
+                    }
+                });
+            }
+            rotation1();
+        });
+    });
+
+
+
+    $(document).ready(function () {
+        var rotation2 = function (){
+            $(".JM1").rotate({
+                angle:0,
+                animateTo:360,
+                callback: rotation2,
+                easing: function (x,t,b,c,d){        // t: current time, b: begInnIng value, c: change In value, d: duratio
+                    d = d*2;
+                    return c*(t/d)+b;
+                }
+            });
+        }
+        rotation2();
+    });
+    $(document).ready(function(){
+        $(".F").mouseleave(function () {
+            var rotation2 = function (){
+                $(".JM1").rotate({
+                    angle:0,
+                    animateTo:360,
+                    callback: rotation2,
+                    easing: function (x,t,b,c,d){        // t: current time, b: begInnIng value, c: change In value, d: duratio
+                        d = d*2;
+                        return c*(t/d)+b;
+                    }
+                });
+            }
+            rotation2();
+        });
+    });
+    $(document).ready(function(){
+        $(".F").mouseover(function () {
+            var rotation1 = function (){
+                $(".JM1").rotate({
+                    angle:0,
+                    animateTo:360,
+                    callback: rotation1,
+                    easing: function (x,t,b,c,d){        // t: current time, b: begInnIng value, c: change In value, d: durati
+                        return c*(t/d)+b;
+                    }
+                });
+            }
+            rotation1();
+        });
+    });
+
+
+    $(document).ready(function () {
+        var rotation2 = function (){
+            $(".MAP").rotate({
+                angle:0,
+                animateTo:360,
+                callback: rotation2,
+                easing: function (x,t,b,c,d){        // t: current time, b: begInnIng value, c: change In value, d: duratio
+                    d = d*2;
+                    return c*(t/d)+b;
+                }
+            });
+        }
+        rotation2();
+    });
+    $(document).ready(function(){
+        $(".B").mouseleave(function () {
+            var rotation2 = function (){
+                $(".MAP").rotate({
+                    angle:0,
+                    animateTo:360,
+                    callback: rotation2,
+                    easing: function (x,t,b,c,d){        // t: current time, b: begInnIng value, c: change In value, d: duratio
+                        d = d*2;
+                        return c*(t/d)+b;
+                    }
+                });
+            }
+            rotation2();
+        });
+    });
+    $(document).ready(function(){
+        $(".B").mouseover(function () {
+            var rotation1 = function (){
+                $(".MAP").rotate({
+                    angle:0,
+                    animateTo:360,
+                    callback: rotation1,
+                    easing: function (x,t,b,c,d){        // t: current time, b: begInnIng value, c: change In value, d: durati
+                        return c*(t/d)+b;
+                    }
+                });
+            }
+            rotation1();
+        });
+    });
+</script>
+
+</html>
