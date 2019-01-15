@@ -17,4 +17,4 @@ RPC 远程调用 Dubbo
 、数据库、作业平台、测试结果、图纸、样本、模型、使用手册、技术文档、设计的技术秘密的业务。
 经营信息：包括客户名称、客户地址及联系方式等。
 
-
+![静态代码检查首页](https://github.com/XRiver/DevOpsTeachingPlatform/blob/codeCheck/DevOpsStaticCheck/img/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-11%20%E4%B8%8B%E5%8D%881.35.27.png)
